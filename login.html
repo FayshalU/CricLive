@@ -1,0 +1,134 @@
+
+<html>
+<head>
+    <title>LOGIN</title>
+    <script>
+        
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        
+        var user = getCookie("rem");
+        if (user != "") {
+            alert("Welcome again user");
+            window.location.href = "user.php";
+        } else {}
+        
+    </script>
+</head>
+<body>
+<center>
+     <br/> <br/> <br/> <br/>
+    <a href="index.php"><b>Cric</b>LIVE</a>
+        <br/> <br/>
+    <fieldset style="width:50%">
+        <legend><b>LOGIN</b></legend>
+        <form name="login" method="post" action="logCheck.php" onsubmit="return checkInfo()">
+            <br/>
+            <table width="100%" cellpadding="0" cellspacing="0">
+
+                <tr>
+                    <td>User Id</td>
+                    <td>:</td>
+                    <td>
+                        <input name="luser" id="luser" type="text" placeholder="User Id" value="" required onchange="checkName()">
+                        <span id="ename"></span>
+                    </td>
+                    <td></td>
+                </tr>		
+                <tr><td colspan="4"><hr/></td></tr>
+
+                <tr>
+                    <td>Password</td>
+                    <td>:</td>
+                    <td>
+                        <input type="password" name="lpass" id="lpass" placeholder="Password" required onchange="checkPass()" />
+                        <span id="epass"></span>
+                    </td>
+                    <td></td>
+                </tr>		
+                <tr><td colspan="4"><hr/></td></tr>
+                <tr>
+                    <td><input type="checkbox" name="remember" id="remember"> Remember Me</td>
+                </tr>		
+            </table>
+
+            <input type="submit" value="Sign in">
+        </form>
+    </fieldset>
+    <a href="register.php">New member?</a>
+</center>
+    
+    <script>
+        
+        var isValid = true;
+        function checkName(){
+
+            console.log("Hello");
+            //document.getElementById("ename").innerHTML = "*This can not be empty";
+            var data = document.getElementById("luser");
+            if(data.value == ""){
+                document.getElementById("ename").innerHTML = "*This can not be empty";
+                isValid = false;
+            }
+            else{
+                document.getElementById("ename").innerHTML = "";
+            }
+        }
+        
+        function checkPass(){
+            var data = document.getElementById("lpass");
+            if(data.value == ""){
+                document.getElementById("epass").innerHTML = "*This can not be empty";
+                isValid = false;
+            }
+            else{
+                document.getElementById("epass").innerHTML = "";
+            }
+        }
+        
+        function checkInfo(){
+            
+            isValid = true;
+            this.checkName();
+            this.checkPass();
+            
+            if(isValid){
+                
+                console.log("LogIn Complete");
+                
+//                if(document.getElementById("remember").checked == true){
+//                    this.setCookie('rem','valid',365);
+//                }
+                
+                //document.forms["register"].submit();
+                
+                //window.location.href = "regCheck.php";
+                
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+    </script>
+    
+</body>
+</html>
