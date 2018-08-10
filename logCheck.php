@@ -29,7 +29,10 @@
 				    setcookie("rem", "valid", time()+3600,'/');
                 }
                 
-                $_SESSION['log'] = 'valid';
+                $_SESSION['log'] = $_POST['luser'];
+                
+                include 'getInfo.php';
+                
                 //setcookie('log', 'valid', time()+3600,'/');
                 
                 $valid = "valid";
@@ -41,8 +44,12 @@
         if($valid == "valid"){
             echo "<script> location.replace('user.php'); </script>";
         }else{
-            echo "<script> location.replace('login.html'); </script>";
+            echo "<script> location.replace('login.html?error=e'); </script>";
         }
+        
+        
+    }else{
+        echo "<script> location.replace('login.html'); </script>";
     }
 
 ?>

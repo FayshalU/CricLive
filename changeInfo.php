@@ -5,7 +5,10 @@
 	if(!isset($_SESSION['log']))
     {
         header("location: login.html");
-	}
+	}else{
+        include 'getInfo.php';
+    }
+    //echo $_SESSION['name'];
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +23,8 @@
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body>
+    <div w3-include-html="getInfo.php"></div>
+    
     <table width="100%" style="color:green;" height="50px">
         <tr >
             <td width="10%"><a href="user.php"><center>CricLive</center></a></td>
@@ -65,17 +70,11 @@
                     <tr>
                         <td>Full Name</td>
                         <td>:</td>
-                        <td><input name="name" type="text" placeholder="Name" value="<?=$_POST['name']?>" minlength="2" required>
-                            <?php  
-                                    if($_SERVER['REQUEST_METHOD'] == 'POST')
-                                    {
-                                        if($_POST['name'] == "" || strlen($_POST['name']) <2 || (strpbrk($_POST['name'] , '1234567890') !== false))
-                                        {
-                                            echo '<i style="color:red;font-size:15px;font-family:calibri ;">* Please give a valid Name</i> ';
-                                            $isValid=false;
-                                        }
-                                    }
-                                ?>
+                        <td>
+                            <input name="name" id="name" type="text" placeholder="Name" value="" disabled >
+                            <input type="button" value="Edit" onclick="nameEdit(this)" />
+                            <input id="namebtn" type="button" value="Done" onclick="changeName()" style="display:none;" />
+                            <span id="ename" style="color:red;font-size:15px;font-family:calibri ;"></span>
                         </td>
                         <td></td>
                     </tr>		
@@ -84,26 +83,11 @@
                         <td>Email</td>
                         <td>:</td>
                         <td>
-                            <input name="email" type="text" placeholder="Email" value="<?=$_POST['email']?>" required>
+                            <input name="email" id="email" type="text" placeholder="Email" disabled>
                             <abbr title="hint: sample@example.com"><b>i</b></abbr>
-                            <?php
-                                if($_SERVER['REQUEST_METHOD'] == 'POST')
-                                {
-                                    if($_POST['email'] != "")
-                                    {
-                                        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-                                        {
-                                            echo '<i style="color:red;font-size:15px;font-family:calibri ;">* Please give a valid Email</i> ';
-                                            $isValid=false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        echo '<i style="color:red;font-size:15px;font-family:calibri ;">* Please give a valid Email</i> ';
-                                        $isValid=false;
-                                    }
-                                }
-                            ?>
+                            <input type="button" value="Edit" onclick="emailEdit(this)" />
+                            <input id="emailbtn" type="button" value="Done" onclick="changeEmail()" style="display:none;" />
+                            <span id="eemail" style="color:red;font-size:15px;font-family:calibri ;"></span>
                         </td>
                         <td></td>
                     </tr>		
@@ -111,24 +95,16 @@
 
 
                     <tr>
-                        <td colspan="3">
-                            <fieldset>
-                                <legend>Date of Birth</legend>    
-                                <input type="text" size="2" name="day" placeholder="DD" value="<?=$_POST['day']?>" required/>/
-                                <input type="text" size="2" name="month" placeholder="MM" value="<?=$_POST['month']?>" required/>/
-                                <input type="text" size="4" name="year" placeholder="YYYY" value="<?=$_POST['year']?>" required/>
-                                <font size="2"><i>(dd/mm/yyyy)</i></font>
-                                <?php
-                                    if($_SERVER['REQUEST_METHOD'] == 'POST')
-                                    {
-                                        if( ((int)$_POST['day']<0 || (int)$_POST['day']>31) || ((int)$_POST['month']<1 || (int)$_POST['month']>12) || ((int)$_POST['year']<1900 || (int)$_POST['year']>2016) || !is_numeric($_POST['day']) || !is_numeric($_POST['month']) || !is_numeric($_POST['year']) )
-                                        {
-                                            echo '<i style="color:red;font-size:15px;font-family:calibri ;">* Please give a valid Date</i> ';
-                                            $isValid=false;
-                                        }
-                                    }
-                                ?>
-                            </fieldset>
+                        <td>Date of Birth</td>
+                        <td>:</td>
+                        <td colspan="3">      
+                            <input type="text" size="2" name="day" placeholder="DD" value="" id="day" disabled />/
+                            <input type="text" size="2" name="month" placeholder="MM" value="" id="month" disabled />/
+                            <input type="text" size="4" name="year" placeholder="YYYY" value="" id="year" disabled />
+                            <font size="2"><i>(dd/mm/yyyy)</i></font>
+                            <input type="button" value="Edit" onclick="dateEdit(this)" />
+                            <input id="datebtn" type="button" value="Done" onclick="changeDate()" style="display:none;" />
+                            <span id="edate" style="color:red;font-size:15px;font-family:calibri ;"></span>
                         </td>
                         <td></td>
                     </tr>
@@ -137,52 +113,226 @@
                         <td>Country</td>
                         <td>:</td>
                         <td>
-                            <select name="country">
-                                <option value="Select" <?php if($_POST['country']=="Select") echo "selected";?> >Select</option>
-                                <option value="Afghanistan" <?php if($_POST['country']=="Afghanistan") echo "selected";?> >Afghanistan</option>
-                                <option value="Australia" <?php if($_POST['country']=="Australia") echo "selected";?> >Australia</option>
-                                <option value="Bangladesh" <?php if($_POST['country']=="Bangladesh") echo "selected";?> >Bangladesh</option>
-                                <option value="England" <?php if($_POST['country']=="England") echo "selected";?> >England</option>
-                                <option value="India" <?php if($_POST['country']=="India") echo "selected";?> >India</option>
-                                <option value="Ireland" <?php if($_POST['country']=="Ireland") echo "selected";?> >Ireland</option>
-                                <option value="New Zealand" <?php if($_POST['country']=="New Zealand") echo "selected";?> >New Zealand</option>
-                                <option value="Pakistan" <?php if($_POST['country']=="Pakistan") echo "selected";?> >Pakistan</option>
-                                <option value="South Africa" <?php if($_POST['country']=="South Africa") echo "selected";?> >South Africa</option>
-                                <option value="Srilanka" <?php if($_POST['country']=="Srilanka") echo "selected";?> >Srilanka</option>
-                                <option value="West Indies" <?php if($_POST['country']=="West Indies") echo "selected";?> >West Indies</option>
-                                <option value="Zimbabwe" <?php if($_POST['country']=="Zimbabwe") echo "selected";?> >Zimbabwe</option>
-                            </select>
-                            <?php
-                                if($_POST['country']=="Select")
-                               {
-                                    echo '<i style="color:red;font-size:15px;font-family:calibri ;">* Please select a Country</i> ';
-                                            $isValid=false;
-                               }
-                            ?>
+                            <div id="country1">
+                                <input name="country" id="country" type="text" placeholder="Country" disabled>
+                                <input type="button" value="Edit" onclick="countryEdit()" />
+                            </div>
+                            
+                            <div id="country2">
+                                <select name="country" id="countrysel">
+                                    <option value="Select" >Select</option>
+                                    <option value="Afghanistan" >Afghanistan</option>
+                                    <option value="Australia" >Australia</option>
+                                    <option value="Bangladesh" >Bangladesh</option>
+                                    <option value="England" >England</option>
+                                    <option value="India" >India</option>
+                                    <option value="Ireland" >Ireland</option>
+                                    <option value="New Zealand" >New Zealand</option>
+                                    <option value="Pakistan" >Pakistan</option>
+                                    <option value="South Africa" >South Africa</option>
+                                    <option value="Srilanka" >Srilanka</option>
+                                    <option value="West Indies" >West Indies</option>
+                                    <option value="Zimbabwe" >Zimbabwe</option>
+                                </select>
+                                <input id="countrybtn" type="button" value="Done" onclick="changeCountry()" />
+                                
+                                <span id="ecountry" style="color:red;font-size:15px;font-family:calibri ;"></span>
+                            </div>
                         </td>
                         <td></td>
                     </tr>
 
                 </table>
                 <hr/>
-                    
-                <input type="submit" value="Confirm">
             </form>
                     
-            <?php
-                if($isValid && $_SERVER['REQUEST_METHOD'] == 'POST')
-                {
+            <script>
+                
+                document.getElementById("country2").style.display = 'none';
+                
+                document.getElementById("name").value = <?php echo json_encode($_SESSION['name']); ?>;
+                document.getElementById("email").value = <?php echo json_encode($_SESSION['email']); ?>;
+                document.getElementById("country").value = <?php echo json_encode($_SESSION['country']); ?>;
+                
+                var date = <?php echo json_encode($_SESSION['date']); ?>;
+                var datearr = date.split("/");
+                document.getElementById("day").value = datearr[0];
+                document.getElementById("month").value = datearr[1];
+                document.getElementById("year").value = datearr[2];
 
-                    $myfile = fopen("user.txt", "a");
-                    $data = $_POST['name']. "|". $_POST['user']. "|". $_POST['email']."|". $_POST['password']."|". $_POST['country']."|". $_POST['date']."\r\n";
-                    fwrite($myfile, $data);   
-                    fclose($myfile);
-
-                    echo '<i style="color:green;font-size:20px;font-family:calibri ;">Update Complete</i>';
-
+                
+                //document.getElementById("date").value = <?php echo json_encode($_SESSION['date']); ?>;
+                
+                var dateValid = true;
+                
+                function nameEdit(obj){
+                    obj.style.display = 'none';
+                    document.getElementById('namebtn').style.display = 'block';
+                    document.getElementById('name').disabled = false; 
                 }
-              ?>
+                
+                function changeName(){
+                    var re = /^[A-Za-z]+$/;
+                    console.log("Hello");
+                    //document.getElementById("ename").innerHTML = "*This can not be empty";
+                    var data = document.getElementById("name");
+                    if(data.value == ""){
+                        document.getElementById("ename").innerHTML = "*This can not be empty";
+                        //isValid = false;
+                    }
+                    else if(data.value.length < 2){
+                        document.getElementById("ename").innerHTML = "*Minimum 2 characters";
+                        //isValid = false;
+                    }
+                    else if(!re.test(data.value)){
+                        document.getElementById("ename").innerHTML = "*Can not contain numbers or special characters";
+                        //isValid = false;
+                    }
+                    else{
+                        document.getElementById("ename").innerHTML = "";
+                        
+                        window.location.href = "addInfoToDB.php?name="+data.value;
+                        
+                    }
+                }
+                
+                function emailEdit(obj){
+                    obj.style.display = 'none';
+                    document.getElementById('emailbtn').style.display = 'block';
+                    document.getElementById('email').disabled = false; 
+                }
+                
+                function changeEmail(){
                     
+                    var re = /\S+@\S+\.\S+/;
+                    
+                    var data = document.getElementById("email");
+                    if(data.value == ""){
+                        document.getElementById("eemail").innerHTML = "*This can not be empty";
+                        //isValid = false;
+                    }
+                    else if(!re.test(data.value)){
+                        document.getElementById("eemail").innerHTML = "*Give a valid email";
+                        //isValid = false;
+                    }
+                    else{
+                        document.getElementById("eemail").innerHTML = "";
+                        
+                        window.location.href = "addInfoToDB.php?email="+data.value;
+                        
+                    }
+                }
+                
+                function dateEdit(obj){
+                    obj.style.display = 'none';
+                    document.getElementById('datebtn').style.display = 'block';
+                    document.getElementById('day').disabled = false; 
+                    document.getElementById('month').disabled = false; 
+                    document.getElementById('year').disabled = false; 
+                }
+                
+                function checkDay(){
+                    
+                    var data = document.getElementById("day");
+                    if(data.value == ""){
+                        document.getElementById("edate").innerHTML = "*Day can not be empty";
+                        dateValid = false;
+                    }
+                    else if(data.value.match(/^[0-9]+$/) == null){
+                        document.getElementById("edate").innerHTML = "*Day can not contain characters";
+                        dateValid = false;
+                    }
+                    else{
+                        if(parseInt(data.value)<1 || parseInt(data.value)>31){
+                            document.getElementById("edate").innerHTML = "*Day can be (1-31)";
+                            dateValid = false;
+                        }
+                        else{
+                            document.getElementById("edate").innerHTML = "";
+                        }
+
+                    }
+                }
+                function checkMonth(){
+                    var data = document.getElementById("month");
+                    if(data.value == ""){
+                        document.getElementById("edate").innerHTML = "*Month can not be empty";
+                        dateValid = false;
+                    }
+                    else if(data.value.match(/^[0-9]+$/) == null){
+                        document.getElementById("edate").innerHTML = "*Month can not contain characters";
+                        dateValid = false;
+                    }
+                    else{
+                        if(parseInt(data.value)<1 || parseInt(data.value)>12){
+                            document.getElementById("edate").innerHTML = "*Month can be (1-12)";
+                            dateValid = false;
+                        }
+                        else{
+                            document.getElementById("edate").innerHTML = "";
+                        }
+
+                    }
+                }
+                function checkYear(){
+                    var data = document.getElementById("year");
+                    if(data.value == ""){
+                        document.getElementById("edate").innerHTML = "*Year can not be empty";
+                        dateValid = false;
+                    }
+                    else if(data.value.match(/^[0-9]+$/) == null){
+                        document.getElementById("edate").innerHTML = "*Year can not contain characters";
+                        dateValid = false;
+                    }
+                    else{
+                        if(parseInt(data.value)<1900 || parseInt(data.value)>2018){
+                            document.getElementById("edate").innerHTML = "*Year can be (1900-2018)";
+                            dateValid = false;
+                        }
+                        else{
+                            document.getElementById("edate").innerHTML = "";
+                        }
+
+                    }
+                }
+                
+                function changeDate(){
+                    
+                    dateValid = true;
+                    
+                    this.checkDay();
+                    this.checkMonth();
+                    this.checkYear();
+                    
+                    
+                    if(dateValid){
+                        
+                        var date = document.getElementById("day").value+"/"+document.getElementById("month").value+"/"+document.getElementById("year").value;
+                        window.location.href = "addInfoToDB.php?date="+date;
+                    }
+                    
+                }
+                
+                function countryEdit(){
+                    
+                    document.getElementById("country1").style.display = 'none';
+                    document.getElementById("country2").style.display = 'block';
+                }
+                
+                function changeCountry(){
+                    var data = document.getElementById("countrysel");
+                    if(data.value == "Select"){
+                        //isValid = false;
+                        document.getElementById("ecountry").innerHTML = "*Country is required";
+                    }
+                    else{
+                        document.getElementById("ecountry").innerHTML = "";
+                        window.location.href = "addInfoToDB.php?country="+data.value;
+                    }
+                }
+                
+            </script>
+                
             </fieldset>
             </td>
             <td width="15%"></td>

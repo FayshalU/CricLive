@@ -5,7 +5,9 @@
 	if(!isset($_SESSION['log']))
     {
         header("location: login.html");
-	}
+	}else{
+        include 'getInfo.php';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +60,7 @@
             <td  width="15%"></td>
             <td width="50%">
                 <fieldset>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <form method="post" action="addPass.php" onsubmit="return checkValid()">
                 <br/>
                 
                 <table width="100%" cellpadding="0" cellspacing="0">
@@ -66,22 +68,10 @@
                     <tr>
                         <td>Current Password</td>
                         <td>:</td>
-                        <td><input type="password" placeholder="Current Password" name="cpass" minlength="4" required/>
-                            <?php  
-                                if($_SERVER['REQUEST_METHOD'] == 'POST')
-                                {
-                                    if($_POST['cpass'] == "" || strlen($_POST['cpass']) <4)
-                                    {
-                                        echo '<i style="color:red;font-size:15px;font-family:calibri ;">* This is required(4 char min)</i> ';
-                                        $isValid=false;
-                                        $pass=null;
-                                    }
-                                    else
-                                    {
-                                        $pass=$_POST['cpass'];
-                                    }
-                                }
-                            ?>
+                        <td>
+                            <input type="password" id="current" name="current" placeholder="Current Password" oninput="checkCurrent()" onblur="checkCurrent()" required/>
+                            <span id="ecurrent" style="color:red;font-size:15px;font-family:calibri ;"></span>
+                            
                         </td>
                         <td></td>
                     </tr>		
@@ -89,22 +79,10 @@
                     <tr>
                     <td>New Password</td>
                         <td>:</td>
-                        <td><input type="password" placeholder="New Password" name="npass" minlength="4" required/>
-                            <?php  
-                                if($_SERVER['REQUEST_METHOD'] == 'POST')
-                                {
-                                    if($_POST['npass'] == "" || strlen($_POST['npass']) <4)
-                                    {
-                                        echo '<i style="color:red;font-size:15px;font-family:calibri ;">* This is required(4 char min)</i> ';
-                                        $isValid=false;
-                                        $pass=null;
-                                    }
-                                    else
-                                    {
-                                        $pass=$_POST['npass'];
-                                    }
-                                }
-                            ?>
+                        <td>
+                            <input type="password" class="form-control" placeholder="New Password" name="password" oninput="checkPass()" onblur="checkPass()" minlength="4" required id="password" />
+                            <span id="epass" style="color:red;font-size:15px;font-family:calibri ;"></span>
+                            
                         </td>
                         <td></td>
                     </tr>
@@ -113,41 +91,22 @@
                     <tr>
                         <td>Confirm Password</td>
                         <td>:</td>
-                        <td><input type="password" placeholder="Retype Password" name="rpass" minlength="4" required/>
-                            <?php  
-                                if($_SERVER['REQUEST_METHOD'] == 'POST')
-                                {
-                                    if($_POST['rpass'] !== $pass)
-                                    {
-                                        echo '<i style="color:red;font-size:15px;font-family:calibri ;">* Password does not match</i> ';
-                                        $isValid=false;
-                                    }
-
-                                }
-                            ?>
+                        <td>
+                            <input type="password" class="form-control" placeholder="Retype Password" name="cpass" oninput="checkCPass()" onblur="checkCPass()" minlength="4" required id="cpass" />
+                            <span id="ecpass" style="color:red;font-size:15px;font-family:calibri ;"></span>
                         </td>
                         <td></td>
                     </tr>		
                     <tr><td colspan="4"><hr/></td></tr>
 
                 </table>
+                
+                <div ><p id="error" style="color:red;font-size:15px;font-family:calibri;display: none;">Password is not correct</p></div>
+                <div ><p id="success" style="color:green;font-size:15px;font-family:calibri;display: none;">Password is changed</p></div>
                     
                 <input type="submit" value="Confirm">
             </form>
                     
-            <?php
-                if($isValid && $_SERVER['REQUEST_METHOD'] == 'POST')
-                {
-
-                    $myfile = fopen("user.txt", "a");
-                    $data = $_POST['name']. "|". $_POST['user']. "|". $_POST['email']."|". $_POST['password']."|". $_POST['country']."|". $_POST['date']."\r\n";
-                    fwrite($myfile, $data);   
-                    fclose($myfile);
-
-                    echo '<i style="color:green;font-size:20px;font-family:calibri ;">Update Complete</i>';
-
-                }
-              ?>
                     
             </fieldset>
             </td>
@@ -156,5 +115,107 @@
     </table>
     <br/>
     <?php include 'footer.php';?>
+    
+    <script>
+        
+        function getString(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        
+        if (getString('msg') == 'e') {
+            document.getElementById('error').style.display = 'block';
+        }
+        else if (getString('msg') == 's') {
+            document.getElementById('success').style.display = 'block';
+        }
+        else {
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
+        }
+        
+        var isValid = true;
+        
+        
+        function checkCurrent(){
+            
+            var data = document.getElementById("current");
+            
+            if(data.value == ""){
+                document.getElementById("ecurrent").innerHTML = "*This can not be empty";
+                isValid = false;
+            }
+            else if(data.value != <?php echo json_encode($_SESSION['password']); ?>){
+                isValid = false;
+               document.getElementById("ecurrent").innerHTML = "*Password does not match";
+            }
+            else{
+                document.getElementById("ecurrent").innerHTML = "";
+            }
+            
+        }
+        
+        function checkPass(){
+            var data = document.getElementById("password");
+            if(data.value == ""){
+                document.getElementById("epass").innerHTML = "*This can not be empty";
+                isValid = false;
+            }
+            else if(data.value.length < 4){
+                document.getElementById("epass").innerHTML = "*Minimum 4 characters";
+                isValid = false;
+            }
+            else{
+                document.getElementById("epass").innerHTML = "";
+            }
+        }
+        
+        function checkCPass(){
+            var data = document.getElementById("cpass");
+            if(data.value == ""){
+                document.getElementById("ecpass").innerHTML = "*This can not be empty";
+                isValid = false;
+            }
+            else if(data.value.length < 4){
+                document.getElementById("ecpass").innerHTML = "*Minimum 4 characters";
+                isValid = false;
+            }
+            else if(data.value != document.getElementById("password").value){
+                document.getElementById("ecpass").innerHTML = "*Password does not match";
+                isValid = false;
+            }
+            else{
+                document.getElementById("ecpass").innerHTML = "";
+            }
+        }
+        
+        function checkValid(){
+            
+            isValid = true;
+            this.checkCurrent();
+            this.checkPass();
+            this.CheckCPass();
+            
+            if(isValid){
+                
+                console.log("Update Complete");
+                
+                
+                
+                return true;
+            }
+            else{
+                return false;
+            }
+            
+        }
+        
+    </script>
+    
 </body>
 </html>

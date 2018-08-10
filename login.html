@@ -66,11 +66,30 @@
 
             <input type="submit" value="Sign in">
         </form>
+        <div ><p id="error" style="color:red;font-size:15px;font-family:calibri;display: none;">User ID and Password does not match</p></div>
     </fieldset>
     <a href="register.php">New member?</a>
 </center>
     
     <script>
+        
+        function getString(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        var x = document.getElementById('error');
+        if (getString('error') == 'e') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+        
+        
         
         var isValid = true;
         function checkName(){
@@ -107,6 +126,7 @@
             if(isValid){
                 
                 console.log("LogIn Complete");
+
                 
 //                if(document.getElementById("remember").checked == true){
 //                    this.setCookie('rem','valid',365);
