@@ -82,6 +82,15 @@
                 echo "Success <br/>";
             }
 
+            $sql = "INSERT into login values('".$_POST['userName']."','".$_POST['password']."','user')";
+
+            if(mysqli_query($conn, $sql))
+            {
+                echo "Inserted";
+            }
+            else
+                echo "Not Registered";
+            
             $sql = "INSERT into user values('".$_POST['userName']."','".$_POST['password']."','".$_POST['name']."','".$_POST['email']."','".$_POST['country']."','".$date."')";
 
             if(mysqli_query($conn, $sql))
@@ -90,6 +99,8 @@
             }
             else
                 echo "Not Registered";
+            
+            
 
             mysqli_close($conn);
 

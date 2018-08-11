@@ -21,7 +21,7 @@
         
         var user = getCookie("rem");
         if (user != "") {
-            alert("Welcome again user");
+            alert("Welcome again "+user);
             window.location.href = "user.php";
         } else {}
         
@@ -68,7 +68,7 @@
         </form>
         <div ><p id="error" style="color:red;font-size:15px;font-family:calibri;display: none;">User ID and Password does not match</p></div>
     </fieldset>
-    <a href="register.php">New member?</a>
+    <a href="register.html">New member?</a>
 </center>
     
     <script>

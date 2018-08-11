@@ -2,6 +2,7 @@
 <?php
     session_start();
     error_reporting(0);
+    $valid = "";
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
@@ -16,32 +17,48 @@
 //            echo "Success <br/>";
 //        }
         
-        $sql= "SELECT * from user";
-
+        $sql= "SELECT * from `login` where id='".$_POST['luser']."'";
+        
+        //echo $_POST['luser'];
+        //echo $sql;
+        
         $result = mysqli_query($conn, $sql);
 
         while($row = mysqli_fetch_assoc($result))
         {
-            if($row['id'] == $_POST['luser'] && $row['password'] == $_POST['lpass'])
+            //echo $row['password'];
+            if($row['password'] == $_POST['lpass'])
             {
-                if($_POST['remember']=="on")
-                {
-				    setcookie("rem", "valid", time()+3600,'/');
+                echo $row['password'];
+                //echo $row['type'];
+                
+                if($row['type'] == "user"){
+                    //echo $row['type'];
+                    $valid = "user";    
+                }else{
+                    
                 }
                 
                 $_SESSION['log'] = $_POST['luser'];
                 
                 include 'getInfo.php';
                 
-                //setcookie('log', 'valid', time()+3600,'/');
+                if($_POST['remember']=="on")
+                {
+				    setcookie("rem", $_POST['luser'], time()+3600,'/');
+                }else{
+                    
+                }
                 
-                $valid = "valid";
+                
+                //setcookie('log', 'valid', time()+3600,'/');
             }
+            //echo $row['id'];
         }
         
         mysqli_close($conn);
 
-        if($valid == "valid"){
+        if($valid == "user"){
             echo "<script> location.replace('user.php'); </script>";
         }else{
             echo "<script> location.replace('login.html?error=e'); </script>";
