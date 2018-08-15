@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2018 at 04:20 PM
+-- Generation Time: Aug 15, 2018 at 05:49 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -43,7 +43,8 @@ CREATE TABLE `comment` (
 
 INSERT INTO `comment` (`com_id`, `post_id`, `user_id`, `text`, `date`, `time`) VALUES
 (1, 1, 'bb', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2018-08-10', '5:30 PM'),
-(2, 2, 'xx', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2018-08-08', '4:00 PM');
+(2, 2, 'xx', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2018-08-08', '4:00 PM'),
+(4, 1, 'aa', 'Hello there :)', '2018-08-15', '11:29:35am');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,52 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `password`, `type`) VALUES
 ('aa', '1234', 'user'),
+('bb', '1234', 'user'),
 ('xx', '2222', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `poll`
+--
+
+CREATE TABLE `poll` (
+  `poll_id` int(255) NOT NULL,
+  `heading` varchar(1000) NOT NULL,
+  `op1` varchar(100) NOT NULL,
+  `op2` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `poll`
+--
+
+INSERT INTO `poll` (`poll_id`, `heading`, `op1`, `op2`) VALUES
+(1, 'Who will win today\'s match?', 'Bangladesh', 'Australia'),
+(2, 'Who will win today\'s match?', 'India', 'Pakistan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `polls`
+--
+
+CREATE TABLE `polls` (
+  `id` int(255) NOT NULL,
+  `poll_id` varchar(100) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `response` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `polls`
+--
+
+INSERT INTO `polls` (`id`, `poll_id`, `user_id`, `response`) VALUES
+(1, '1', 'aa', 'Bangladesh'),
+(7, '2', 'aa', 'Pakistan'),
+(9, '1', 'xx', 'Australia'),
+(13, '1', 'bb', 'Bangladesh');
 
 -- --------------------------------------------------------
 
@@ -97,6 +143,7 @@ INSERT INTO `login` (`id`, `password`, `type`) VALUES
 CREATE TABLE `post` (
   `post_id` int(255) NOT NULL,
   `user_id` varchar(1000) NOT NULL,
+  `headline` varchar(1000) NOT NULL,
   `text` varchar(10000) NOT NULL,
   `date` date NOT NULL,
   `time` varchar(100) NOT NULL,
@@ -107,9 +154,9 @@ CREATE TABLE `post` (
 -- Dumping data for table `post`
 --
 
-INSERT INTO `post` (`post_id`, `user_id`, `text`, `date`, `time`, `image`) VALUES
-(1, 'adam', 'Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.', '2018-08-10', '2:30 PM', ''),
-(2, 'charlie', 'Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.', '2018-08-08', '12:00 AM', '');
+INSERT INTO `post` (`post_id`, `user_id`, `headline`, `text`, `date`, `time`, `image`) VALUES
+(1, 'adam', 'Shakib\'s retirement', 'Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.', '2018-08-10', '2:30 PM', ''),
+(2, 'charlie', 'Mashrafi the hero', 'Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.', '2018-08-08', '12:00 AM', '');
 
 -- --------------------------------------------------------
 
@@ -131,11 +178,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `password`, `name`, `email`, `country`, `date`) VALUES
-('12312', '1234', 'dss', 'sadfasf@as.com', 'Afghanistan', '2/2/2000'),
 ('aa', '1234', 'ABC', 'abc@gmail.com', 'Bangladesh', '3/3/2000'),
-('abc', '1234', 'abc', 'faysal4777@gmail.com', 'Bangladesh', '2/3/2000'),
 ('bb', '1234', 'Faysal', 'fa@gmail.com', 'South Africa', '1/1/2001'),
-('cc', '1234', 'Liomn', 'limon@gmail.com', 'Australia', '3/3/2003'),
 ('xx', '2222', 'ABCD', 'abc@gmail.com', 'England', '1/1/2001');
 
 --
@@ -161,6 +205,18 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `poll`
+--
+ALTER TABLE `poll`
+  ADD PRIMARY KEY (`poll_id`);
+
+--
+-- Indexes for table `polls`
+--
+ALTER TABLE `polls`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
@@ -180,7 +236,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `com_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `com_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `poll`
+--
+ALTER TABLE `poll`
+  MODIFY `poll_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `polls`
+--
+ALTER TABLE `polls`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `post`

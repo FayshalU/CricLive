@@ -91,9 +91,9 @@
             else
                 echo "Not Registered";
             
-            $sql = "INSERT into user values('".$_POST['userName']."','".$_POST['password']."','".$_POST['name']."','".$_POST['email']."','".$_POST['country']."','".$date."')";
+            $sql2 = "INSERT into user values('".$_POST['userName']."','".$_POST['password']."','".$_POST['name']."','".$_POST['email']."','".$_POST['country']."','".$date."')";
 
-            if(mysqli_query($conn, $sql))
+            if(mysqli_query($conn, $sql2))
             {
                 echo "Inserted";
             }
@@ -104,7 +104,7 @@
 
             mysqli_close($conn);
 
-            echo "<script> location.replace('login.html'); </script>";
+            echo "<script> location.replace('../login.html'); </script>";
 
         }
         else{

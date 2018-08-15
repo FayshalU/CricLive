@@ -4,53 +4,10 @@
 
 	if(!isset($_SESSION['log']))
     {
-        header("location: login.html");
-	}
-    
-    $user = $_GET['id'];
-    $name = null;
-    $email = null;
-    $dob = null;
-    $country = null;
-    $post = null;
-    
-    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
-
-//        if(!$conn)
-//        {
-//            echo "DB Error: ".mysqli_connect_error();
-//        }
-//        else
-//        {
-//            echo "Success <br/>";
-//        }
-
-    $sql= "SELECT * from `user` where id='".$user."'";
-
-    //echo $_POST['luser'];
-    //echo $sql;
-
-    $result = mysqli_query($conn, $sql);
-
-    while($row = mysqli_fetch_assoc($result))
-    {
-        $name = $row['name'];
-        $email = $row['email'];
-        $dob = $row['date'];
-        $country = $row['country'];
+        header("location: ../login.html");
+	}else{
+        include 'getInfo.php';
     }
-    
-//    $sql= "SELECT * from `post` where user_id='".$user."'";
-//
-//    //echo $_POST['luser'];
-//    //echo $sql;
-//
-//    $result = mysqli_query($conn, $sql);
-//
-//    $post =  mysqli_num_rows($result);
-    
-    mysqli_close($conn);
-
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +18,9 @@
   <title>CricLive - Cricket Score, News</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
 </head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body>
     <table width="100%" style="color:green;" height="50px">
         <tr >
@@ -85,10 +44,10 @@
                             <td>
 
                                 <ul>
-                                <li><a href="#">Timeline</a></li>
-                                <li><a href="myTeam.php"> My Team</a></li>
-                                <li><a href="ranking.php"> My Ranking</a></li>
-                                <li><a href="poll.php"> Current Polls </a></li>
+                                <li><a href="#">My info</a></li>
+                                <li><a href="changeInfo.php"> Change Info </a></li>
+                                <li><a href="changePass.php"> Change Password</a></li>
+                                <li><a href="changePic.php"> Change Picture </a></li>
                               </ul>
 
                             </td>
@@ -104,28 +63,32 @@
                     <tr>
                         <td colspan="2">
                             <center>
-                                <img src="image/people.png" style="height:180px;">
-                                <p id="name"><?=$name?></p>
+                                <img src="../image/people.png" style="height:180px;">
+                                <p id="name"></p>
                             </center>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <center><p id="country"><?=$country?></p></center>
+                            <center><p id="country"></p></center>
                         </td>
                     </tr>
                     <tr>
-                        <td><p style="text-align: lest;">Rank</p></td>
-                        <td><p style="text-align: right;" id="post">12</p></td>
+                        <td width="50%"><p style="text-align: left;">Email</p></td>
+                        <td><p style="text-align: right;" id="email"></p></td>
                     </tr>
                     <tr>
-                        <td width="50%"><p style="text-align: left;">Email</p></td>
-                        <td><p style="text-align: right;" id="email"><?=$email?></p></td>
+                        <td width="50%"><p style="text-align: left;">Current Rank</p></td>
+                        <td><p style="text-align: right;" id="crank">1322</p></td>
+                    </tr>
+                    <tr>
+                        <td><p style="text-align: lest;">Best Rank</p></td>
+                        <td><p style="text-align: right;" id="brank">543</p></td>
                     </tr>
                     
                     <tr>
                         <td><p style="text-align: lest;">Date Of Birth</p></td>
-                        <td><p style="text-align: right;" id="date"><?=$dob?></p></td>
+                        <td><p style="text-align: right;" id="date"></p></td>
                     </tr>
                     
                 </table>
@@ -138,11 +101,12 @@
     
     <script>
         
-//        document.getElementById("name").innerHTML = <?php echo json_encode($_SESSION['name']); ?>;
-//        document.getElementById("email").innerHTML = <?php echo json_encode($_SESSION['email']); ?>;
-//        document.getElementById("country").innerHTML = <?php echo json_encode($_SESSION['country']); ?>;
-//        document.getElementById("date").innerHTML = <?php echo json_encode($_SESSION['date']); ?>;
+        document.getElementById("name").innerHTML = <?php echo json_encode($_SESSION['name']); ?>;
+        document.getElementById("email").innerHTML = <?php echo json_encode($_SESSION['email']); ?>;
+        document.getElementById("country").innerHTML = <?php echo json_encode($_SESSION['country']); ?>;
+        document.getElementById("date").innerHTML = <?php echo json_encode($_SESSION['date']); ?>;
         
     </script>
+    
 </body>
 </html>

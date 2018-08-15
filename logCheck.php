@@ -59,7 +59,7 @@
         mysqli_close($conn);
 
         if($valid == "user"){
-            echo "<script> location.replace('user.php'); </script>";
+            echo "<script> location.replace('user/user.php'); </script>";
         }else{
             echo "<script> location.replace('login.html?error=e'); </script>";
         }

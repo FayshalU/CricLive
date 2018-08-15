@@ -5,7 +5,7 @@
 
 	if(!isset($_SESSION['log']))
     {
-        header("location: login.html");
+        header("location: ../login.html");
 	}else{}
     
     $user = null;

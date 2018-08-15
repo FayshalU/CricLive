@@ -4,7 +4,7 @@
 
 	if(!isset($_SESSION['log']))
     {
-        header("location: login.html");
+        header("location: ../login.html");
 	}
 ?>
 
@@ -43,8 +43,8 @@
 
                                 <ul>
                                 <li><a href="user.php">Timeline</a></li>
-                                <li><a href="myTeam.php"> My Team</a></li>
-                                <li><a href="#"> My Ranking</a></li>
+                                <li><a href="#"> My Team</a></li>
+                                <li><a href="ranking.php"> My Ranking</a></li>
                                 <li><a href="poll.php"> Current Polls </a></li>
                               </ul>
 
@@ -60,83 +60,109 @@
                 <table  width="100%" border="1">
                     <tr>
                         <td>
-                            <div class="box-header">
-                              <h3 class="box-title">Rankings</h3>
+                            <div>
+                              <center><h3>Available Balance: $665</h3></center>
+                              <h3>My Squad</h3>
                             </div>
                               <table width="100%">
                                 <thead>
                                 <tr role="row">
-                                    <th><center>#</center></th>
+                                    <th><center>Position</center></th>
                                     <th><center>Name</center></th>
                                     <th><center>Country</center></th>
-                                    <th><center>Points</center></th>
+                                    <th><center>Type</center></th>
+                                    <th><center>Rating</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>1</center></td>
+                                    <tr>
+                                      <td><center>1</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Batsman</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>2</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Batsman</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>3</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Batsman</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>4</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Batsman</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>5</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Wicket Keeper</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>6</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>All Rounder</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>7</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>All Rounder</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>8</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Bowler</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>9</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Bowler</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                     <tr role="row" class="odd">
                                       <td class="sorting_1"><center>10</center></td>
                                       <td><center>ABC</center></td>
                                       <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
+                                      <td><center>Bowler</center></td>
+                                      <td><center>8</center></td>
+                                    </tr>
+                                    <tr role="row" class="odd">
+                                      <td class="sorting_1"><center>11</center></td>
+                                      <td><center>ABC</center></td>
+                                      <td><center>Australia</center></td>
+                                      <td><center>Bowler</center></td>
+                                      <td><center>8</center></td>
                                     </tr>
                                 </tbody>
-                            </table>
-                            <br>
-                            <center><input type="button" value="Next"></center>
+                                <tfoot>
+                                    <tr>
+                                        <th rowspan="1" colspan="1"><center>Position</center></th>
+                                        <th rowspan="1" colspan="1"><center>Name</center></th>
+                                        <th rowspan="1" colspan="1"><center>Country</center></th>
+                                        <th rowspan="1" colspan="1"><center>Type</center></th>
+                                        <th rowspan="1" colspan="1"><center>Rating</center></th>
+                                    </tr>
+                                </tfoot>
+                          </table>
                         </td>
                     </tr>
                    

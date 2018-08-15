@@ -4,7 +4,7 @@
 
 	if(!isset($_SESSION['log']))
     {
-        header("location: login.html");
+        header("location: ../login.html");
 	}
 ?>
 
@@ -23,7 +23,7 @@
     <table width="100%" style="color:green;" height="50px">
         <tr >
             <td width="10%"><a href="user.php"><center>CricLive</center></a></td>
-            <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
+            <td width="10%" style="color:green;"><a href="#"><center>Live Score</center></a></td>
             <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
             <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
@@ -45,7 +45,7 @@
                                 <li><a href="user.php">Timeline</a></li>
                                 <li><a href="myTeam.php"> My Team</a></li>
                                 <li><a href="ranking.php"> My Ranking</a></li>
-                                <li><a href="#"> Current Polls </a></li>
+                                <li><a href="poll.php"> Current Polls </a></li>
                               </ul>
 
                             </td>
@@ -58,61 +58,47 @@
             <td  width="5%"></td>
             <td width="75%">
                 <table  width="100%" border="1">
-                    <center><p style="font-size:25px;color:green;">New Polls</p></center>
+                    <tr>
+                        <td><center><p style="font-size:25px;color:green;">Live</p></center></td>
+                    </tr>
                     <tr>
                         <td>
                             
-                            <form method="post" action="#">
-                                <center><p style="font-size:20px;">Who will win today's match?</p></center>
-                                <input type="submit" name="poll1" value="Bangladesh" style="height:30px;width:48%">
-                                <input type="submit" name="poll2" value="Australia" style="height:30px;width:50%">
-                            </form>
+                            <center><p style="font-size:20px;">BAN vs AUS</p></center>
+                            <center><p style="font-size:15px;">BAN 320/6 &nbsp &nbsp &nbsp &nbsp &nbsp AUS 170/5</p></center>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             
-                            <form method="post" action="#">
-                                <center><p style="font-size:20px;">Who will win today's match?</p></center>
-                                <input type="submit" name="poll1" value="Bangladesh" style="height:30px;width:48%">
-                                <input type="submit" name="poll2" value="Australia" style="height:30px;width:50%">
-                            </form>
+                            <center><p style="font-size:20px;">BAN vs AUS</p></center>
+                            <center><p style="font-size:15px;">BAN 320/6 &nbsp &nbsp &nbsp &nbsp &nbsp AUS 170/5</p></center>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             
-                            <form method="post" action="#">
-                                <center><p style="font-size:20px;">Who will win today's match?</p></center>
-                                <input type="submit" name="poll1" value="Bangladesh" style="height:30px;width:48%">
-                                <input type="submit" name="poll2" value="Australia" style="height:30px;width:50%">
-                            </form>
+                            <center><p style="font-size:20px;">BAN vs AUS</p></center>
+                            <center><p style="font-size:15px;">BAN 320/6 &nbsp &nbsp &nbsp &nbsp &nbsp AUS 170/5</p></center>
                         </td>
                     </tr>
                     <tr>
-                        <td><center><p style="font-size:25px;color:green;">Poll Results</p></center></td>
+                        <td><center><p style="font-size:25px;color:blue;">Results</p></center></td>
                     </tr>
                     <tr>
                         <td>
                             
-                            <form method="post" action="#">
-                                <center><p style="font-size:20px;">Who will win today's match?</p></center>
-                                <input type="submit" name="poll1" value="Bangladesh" style="height:30px;width:48%">
-                                <input type="submit" name="poll2" value="Australia" style="height:30px;width:50%">
-                            </form>
+                            <center><p style="font-size:20px;">BAN vs AUS</p></center>
+                            <center><p style="font-size:15px;">BAN 365/8 &nbsp &nbsp &nbsp &nbsp &nbsp AUS 280/10</p></center>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             
-                            <form method="post" action="#">
-                                <center><p style="font-size:20px;">Who will win today's match?</p></center>
-                                <input type="submit" name="poll1" value="Bangladesh" style="height:30px;width:48%">
-                                <input type="submit" name="poll2" value="Australia" style="height:30px;width:50%">
-                            </form>
+                            <center><p style="font-size:20px;">BAN vs AUS</p></center>
+                            <center><p style="font-size:15px;">BAN 365/8 &nbsp &nbsp &nbsp &nbsp &nbsp AUS 280/10</p></center>
                         </td>
                     </tr>
-                    
                 </table>
             </td>
         </tr>

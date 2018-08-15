@@ -2,10 +2,16 @@
 	session_start();
 	error_reporting(0);
 
-	if(isset($_SESSION['log']))
+	if(!isset($_SESSION['log']))
     {
-        header("location: user/user.php");
-	}
+        header("location: ../login.html");
+	}else{
+        
+        $value = null;
+        $count = 10;
+        $conn = null;
+        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -16,18 +22,16 @@
   <title>CricLive - Cricket Score, News</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  
 </head>
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body>
     <table width="100%" style="color:green;" height="50px">
         <tr >
-            <td width="10%"><a href="index.php"><center>CricLive</center></a></td>
+            <td width="10%"><a href="user.php"><center>CricLive</center></a></td>
             <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
             <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
-            <td width="10%"><a href="login.html"><center>Sign In</center></a></td>
-            <td width="10%"><a href="user/register.html"><center>Sign Up</center></a></td>
+            <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
+            <td width="10%"><a href="logout.php"><center>Log Out</center></a></td>
             
         </tr>
     </table >
@@ -43,7 +47,9 @@
 
                                 <ul>
                                 <li><a href="#">Timeline</a></li>
-                                <li><a href="user/aPoll.php"> Current Polls</a></li>
+                                <li><a href="myTeam.php"> My Team</a></li>
+                                <li><a href="ranking.php"> My Ranking</a></li>
+                                <li><a href="poll.php"> Current Polls </a></li>
                               </ul>
 
                             </td>
@@ -54,7 +60,7 @@
                 
             </td>
             <td  width="5%"></td>
-            <td width="75%">
+            <td width="75%" valign="top">
                 <table  width="100%" border="1">
                     <?php
                         $conn = mysqli_connect('localhost', 'root', '', 'criclive');
@@ -66,8 +72,8 @@
                         $i = 0;
                         while($row = mysqli_fetch_assoc($result)){ 
                             
-                            $str = 'user/editorProfile.php?id='. $row['user_id'];
-                            $str3 = 'user/post.php?id='. $row['post_id'];
+                            $str = 'editorProfile.php?id='. $row['user_id'];
+                            $str3 = 'userPost.php?id='. $row['post_id'];
                             
                             $sql2= "SELECT * from `editor` where id='".$row['user_id']."'";
                             $result2 = mysqli_query($conn, $sql2);
@@ -79,7 +85,7 @@
                             
                             $comment = null;
                             
-                            $sql5= "SELECT * from `post` where post_id='".$row['post_id']."'";
+                            $sql5= "SELECT * from `comment` where post_id='".$row['post_id']."'";
                             $result5 = mysqli_query($conn, $sql5);
                             $comment = mysqli_num_rows($result5);
                             
@@ -114,6 +120,11 @@
         </tr>
     </table>
     <br/>
-    <?php include 'user/footer.php';?>
+    <?php include 'footer.php';?>
+    
+    <script>
+        
+    </script>
+    
 </body>
 </html>

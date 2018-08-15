@@ -6,5 +6,5 @@
     setcookie('rem', '', time()-100, '/');
     setcookie('log', '', time()-100, '/');
 
-	header("location: login.html");
+	header("location: ../login.html");
 ?>

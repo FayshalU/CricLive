@@ -4,7 +4,7 @@
 
 	if(!isset($_SESSION['log']))
     {
-        header("location: login.html");
+        header("location: ../login.html");
 	}
     
     $user = $_GET['id'];
@@ -25,7 +25,7 @@
 //            echo "Success <br/>";
 //        }
 
-    $sql= "SELECT * from `editor` where id='".$user."'";
+    $sql= "SELECT * from `user` where id='".$user."'";
 
     //echo $_POST['luser'];
     //echo $sql;
@@ -40,14 +40,14 @@
         $country = $row['country'];
     }
     
-    $sql= "SELECT * from `post` where user_id='".$user."'";
-
-    //echo $_POST['luser'];
-    //echo $sql;
-
-    $result = mysqli_query($conn, $sql);
-
-    $post =  mysqli_num_rows($result);
+//    $sql= "SELECT * from `post` where user_id='".$user."'";
+//
+//    //echo $_POST['luser'];
+//    //echo $sql;
+//
+//    $result = mysqli_query($conn, $sql);
+//
+//    $post =  mysqli_num_rows($result);
     
     mysqli_close($conn);
 
@@ -115,13 +115,12 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><p style="text-align: lest;">Rank</p></td>
+                        <td><p style="text-align: right;" id="post">12</p></td>
+                    </tr>
+                    <tr>
                         <td width="50%"><p style="text-align: left;">Email</p></td>
                         <td><p style="text-align: right;" id="email"><?=$email?></p></td>
-                    </tr>
-                    
-                    <tr>
-                        <td><p style="text-align: lest;">Total Post</p></td>
-                        <td><p style="text-align: right;" id="post"><?=$post?></p></td>
                     </tr>
                     
                     <tr>
