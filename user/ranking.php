@@ -5,7 +5,35 @@
 	if(!isset($_SESSION['log']))
     {
         header("location: ../login.html");
-	}
+	}else{
+        include 'getInfo.php';
+    }
+
+    $ser = 0;
+    
+    $conn1 = mysqli_connect('localhost', 'root', '', 'criclive');
+    $sql1 = "SELECT * FROM rank";
+    $result1 = mysqli_query($conn1, $sql1);
+    $count = mysqli_num_rows($result1);
+
+    function serial($id){
+        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+
+        $sql = "SELECT @a:=@a+1 serial_number, points,user_id FROM rank, (SELECT @a:= 0) AS a ORDER BY `points` DESC";
+
+        $result = mysqli_query($conn, $sql);
+        //echo mysqli_num_rows($result);
+        
+        $count = mysqli_num_rows($result);
+        while($row = mysqli_fetch_assoc($result)){
+            //echo $row['serial_number']." ".$row['points']."<br>";
+            
+            if($row['user_id'] == $id){
+                return $row['serial_number'];
+            }
+            
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -57,86 +85,212 @@
             </td>
             <td  width="5%"></td>
             <td width="75%">
-                <table  width="100%" border="1">
+                <table  width="100%" border="1px">
                     <tr>
                         <td>
-                            <div class="box-header">
-                              <h3 class="box-title">Rankings</h3>
+                            <div>
+                              <center><h3>Rankings</h3></center>
                             </div>
                               <table width="100%">
                                 <thead>
-                                <tr role="row">
+                                <tr>
                                     <th><center>#</center></th>
+                                    <th><center>ID</center></th>
                                     <th><center>Name</center></th>
                                     <th><center>Country</center></th>
                                     <th><center>Points</center></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>1</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>2</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>3</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>4</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>5</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>6</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>7</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>8</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>9</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>10</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>1700</center></td>
-                                    </tr>
-                                </tbody>
+                                
+                                <?php
+                                  
+                                    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+
+                                    $sql= "SELECT * FROM `rank` ORDER BY `points` DESC";
+
+                                    $result = mysqli_query($conn, $sql);
+                                    //echo mysqli_num_rows($result);
+                                    $i = 0;
+                                    $pos = serial($_SESSION['id']);
+                                    if($_GET['se']!=""){
+                                        
+                                        $ser = $_GET['se'];
+                                        //echo $ser;
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            //echo serial($row['user_id']);
+                                            if($i<10 && (serial($row['user_id'])>=$ser)){
+                                                //echo $row['user_id'];
+                                                $str = 'userProfile.php?id='. $row['user_id'];
+                                                
+                                                if($row['user_id'] == $_SESSION['id']){
+                                ?>
+                                                 <tr style="outline: thin solid; color:blue;">
+                                                  <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                    <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                    <td><center><?=$row['name']?></center></td>
+                                                  <td><center><?=$row['country']?></center></td>
+                                                  <td><center><?=$row['points']?></center></td>
+                                                </tr>   
+
+                                    <?php
+                                                //echo $count;
+                                                continue;
+                                            }
+                                    ?>
+
+                                            <tr>
+                                              <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                <td><center><?=$row['name']?></center></td>
+                                              <td><center><?=$row['country']?></center></td>
+                                              <td><center><?=$row['points']?></center></td>
+                                            </tr>
+
+
+                                    <?php
+                                    
+                                            $i++;
+                                            }else{
+                                                //break;
+                                            }
+                                        }
+                                        
+                                    }
+                                    else if($count>10 && ($count-$pos<10)){
+                                        $ser = $count-10;
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            if($i<10 && (serial($row['user_id'])>=$ser)){
+                                                
+                                                $str = 'userProfile.php?id='. $row['user_id'];
+                                                
+                                                if($row['user_id'] == $_SESSION['id']){
+                                ?>
+                                                 <tr style="outline: thin solid; color:blue;">
+                                                  <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                    <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                    <td><center><?=$row['name']?></center></td>
+                                                  <td><center><?=$row['country']?></center></td>
+                                                  <td><center><?=$row['points']?></center></td>
+                                                </tr>   
+
+                                    <?php
+                                                //echo $count;
+                                                continue;
+                                            }
+                                    ?>
+
+                                            <tr>
+                                              <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                <td><center><?=$row['name']?></center></td>
+                                              <td><center><?=$row['country']?></center></td>
+                                              <td><center><?=$row['points']?></center></td>
+                                            </tr>
+
+
+                                    <?php
+                                    
+                                            $i++;
+                                            }else{
+                                                //break;
+                                            }
+                                        }
+                                  
+                                  
+                                    }
+                                    else if($count>10){
+                                        
+                                        $ser = serial($_SESSION['id']);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            if($i<10 && (serial($row['user_id'])>=$ser)){
+                                                
+                                                $str = 'userProfile.php?id='. $row['user_id'];
+                                                
+                                                if($row['user_id'] == $_SESSION['id']){
+                                ?>
+                                                 <tr style="outline: thin solid; color:blue;">
+                                                  <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                    <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                    <td><center><?=$row['name']?></center></td>
+                                                  <td><center><?=$row['country']?></center></td>
+                                                  <td><center><?=$row['points']?></center></td>
+                                                </tr>   
+
+                                    <?php
+                                                //echo $count;
+                                                continue;
+                                            }
+                                    ?>
+
+                                            <tr>
+                                              <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                <td><center><?=$row['name']?></center></td>
+                                              <td><center><?=$row['country']?></center></td>
+                                              <td><center><?=$row['points']?></center></td>
+                                            </tr>
+
+
+                                    <?php
+                                    
+                                            $i++;
+                                            }else{
+                                                //break;
+                                            }
+                                        }
+                                        
+                                    }
+                                    else{
+                                        
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            if($i<10){
+                                                
+                                                $str = 'userProfile.php?id='. $row['user_id'];
+                                                
+                                                if($row['user_id'] == $_SESSION['id']){
+                                ?>
+                                                 <tr style="outline: thin solid; color:blue;">
+                                                  <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                    <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                    <td><center><?=$row['name']?></center></td>
+                                                  <td><center><?=$row['country']?></center></td>
+                                                  <td><center><?=$row['points']?></center></td>
+                                                </tr>   
+
+                                    <?php
+                                                //echo $count;
+                                                continue;
+                                            }
+                                    ?>
+
+                                            <tr>
+                                              <td><center><?php echo serial($row['user_id']) ?></center></td>
+                                                <td><center><a href='<?=$str?>'><?=$row['user_id']?></a></center></td>
+                                                <td><center><?=$row['name']?></center></td>
+                                              <td><center><?=$row['country']?></center></td>
+                                              <td><center><?=$row['points']?></center></td>
+                                            </tr>
+
+
+                                    <?php
+                                    
+                                            $i++;
+                                            }else{
+                                                //break;
+                                            }
+                                        }
+                                    }
+                                  
+                                    mysqli_close($conn);
+                                ?>
+                                  
+                                  
                             </table>
                             <br>
-                            <center><input type="button" value="Next"></center>
+                            <center>
+                                <input type="button" id="prev" value="Prev" onclick="prevbtn()">
+                                <input type="button" id="next" value="Next" onclick="nextbtn()">
+                            </center>
                         </td>
                     </tr>
                    
@@ -146,5 +300,42 @@
     </table>
     <br/>
     <?php include 'footer.php';?>
+    
+    <script>
+        var count = <?php echo $count; ?>;
+        console.log(count);
+        if(count<11){
+            document.getElementById("next").style.display = 'none';   
+            document.getElementById("prev").style.display = 'none';   
+        }else{
+            document.getElementById("next").style.display = 'block';   
+            document.getElementById("prev").style.display = 'block';   
+        }
+        
+        function prevbtn(){
+            var ser = <?php echo $ser; ?>-10;
+            
+            if(ser<0){
+                location.replace('ranking.php?se=0');
+            }
+            else{
+                location.replace('ranking.php?se='+ser);
+            }
+        }
+        
+        function nextbtn(){
+            var ser = <?php echo $ser; ?>+10;
+            
+            if(ser+10 > count){
+                var temp = count-10
+                location.replace('ranking.php?se='+temp);
+            }
+            else{
+                location.replace('ranking.php?se='+ser);
+            }
+        }
+        
+    </script>
+    
 </body>
 </html>

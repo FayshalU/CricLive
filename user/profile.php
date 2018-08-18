@@ -7,6 +7,27 @@
         header("location: ../login.html");
 	}else{
         include 'getInfo.php';
+        
+        
+        
+        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+
+        $sql = "SELECT @a:=@a+1 serial_number, points,user_id FROM rank, (SELECT @a:= 0) AS a ORDER BY `points` DESC";
+
+        $result = mysqli_query($conn, $sql);
+        //echo mysqli_num_rows($result);
+        
+        $rank = null;
+        while($row = mysqli_fetch_assoc($result)){
+            //echo $row['serial_number']." ".$row['points']."<br>";
+            
+            if($row['user_id'] == $_SESSION['id']){
+                $rank = $row['serial_number'];
+            }
+            
+        }
+        
+        
     }
 ?>
 
@@ -79,12 +100,14 @@
                     </tr>
                     <tr>
                         <td width="50%"><p style="text-align: left;">Current Rank</p></td>
-                        <td><p style="text-align: right;" id="crank">1322</p></td>
+                        <td><p style="text-align: right;" id="crank"><?=$rank?></p></td>
                     </tr>
+<!--
                     <tr>
                         <td><p style="text-align: lest;">Best Rank</p></td>
                         <td><p style="text-align: right;" id="brank">543</p></td>
                     </tr>
+-->
                     
                     <tr>
                         <td><p style="text-align: lest;">Date Of Birth</p></td>

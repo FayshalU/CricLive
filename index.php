@@ -5,7 +5,9 @@
 	if(isset($_SESSION['log']))
     {
         header("location: user/user.php");
-	}
+	}else if(!isset($_SESSION['an'])){
+        $_SESSION['an'] = rand();
+    }
 ?>
 
 <!DOCTYPE html>

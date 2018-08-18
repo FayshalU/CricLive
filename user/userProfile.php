@@ -104,7 +104,7 @@
                     <tr>
                         <td colspan="2">
                             <center>
-                                <img src="image/people.png" style="height:180px;">
+                                <img src="../image/people.png" style="height:180px;">
                                 <p id="name"><?=$name?></p>
                             </center>
                         </td>

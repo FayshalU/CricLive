@@ -120,6 +120,7 @@
                             
                             if($done){
                                 
+                                echo "<br><br></td> </tr>";
                                 continue;
                                 
                             }
@@ -138,9 +139,9 @@
 
                                 <br><br>
                             
-                            </td> </tr>
+                            
                         <?php
-                                
+                            echo "</td> </tr>";
                             //echo $row['text'];
                             $i++;
                         }

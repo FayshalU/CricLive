@@ -88,8 +88,9 @@
             {
                 echo "Inserted";
             }
-            else
+            else{
                 echo "Not Registered";
+            }
             
             $sql2 = "INSERT into user values('".$_POST['userName']."','".$_POST['password']."','".$_POST['name']."','".$_POST['email']."','".$_POST['country']."','".$date."')";
 
@@ -97,8 +98,21 @@
             {
                 echo "Inserted";
             }
-            else
+            else{
                 echo "Not Registered";
+            }
+            
+            $zero = 0;
+            
+            $sql3 = "INSERT into rank values('".$_POST['userName']."','".$_POST['name']."','".$_POST['country']."',".$zero.")";
+
+            if(mysqli_query($conn, $sql3))
+            {
+                echo "Inserted";
+            }
+            else{
+                echo "Not Registered";
+            }
             
             
 

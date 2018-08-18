@@ -2,13 +2,7 @@
 	session_start();
 	error_reporting(0);
 
-	if(!isset($_SESSION['log']))
-    {
-        header("location: ../login.html");
-	}
-    else if($_GET['id'] != "" && $_GET['vote']!= ""){
-        
-        include 'getInfo.php';
+	if($_GET['id'] != "" && $_GET['vote']!= ""){
         
         $id = $_GET['id'];
         $vote = $_GET['vote'];
@@ -16,7 +10,7 @@
         $conn = mysqli_connect('localhost', 'root', '', 'criclive');
 
         
-        $sql= "INSERT into polls values('','".$id."','".$_SESSION['id']."','".$vote."')";
+        $sql= "INSERT into polls values('','".$id."','".$_SESSION['an']."','".$vote."')";
 
         if(mysqli_query($conn, $sql))
         {
@@ -34,7 +28,6 @@
             $value1 = $row1['op1'];
             $value2 = $row1['op2'];
         }
-        
         $op1=0;
         $op2=0;
         
@@ -58,17 +51,18 @@
         
 //        echo $op1;
 //        echo $op2;
-        
+//        echo $value2;
+//        echo $value1;
         echo '<div style="width:100%;">
-                    <div>'.$value1." ". 100*round($op1/($op2+$op1),2).'% </div>
-                    <div style="background-color:lightblue; width:'. 100*round($op1/($op2+$op1),2).'%; height:20px;"></div>
-                    <div>'. $value2." ". 100*round($op2/($op2+$op1),2).'% </div>
-                    <div style="background-color:lightgreen; width:'. 100*round($op2/($op2+$op1),2).'%; height:20px;"</div>  
-                </div>';
+                <div>'.$value1." ". 100*round($op1/($op2+$op1),2).'% </div>
+                <div style="background-color:lightblue; width:'. 100*round($op1/($op2+$op1),2).'%; height:20px;"></div>
+                <div>'. $value2." ". 100*round($op2/($op2+$op1),2).'% </div>
+                <div style="background-color:lightgreen; width:'. 100*round($op2/($op2+$op1),2).'%; height:20px;"</div>  
+            </div>';
 
     }
     else{
-        header("location: poll.php");
+        header("location: aPoll.php");
     }
 
 ?>

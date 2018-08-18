@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2018 at 05:49 PM
+-- Generation Time: Aug 18, 2018 at 05:38 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -132,7 +132,10 @@ INSERT INTO `polls` (`id`, `poll_id`, `user_id`, `response`) VALUES
 (1, '1', 'aa', 'Bangladesh'),
 (7, '2', 'aa', 'Pakistan'),
 (9, '1', 'xx', 'Australia'),
-(13, '1', 'bb', 'Bangladesh');
+(30, '1', '28412', 'Bangladesh'),
+(32, '2', '28412', 'India'),
+(33, '1', 'bb', 'Bangladesh'),
+(34, '2', 'bb', 'Pakistan');
 
 -- --------------------------------------------------------
 
@@ -157,6 +160,28 @@ CREATE TABLE `post` (
 INSERT INTO `post` (`post_id`, `user_id`, `headline`, `text`, `date`, `time`, `image`) VALUES
 (1, 'adam', 'Shakib\'s retirement', 'Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.', '2018-08-10', '2:30 PM', ''),
 (2, 'charlie', 'Mashrafi the hero', 'Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.', '2018-08-08', '12:00 AM', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rank`
+--
+
+CREATE TABLE `rank` (
+  `user_id` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `points` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rank`
+--
+
+INSERT INTO `rank` (`user_id`, `name`, `country`, `points`) VALUES
+('aa', 'ABC', 'Bangladesh', 800),
+('bb', 'Faysal', 'South Africa', 1000),
+('xx', 'ABCD', 'England', 500);
 
 -- --------------------------------------------------------
 
@@ -223,6 +248,12 @@ ALTER TABLE `post`
   ADD PRIMARY KEY (`post_id`);
 
 --
+-- Indexes for table `rank`
+--
+ALTER TABLE `rank`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -248,7 +279,7 @@ ALTER TABLE `poll`
 -- AUTO_INCREMENT for table `polls`
 --
 ALTER TABLE `polls`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `post`
