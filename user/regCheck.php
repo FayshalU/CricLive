@@ -115,6 +115,18 @@
             }
             
             
+            $balance = 50000;
+            $sql4 = "INSERT into team (user_id, balance) values('".$_POST['userName']."',".$balance.")";
+
+            if(mysqli_query($conn, $sql4))
+            {
+                echo "Inserted";
+            }
+            else{
+                echo "Not Registered";
+            }
+            
+            
 
             mysqli_close($conn);
 

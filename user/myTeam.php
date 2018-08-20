@@ -5,7 +5,9 @@
 	if(!isset($_SESSION['log']))
     {
         header("location: ../login.html");
-	}
+	}else{
+        include 'getInfo.php';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -42,10 +44,8 @@
                             <td>
 
                                 <ul>
-                                <li><a href="user.php">Timeline</a></li>
-                                <li><a href="#"> My Team</a></li>
-                                <li><a href="ranking.php"> My Ranking</a></li>
-                                <li><a href="poll.php"> Current Polls </a></li>
+                                <li><a href="#">View Team</a></li>
+                                <li><a href="modify.php">Change Team</a></li>
                               </ul>
 
                             </td>
@@ -61,107 +61,89 @@
                     <tr>
                         <td>
                             <div>
-                              <center><h3>Available Balance: $665</h3></center>
-                              <h3>My Squad</h3>
+                              <center><h3>My Squad</h3></center>
                             </div>
                               <table width="100%">
-                                <thead>
-                                <tr role="row">
-                                    <th><center>Position</center></th>
-                                    <th><center>Name</center></th>
-                                    <th><center>Country</center></th>
-                                    <th><center>Type</center></th>
-                                    <th><center>Rating</center></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                      <td><center>1</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Batsman</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>2</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Batsman</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>3</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Batsman</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>4</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Batsman</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>5</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Wicket Keeper</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>6</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>All Rounder</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>7</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>All Rounder</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>8</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Bowler</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>9</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Bowler</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>10</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Bowler</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                      <td class="sorting_1"><center>11</center></td>
-                                      <td><center>ABC</center></td>
-                                      <td><center>Australia</center></td>
-                                      <td><center>Bowler</center></td>
-                                      <td><center>8</center></td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1"><center>Position</center></th>
-                                        <th rowspan="1" colspan="1"><center>Name</center></th>
-                                        <th rowspan="1" colspan="1"><center>Country</center></th>
-                                        <th rowspan="1" colspan="1"><center>Type</center></th>
-                                        <th rowspan="1" colspan="1"><center>Rating</center></th>
-                                    </tr>
-                                </tfoot>
+                                <?php
+                                     
+                                    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+
+                                    $sql = "SELECT * FROM team where user_id='".$_SESSION['id']."'";
+
+                                    $result = mysqli_query($conn, $sql);
+
+                                    while($row = mysqli_fetch_assoc($result)){
+
+                                        if(($row['player1'] == "") || ($row['player2'] == "") || ($row['player3'] == "") || ($row['player4'] == "") || ($row['player5'] == "") || ($row['player6'] == "") || ($row['player7'] == "") || ($row['player8'] == "") || ($row['player9'] == "") || ($row['player10'] == "") || ($row['player11'] == "")){
+                                ?>
+                                                <tr>
+                                                    <td>
+                                                        <center><h4>Create a team first</h4></center>
+                                                    </td>
+                                                </tr>
+                                <?php
+                                        }
+                                        else{
+                                ?>
+                                                <thead>
+                                                    <tr>
+                                                        <th><center>Name</center></th>
+                                                        <th><center>Country</center></th>
+                                                        <th><center>Type</center></th>
+                                                        <th><center>Rating</center></th>
+                                                    </tr>
+                                                </thead>
+                                    <?php
+                                            
+                                                //$conn = mysqli_connect('localhost', 'root', '', 'criclive');
+                        
+                                                $sql= "SELECT * FROM `team` WHERE user_id='".$_SESSION['id']."'";
+
+                                                $result = mysqli_query($conn, $sql);
+                                                //echo mysqli_num_rows($result);
+                                                
+                                                while($row = mysqli_fetch_assoc($result)){ 
+                                                    
+                                                    $i = 1;
+                                                    
+                                                    while($i<12){
+                                                        
+                                                        $sql2= "SELECT * FROM `player info` WHERE player_id='".$row['player'.$i]."'";
+
+                                                        $result2 = mysqli_query($conn, $sql2);
+                                                        //echo mysqli_num_rows($result);
+
+                                                        while($row2 = mysqli_fetch_assoc($result2)){
+                                                            
+                                    ?>
+                                                            
+                                                            <tr>
+                                                                <td><center> <?=$row2['name']?> </center></td>
+                                                                <td><center> <?=$row2['country']?> </center></td>
+                                                                <td><center> <?=$row2['category']?> </center></td>
+                                                                <td><center> <?=$row2['rating']?> </center></td>
+                                                                
+                                                            </tr>
+                                                
+                                            <?php                
+                                                        }
+                                                        
+                                                        $i++;
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+                                  
+                                        }
+
+                                    }
+                                     
+                                    mysqli_close($conn);
+                                  
+                                ?>
+                                
+                                
                           </table>
                         </td>
                     </tr>

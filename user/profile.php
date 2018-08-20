@@ -95,6 +95,10 @@
                         </td>
                     </tr>
                     <tr>
+                        <td width="50%"><p style="text-align: left;">ID</p></td>
+                        <td><p style="text-align: right;" id="id"></p></td>
+                    </tr>
+                    <tr>
                         <td width="50%"><p style="text-align: left;">Email</p></td>
                         <td><p style="text-align: right;" id="email"></p></td>
                     </tr>
@@ -124,6 +128,7 @@
     
     <script>
         
+        document.getElementById("id").innerHTML = <?php echo json_encode($_SESSION['id']); ?>;
         document.getElementById("name").innerHTML = <?php echo json_encode($_SESSION['name']); ?>;
         document.getElementById("email").innerHTML = <?php echo json_encode($_SESSION['email']); ?>;
         document.getElementById("country").innerHTML = <?php echo json_encode($_SESSION['country']); ?>;
