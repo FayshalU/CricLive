@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2018 at 05:38 PM
+-- Generation Time: Aug 28, 2018 at 01:27 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -21,6 +21,72 @@ SET time_zone = "+00:00";
 --
 -- Database: `criclive`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `password` varchar(10) NOT NULL,
+  `email` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `password`, `email`) VALUES
+('admin', 'admin', '1111', 'adf@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `batting`
+--
+
+CREATE TABLE `batting` (
+  `id` varchar(100) NOT NULL,
+  `player1` varchar(10) NOT NULL,
+  `player2` varchar(10) NOT NULL,
+  `player3` varchar(10) NOT NULL,
+  `player4` varchar(10) NOT NULL,
+  `player5` varchar(10) NOT NULL,
+  `player6` varchar(10) NOT NULL,
+  `player7` varchar(10) NOT NULL,
+  `player8` varchar(10) NOT NULL,
+  `player9` varchar(10) NOT NULL,
+  `player10` varchar(10) NOT NULL,
+  `player11` varchar(10) NOT NULL,
+  `batsman1` varchar(10) NOT NULL,
+  `batsman2` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bowling`
+--
+
+CREATE TABLE `bowling` (
+  `id` varchar(100) NOT NULL,
+  `player1` varchar(100) NOT NULL,
+  `player2` varchar(100) NOT NULL,
+  `player3` varchar(100) NOT NULL,
+  `player4` varchar(100) NOT NULL,
+  `player5` varchar(100) NOT NULL,
+  `player6` varchar(100) NOT NULL,
+  `player7` varchar(100) NOT NULL,
+  `player8` varchar(100) NOT NULL,
+  `player9` varchar(100) NOT NULL,
+  `player10` varchar(100) NOT NULL,
+  `player11` varchar(100) NOT NULL,
+  `bowler1` varchar(10) NOT NULL,
+  `bowler2` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -45,6 +111,28 @@ INSERT INTO `comment` (`com_id`, `post_id`, `user_id`, `text`, `date`, `time`) V
 (1, 1, 'bb', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2018-08-10', '5:30 PM'),
 (2, 2, 'xx', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2018-08-08', '4:00 PM'),
 (4, 1, 'aa', 'Hello there :)', '2018-08-15', '11:29:35am');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country`
+--
+
+CREATE TABLE `country` (
+  `team_id` varchar(100) NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `player1` varchar(10) NOT NULL,
+  `player2` varchar(10) NOT NULL,
+  `player3` varchar(10) NOT NULL,
+  `player4` varchar(10) NOT NULL,
+  `player5` varchar(10) NOT NULL,
+  `player6` varchar(10) NOT NULL,
+  `player7` varchar(10) NOT NULL,
+  `player8` varchar(10) NOT NULL,
+  `player9` varchar(10) NOT NULL,
+  `player10` varchar(10) NOT NULL,
+  `player11` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -87,8 +175,24 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `password`, `type`) VALUES
 ('aa', '1234', 'user'),
+('admin', '1111', 'admin'),
 ('bb', '1234', 'user'),
 ('xx', '2222', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `play`
+--
+
+CREATE TABLE `play` (
+  `match_id` varchar(100) NOT NULL,
+  `team1` varchar(10) NOT NULL,
+  `team2` varchar(10) NOT NULL,
+  `score` int(10) NOT NULL,
+  `extra` int(10) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -175,7 +279,8 @@ INSERT INTO `polls` (`id`, `poll_id`, `user_id`, `response`) VALUES
 (30, '1', '28412', 'Bangladesh'),
 (32, '2', '28412', 'India'),
 (33, '1', 'bb', 'Bangladesh'),
-(34, '2', 'bb', 'Pakistan');
+(34, '2', 'bb', 'Pakistan'),
+(35, '1', '15578', 'Bangladesh');
 
 -- --------------------------------------------------------
 
@@ -250,7 +355,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`user_id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `balance`) VALUES
-('aa', '5', '8', '7', '9', '17', '18', '1', '3', '16', '13', '15', 11000),
+('aa', '5', '8', '7', '9', '17', '18', '1', '3', '16', '13', '20', 10000),
 ('bb', '', '', '', '', '', '', '', '', '', '', '', 50000),
 ('xx', '', '', '', '', '', '', '', '', '', '', '', 50000);
 
@@ -283,10 +388,34 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `country`, `date`) VALUES
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `batting`
+--
+ALTER TABLE `batting`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bowling`
+--
+ALTER TABLE `bowling`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`com_id`);
+
+--
+-- Indexes for table `country`
+--
+ALTER TABLE `country`
+  ADD PRIMARY KEY (`team_id`);
 
 --
 -- Indexes for table `editor`
@@ -299,6 +428,12 @@ ALTER TABLE `editor`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `play`
+--
+ALTER TABLE `play`
+  ADD PRIMARY KEY (`match_id`);
 
 --
 -- Indexes for table `player info`
@@ -362,7 +497,7 @@ ALTER TABLE `poll`
 -- AUTO_INCREMENT for table `polls`
 --
 ALTER TABLE `polls`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `post`
