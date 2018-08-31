@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2018 at 01:27 PM
+-- Generation Time: Sep 01, 2018 at 12:31 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -61,9 +61,20 @@ CREATE TABLE `batting` (
   `player9` varchar(10) NOT NULL,
   `player10` varchar(10) NOT NULL,
   `player11` varchar(10) NOT NULL,
+  `score` int(100) NOT NULL,
+  `wicket` int(10) NOT NULL,
+  `extra` int(10) NOT NULL,
+  `over` varchar(10) NOT NULL,
   `batsman1` varchar(10) NOT NULL,
   `batsman2` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `batting`
+--
+
+INSERT INTO `batting` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `score`, `wicket`, `extra`, `over`, `batsman1`, `batsman2`) VALUES
+('banvsaus_1', '14/6', '3/3', '6/3', '', '', '', '', '', '', '', '', 25, 1, 2, '2.0', 'player1', 'player3');
 
 -- --------------------------------------------------------
 
@@ -87,6 +98,13 @@ CREATE TABLE `bowling` (
   `bowler1` varchar(10) NOT NULL,
   `bowler2` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bowling`
+--
+
+INSERT INTO `bowling` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `bowler1`, `bowler2`) VALUES
+('banvsaus_2', '', '', '', '', '', '', '1.0-16-0', '1.0-9-1', '', '', '', 'player7', 'player8');
 
 -- --------------------------------------------------------
 
@@ -133,6 +151,16 @@ CREATE TABLE `country` (
   `player10` varchar(10) NOT NULL,
   `player11` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `country`
+--
+
+INSERT INTO `country` (`team_id`, `name`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`) VALUES
+('AUS', 'Australia', 'Marsh', 'Warner', 'Khawaja', 'Maxwell', 'Smith', 'Finch', 'Paine', 'Wade', 'Cummins', 'Lyon', 'Starc'),
+('BAN', 'Bangladesh', 'Tamim', 'Liton', 'Shakib', 'Ashraful', 'Mahmud', 'Mushfiq', 'Soumya', 'Mashrafee', 'Rubel', 'Mustafiz', 'Roni'),
+('IND', 'India', 'Pujara', 'Rohit', 'Kohli', 'Rahul', 'Yuvraj', 'Dhoni', 'Pandya', 'Jadeja', 'Ashwin', 'Shami', 'Bumrah'),
+('PAK\r\n', 'Pakistan', 'Fakhar', 'Malik', 'Shehzad', 'Mishbah', 'Afridi', 'Hafeez', 'Sarfaraz', 'Amir', 'Wahab', 'Irfan', 'Yasir');
 
 -- --------------------------------------------------------
 
@@ -189,10 +217,15 @@ CREATE TABLE `play` (
   `match_id` varchar(100) NOT NULL,
   `team1` varchar(10) NOT NULL,
   `team2` varchar(10) NOT NULL,
-  `score` int(10) NOT NULL,
-  `extra` int(10) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `play`
+--
+
+INSERT INTO `play` (`match_id`, `team1`, `team2`, `status`) VALUES
+('banvsaus', 'BAN', 'AUS', 'live');
 
 -- --------------------------------------------------------
 
@@ -280,7 +313,8 @@ INSERT INTO `polls` (`id`, `poll_id`, `user_id`, `response`) VALUES
 (32, '2', '28412', 'India'),
 (33, '1', 'bb', 'Bangladesh'),
 (34, '2', 'bb', 'Pakistan'),
-(35, '1', '15578', 'Bangladesh');
+(35, '1', '15578', 'Bangladesh'),
+(36, '1', '935', 'Australia');
 
 -- --------------------------------------------------------
 
@@ -497,7 +531,7 @@ ALTER TABLE `poll`
 -- AUTO_INCREMENT for table `polls`
 --
 ALTER TABLE `polls`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `post`

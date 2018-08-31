@@ -25,7 +25,7 @@
     <table width="100%" style="color:green;" height="50px">
         <tr >
             <td width="10%"><a href="index.php"><center>CricLive</center></a></td>
-            <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
+            <td width="10%" style="color:green;"><a href="user/viewScore.php"><center>Live Score</center></a></td>
             <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
             <td width="10%"><a href="login.html"><center>Sign In</center></a></td>
@@ -81,7 +81,7 @@
                             
                             $comment = null;
                             
-                            $sql5= "SELECT * from `post` where post_id='".$row['post_id']."'";
+                            $sql5= "SELECT * from `comment` where post_id='".$row['post_id']."'";
                             $result5 = mysqli_query($conn, $sql5);
                             $comment = mysqli_num_rows($result5);
                             

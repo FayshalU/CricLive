@@ -85,7 +85,7 @@
 
                             $comment = null;
 
-                            $sql5= "SELECT * from `post` where post_id='".$id."'";
+                            $sql5= "SELECT * from `comment` where post_id='".$id."'";
                             $result5 = mysqli_query($conn, $sql5);
                             $comment = mysqli_num_rows($result5);
 
