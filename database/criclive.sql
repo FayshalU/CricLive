@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2018 at 12:31 AM
+-- Generation Time: Sep 01, 2018 at 12:29 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -74,7 +74,8 @@ CREATE TABLE `batting` (
 --
 
 INSERT INTO `batting` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `score`, `wicket`, `extra`, `over`, `batsman1`, `batsman2`) VALUES
-('banvsaus_1', '14/6', '3/3', '6/3', '', '', '', '', '', '', '', '', 25, 1, 2, '2.0', 'player1', 'player3');
+('banvsaus_1', '18/10', '3/3', '6/3', '', '', '', '', '', '', '', '', 29, 1, 2, '2.4', 'player1', 'player3'),
+('banvsaus_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', '', '');
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,7 @@ CREATE TABLE `bowling` (
 --
 
 INSERT INTO `bowling` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `bowler1`, `bowler2`) VALUES
-('banvsaus_2', '', '', '', '', '', '', '1.0-16-0', '1.0-9-1', '', '', '', 'player7', 'player8');
+('banvsaus_2', '', '', '', '', '', '', '1.4-20-0', '1.0-9-1', '', '', '', 'player7', 'player8');
 
 -- --------------------------------------------------------
 
@@ -217,15 +218,16 @@ CREATE TABLE `play` (
   `match_id` varchar(100) NOT NULL,
   `team1` varchar(10) NOT NULL,
   `team2` varchar(10) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `innings` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `play`
 --
 
-INSERT INTO `play` (`match_id`, `team1`, `team2`, `status`) VALUES
-('banvsaus', 'BAN', 'AUS', 'live');
+INSERT INTO `play` (`match_id`, `team1`, `team2`, `status`, `innings`) VALUES
+('banvsaus', 'BAN', 'AUS', 'live', 1);
 
 -- --------------------------------------------------------
 

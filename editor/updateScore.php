@@ -1,6 +1,6 @@
 <?php
-//	session_start();
-//	error_reporting(0);
+	session_start();
+	error_reporting(0);
 //
 //	if(!isset($_SESSION['log']))
 //    {
@@ -12,12 +12,28 @@
 //        $conn = null;
 //        
 //    }
+    
+    $matchid = $_GET['id'];
+    $team1 = null;
+    $team2 = null;
 
-    $team1 = "BAN";
-    $team2 = "AUS";
-    $batting = "banvsaus_1";
-    $bowling = "banvsaus_2";
+    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+                        
+    $sql= "SELECT * FROM `play` where `match_id`='".$matchid."'";
 
+    $result = mysqli_query($conn, $sql);
+    //echo mysqli_num_rows($result);
+    $i = 0;
+    while($row = mysqli_fetch_assoc($result)){ 
+
+        $team1 = $row['team1'];
+        $team2 = $row['team2'];
+    }
+    
+    $batting = $matchid."_1";
+    $bowling = $matchid."_2";
+    
+    
     
 ?>
 
