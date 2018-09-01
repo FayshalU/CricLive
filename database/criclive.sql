@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2018 at 12:29 PM
+-- Generation Time: Sep 02, 2018 at 12:28 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -74,8 +74,8 @@ CREATE TABLE `batting` (
 --
 
 INSERT INTO `batting` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `score`, `wicket`, `extra`, `over`, `batsman1`, `batsman2`) VALUES
-('banvsaus_1', '18/10', '3/3', '6/3', '', '', '', '', '', '', '', '', 29, 1, 2, '2.4', 'player1', 'player3'),
-('banvsaus_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', '', '');
+('banvsaus_1', '21/10', '3/3', '27/18', '24/18', '', '', '', '', '', '', '', 77, 2, 2, '8.1', 'player4', 'player3'),
+('banvsaus_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', 'player1', 'player2');
 
 -- --------------------------------------------------------
 
@@ -105,7 +105,8 @@ CREATE TABLE `bowling` (
 --
 
 INSERT INTO `bowling` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `bowler1`, `bowler2`) VALUES
-('banvsaus_2', '', '', '', '', '', '', '1.4-20-0', '1.0-9-1', '', '', '', 'player7', 'player8');
+('banvsaus_1', '', '', '', '', '', '', '', '', '', '', '', 'player9', 'player10'),
+('banvsaus_2', '', '', '', '', '', '', '3.0-27-1', '3.0-26-1', '0.1-1-0', '1.0-8-0', '1.0-14-0', 'player9', 'player10');
 
 -- --------------------------------------------------------
 
@@ -415,9 +416,37 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `password`, `name`, `email`, `country`, `date`) VALUES
-('aa', '1234', 'ABC', 'abc@gmail.com', 'Bangladesh', '3/3/2000'),
+('aa', '1234', 'ABCD', 'abc@gmail.com', 'Bangladesh', '3/3/2000'),
 ('bb', '1234', 'Faysal', 'fa@gmail.com', 'South Africa', '1/1/2001'),
 ('xx', '2222', 'ABCD', 'abc@gmail.com', 'England', '1/1/2001');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wicket`
+--
+
+CREATE TABLE `wicket` (
+  `id` varchar(100) NOT NULL,
+  `player1` varchar(10) NOT NULL,
+  `player2` varchar(10) NOT NULL,
+  `player3` varchar(10) NOT NULL,
+  `player4` varchar(10) NOT NULL,
+  `player5` varchar(10) NOT NULL,
+  `player6` varchar(10) NOT NULL,
+  `player7` varchar(10) NOT NULL,
+  `player8` varchar(10) NOT NULL,
+  `player9` varchar(10) NOT NULL,
+  `player10` varchar(10) NOT NULL,
+  `player11` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `wicket`
+--
+
+INSERT INTO `wicket` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`) VALUES
+('banvsaus_1', 'Paine', 'Wade', '', '', '', '', '', '', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -511,6 +540,12 @@ ALTER TABLE `team`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `wicket`
+--
+ALTER TABLE `wicket`
   ADD PRIMARY KEY (`id`);
 
 --

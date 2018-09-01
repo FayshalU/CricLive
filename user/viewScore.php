@@ -77,6 +77,8 @@
                         //$i = 0;
                         while($row = mysqli_fetch_assoc($result)){ 
                             
+                            $innings = $row['innings'];
+                            
                             $str1 = 'matches.php?id='.$row['match_id'];
                             $str2 = $row['team1'];
                             $str3 = $row['team2'];
@@ -100,6 +102,27 @@
                             while($row2 = mysqli_fetch_assoc($result2)){
                                 
                                 $score2 = $row2['score']."/".$row2['wicket'];
+                            }
+                            
+                            if($innings == 2){
+                                
+                                $need = $score1-$score2;
+                                $wicket = 10 - $row2['wicket'];
+                        ?>        
+                                
+                                <tr> <td>
+                                <a href='<?=$str1?>'><center><h3><?=$str2."vs".$str3?></h3></center></a>
+                                <center><p style="font-size:15px;"><?=$str2?> <?=$score1?> &nbsp &nbsp &nbsp &nbsp &nbsp <?=$str3?> <?=$score2?></p></center>
+                                    <center><p style="font-size:15px;"><?=$str3?> need <?=$need?> run to win with <?=$wicket?> wickets remaining</p></center>
+
+                                    <br><br>
+
+                                </td> </tr>
+                    
+                       <?php
+                                
+                            continue;
+                            
                             }
                             
                     ?>

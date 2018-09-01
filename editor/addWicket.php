@@ -7,6 +7,7 @@
    // $run = $_GET['run'];
 //    $player = $_GET['player'];
     $country = $_GET['country'];
+    $bowlerName = $_GET['name'];
     $id = $_GET['id'];
 
     if($country != "" && $id != ""){
@@ -79,6 +80,22 @@
         {
             $playerName = $row4[$newPlayer];
             
+        }
+        
+
+
+        
+        $sql4= "UPDATE `wicket` SET ".$playerNum."='".$bowlerName."' WHERE id='".$id."'";
+        
+        //echo $sql4;
+
+        if(mysqli_query($conn, $sql4))
+        {
+            //echo "Inserted";
+        }
+        else{
+            //echo "Not Registered";
+            //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
         
         

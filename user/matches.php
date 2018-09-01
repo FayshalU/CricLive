@@ -148,7 +148,14 @@
                                     $data = explode('/', $row[$playerNum]);
                                     $run = intval($data[0]);
                                     $ball = intval($data[1]);
-                                    $SR = ($run/$ball) * 100;
+                                    
+                                    if($run == 0){
+                                        $SR = 0;
+                                    }
+                                    else{
+                                        $SR = round(($run/$ball) * 100,2);
+                                    }
+                                    
 
 
                                     $sql1= "SELECT * FROM `country` where `team_id`='".$t1."'";
@@ -236,7 +243,12 @@
                                     $over = $data[0];
                                     $over1 =  floatval( $over);
 
-                                    $econ = round(($run/$over1),2);
+                                    if($over1 == 0){
+                                        $econ = 0;
+                                    }
+                                    else{
+                                        $econ = round(($run/$over1),2);
+                                    }
 
                                     //echo $playerNum;
                                     $sql1= "SELECT * FROM `country` where `team_id`='".$t2."'";
@@ -287,9 +299,11 @@
                         </table>
                     
             
-                    <br>
-                    <br>
+                    
                 </div>
+                
+                <br>
+                <br>
                 
                 <input type="button" value="Scorecard" onclick="scorecardbtn()">
                 
@@ -304,6 +318,7 @@
                         <table>
                             <tr>
                                 <th>Batsman</th>
+                                <th></th>
                                 <th>Run</th>
                                 <th>Ball</th>
                                 <th>S/R</th>
@@ -333,7 +348,13 @@
                                     $data = explode('/', $row['player'.$i]);
                                     $run = intval($data[0]);
                                     $ball = intval($data[1]);
-                                    $SR = ($run/$ball) * 100;
+                                    
+                                    if($run == 0){
+                                        $SR = 0;
+                                    }
+                                    else{
+                                        $SR = round(($run/$ball) * 100,2);
+                                    }
 
 
                                     $sql1= "SELECT * FROM `country` where `team_id`='".$team1."'";
@@ -358,12 +379,36 @@
                                             </tr>';
                                         continue;
                                     }
+                                    
+                                    $wicketName = null;
+                                    
+                                    $sql2= "SELECT * FROM `wicket` where `id`='".$batting."'";
+
+                                    $result2 = mysqli_query($conn, $sql2);
+                                    //echo mysqli_num_rows($result);
+
+
+
+                                    while($row2 = mysqli_fetch_assoc($result2)){
+
+                                        $wicketName = $row2['player'.$i];
+
+                                    }
+                                    
+                                    if($wicketName == ""){
+                                        
+                                        $wicketName = 'Not out';
+                                        
+                                    }
+                                    
+                                    
 
                               ?>      
 
 
                                     <tr>
                                         <td><?=$name?></td>
+                                        <td><?=$wicketName?></td>
                                         <td><?=$run?></td>
                                         <td><?=$ball?></td>
                                         <td ><?=$SR?></td>
@@ -422,7 +467,12 @@
                                     $over = $data[0];
                                     $over1 =  floatval( $over);
 
-                                    $econ = round(($run/$over1),2);
+                                    if($over1 == 0){
+                                        $econ = 0;
+                                    }
+                                    else{
+                                        $econ = round(($run/$over1),2);
+                                    }
 
 
                                     $sql1= "SELECT * FROM `country` where `team_id`='".$team2."'";
@@ -482,20 +532,21 @@
                         <table>
                             <tr>
                                 <th>Batsman</th>
+                                <th></th>
                                 <th>Run</th>
                                 <th>Ball</th>
                                 <th>S/R</th>
                             </tr>
                     <?php
 
-                            $batting = $matchId.'_2';
-                            $bowling = $matchId.'_1';
+                            $batt = $matchId.'_2';
+                            $bowl = $matchId.'_1';
 
-                           $temp = $team1;
-                           $team1 = $team2;
-                           $team2 = $temp;
+//                           $temp = $team1;
+//                           $team1 = $team2;
+//                           $team2 = $temp;
 
-                            $sql= "SELECT * FROM `batting` where `id`='".$batting."'";
+                            $sql= "SELECT * FROM `batting` where `id`='".$batt."'";
 
                             $result = mysqli_query($conn, $sql);
                             //echo mysqli_num_rows($result);
@@ -515,10 +566,16 @@
                                     $data = explode('/', $row['player'.$i]);
                                     $run = intval($data[0]);
                                     $ball = intval($data[1]);
-                                    $SR = ($run/$ball) * 100;
+                                    
+                                    if($run == 0){
+                                        $SR = 0;
+                                    }
+                                    else{
+                                        $SR = round(($run/$ball) * 100,2);
+                                    }
 
 
-                                    $sql1= "SELECT * FROM `country` where `team_id`='".$team1."'";
+                                    $sql1= "SELECT * FROM `country` where `team_id`='".$team2."'";
 
                                     $result1 = mysqli_query($conn, $sql1);
                                     //echo mysqli_num_rows($result);
@@ -540,12 +597,34 @@
                                             </tr>';
                                         continue;
                                     }
+                                    
+                                    $wicketName = null;
+                                    
+                                    $sql2= "SELECT * FROM `wicket` where `id`='".$batt."'";
+
+                                    $result2 = mysqli_query($conn, $sql2);
+                                    //echo mysqli_num_rows($result);
+
+
+
+                                    while($row2 = mysqli_fetch_assoc($result2)){
+
+                                        $wicketName = $row2['player'.$i];
+
+                                    }
+                                    
+                                    if($wicketName == ""){
+                                        
+                                        $wicketName = 'Not out';
+                                        
+                                    }
 
                               ?>      
 
 
                                     <tr>
                                         <td><?=$name?></td>
+                                        <td><?=$wicketName?></td>
                                         <td><?=$run?></td>
                                         <td><?=$ball?></td>
                                         <td ><?=$SR?></td>
@@ -576,10 +655,10 @@
                             </tr>
                     <?php
 
-                            $batting = $matchId.'_2';
-                            $bowling = $matchId.'_1';
+//                            $batting = $matchId.'_2';
+//                            $bowling = $matchId.'_1';
 
-                            $sql= "SELECT * FROM `bowling` where `id`='".$bowling."'";
+                            $sql= "SELECT * FROM `bowling` where `id`='".$bowl."'";
 
                             $result = mysqli_query($conn, $sql);
                             //echo mysqli_num_rows($result);
@@ -604,10 +683,15 @@
                                     $over = $data[0];
                                     $over1 =  floatval( $over);
 
-                                    $econ = round(($run/$over1),2);
+                                    if($over1 == 0){
+                                        $econ = 0;
+                                    }
+                                    else{
+                                        $econ = round(($run/$over1),2);
+                                    }
 
 
-                                    $sql1= "SELECT * FROM `country` where `team_id`='".$team2."'";
+                                    $sql1= "SELECT * FROM `country` where `team_id`='".$team1."'";
 
                                     $result1 = mysqli_query($conn, $sql1);
                                     //echo mysqli_num_rows($result);
@@ -667,12 +751,52 @@
     
     <script>
         
+        var myVar = null;
+        
         $(document).ready(function(){
+            
+            myVar = setInterval(myTimer, 3000);
+            
 
            $("#div2").hide();
             $("#scorecard").hide();
 
         });
+        
+        function myTimer(){
+        
+            console.log("ABC");
+            
+            //window.clearInterval(myVar);
+            
+            
+            
+            $.get("getLive.php?id=<?=$matchId?>&in=<?=$innings?>&t1=<?=$team1?>&t2=<?=$team2?>", function(data, status){
+                //alert("Data: " + data + "\nStatus: " + status);
+                if(status == "success"){
+                    $("#live").html(data);
+                }
+            });
+            
+            $.get("getDiv.php?bat=<?=$batting?>&ball=<?=$bowling?>&t1=<?=$team1?>&t2=<?=$team2?>", function(data, status){
+                //alert("Data: " + data + "\nStatus: " + status);
+                if(status == "success"){
+                    $("#div1").html(data);
+                }
+            });
+            
+            $.get("getDiv.php?bat=<?=$batt?>&ball=<?=$bowl?>&t1=<?=$team2?>&t2=<?=$team1?>", function(data, status){
+                //alert("Data: " + data + "\nStatus: " + status);
+                if(status == "success"){
+                    $("#div2").html(data);
+                }
+            });
+            
+            
+                      
+                
+            
+        }
         
         function first(){
             if($("#div1").is(":visible")){

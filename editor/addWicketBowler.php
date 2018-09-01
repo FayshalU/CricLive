@@ -6,31 +6,16 @@
 
     //$run = $_GET['run'];
 //    $player = $_GET['player'];
-//    $country = $_GET['country'];
+    //$country = $_GET['country'];
     $id = $_GET['id'];
 
     if($id != ""){
         
         $conn = mysqli_connect('localhost', 'root', '', 'criclive');
         
+        
+        
         $playerNum = null;
-
-//        $sql= "SELECT * from country where team_id='".$country."'";
-//        
-//        $result = mysqli_query($conn, $sql);
-//        
-//        
-//        
-//        while($row = mysqli_fetch_assoc($result))
-//        {
-//            for($i=1; $i<12; $i++){
-//                if($row['player'.$i] == $player){
-//                    $playerNum = 'player'.$i;
-//                    break;
-//                }
-//            }
-//            
-//        }
         
         $sql2= "SELECT * from bowling where id='".$id."'";
         
@@ -76,6 +61,8 @@
             //echo "Not Registered";
             //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
+        
+        
         
         echo $temp;
         

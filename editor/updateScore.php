@@ -16,6 +16,9 @@
     $matchid = $_GET['id'];
     $team1 = null;
     $team2 = null;
+    $innings = 0;
+    $batting = null;
+    $bowling = null;
 
     $conn = mysqli_connect('localhost', 'root', '', 'criclive');
                         
@@ -24,14 +27,32 @@
     $result = mysqli_query($conn, $sql);
     //echo mysqli_num_rows($result);
     $i = 0;
+    $t1 = null;
+    $t2 = null;
+
     while($row = mysqli_fetch_assoc($result)){ 
 
-        $team1 = $row['team1'];
-        $team2 = $row['team2'];
+        $t1 = $row['team1'];
+        $t2 = $row['team2'];
+        $innings = $row['innings'];
     }
     
-    $batting = $matchid."_1";
-    $bowling = $matchid."_2";
+    if($innings == 2){
+        
+        $team1 = $t2;
+        $team2 = $t1;
+        $batting = $matchid."_2";
+        $bowling = $matchid."_1";
+    }
+    else{
+        
+        $team1 = $t1;
+        $team2 = $t2;
+        $batting = $matchid."_1";
+        $bowling = $matchid."_2";
+    }
+    
+    
     
     
     
@@ -94,55 +115,61 @@
                     <tr>
                         <td>
                             <div>
-                                On Strike
-                                <select id="player1" onchange="changeOn(this)">
+                                On Strike :
+                                
+                                <span id="player1"></span>
+<!--                                <select id="player1" onchange="changeOn(this)">-->
                             <?php
-                                    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
-
-                                    $sql= "SELECT * FROM `country` where team_id='".$team1."'";
-
-                                    $result = mysqli_query($conn, $sql);
-                                    //echo mysqli_num_rows($result);
-
-                                    while($row = mysqli_fetch_assoc($result)){
-
-                                        for($i=1; $i<12; $i++){
-
-                                            echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
-
-                                        }
-
-                                    }
-                                    mysqli_close($conn);
+//                                    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+//
+//                                    $sql= "SELECT * FROM `country` where team_id='".$team1."'";
+//
+//                                    $result = mysqli_query($conn, $sql);
+//                                    //echo mysqli_num_rows($result);
+//
+//                                    while($row = mysqli_fetch_assoc($result)){
+//
+//                                        for($i=1; $i<12; $i++){
+//
+//                                            echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
+//
+//                                        }
+//
+//                                    }
+//                                    mysqli_close($conn);
                                 ?>
 
-                                </select>
+<!--                                </select>-->
 
                                 <input type="button" id="swap" value="Swap" onclick="swapBatsman()">
 
                                 <br>
-                                Off Strike
+                                Off Strike : 
+                                
+                                <span id="player2"></span>
+<!--
                                 <select id="player2" onchange="changeOff(this)">
                                     <?php
-                                        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
-
-                                        $sql= "SELECT * FROM `country` where team_id='".$team1."'";
-
-                                        $result = mysqli_query($conn, $sql);
-                                        //echo mysqli_num_rows($result);
-
-                                        while($row = mysqli_fetch_assoc($result)){
-
-                                            for($i=1; $i<12; $i++){
-
-                                                echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
-
-                                            }
-
-                                        }
-                                        mysqli_close($conn);
+//                                        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+//
+//                                        $sql= "SELECT * FROM `country` where team_id='".$team1."'";
+//
+//                                        $result = mysqli_query($conn, $sql);
+//                                        //echo mysqli_num_rows($result);
+//
+//                                        while($row = mysqli_fetch_assoc($result)){
+//
+//                                            for($i=1; $i<12; $i++){
+//
+//                                                echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
+//
+//                                            }
+//
+//                                        }
+//                                        mysqli_close($conn);
                                     ?>
                                 </select>
+-->
                             </div>
 
                             <div>
@@ -210,55 +237,61 @@
                         <td></td>
                         <td>
                             <div>
-                                On Strike
+                                On Strike :
+                                <span id="bowler1"></span>
+<!--
                                 <select id="bowler1" onchange="changeBOn(this)">
                             <?php
-                                    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
-
-                                    $sql= "SELECT * FROM `country` where team_id='".$team2."'";
-
-                                    $result = mysqli_query($conn, $sql);
-                                    //echo mysqli_num_rows($result);
-
-                                    while($row = mysqli_fetch_assoc($result)){
-
-                                        for($i=1; $i<12; $i++){
-
-                                            echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
-
-                                        }
-
-                                    }
-                                    mysqli_close($conn);
+//                                    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+//
+//                                    $sql= "SELECT * FROM `country` where team_id='".$team2."'";
+//
+//                                    $result = mysqli_query($conn, $sql);
+//                                    //echo mysqli_num_rows($result);
+//
+//                                    while($row = mysqli_fetch_assoc($result)){
+//
+//                                        for($i=1; $i<12; $i++){
+//
+//                                            echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
+//
+//                                        }
+//
+//                                    }
+//                                    mysqli_close($conn);
                                 ?>
 
                                 </select>
+-->
 
                                 <input type="button" id="swap" value="Swap" onclick="swapBowler()">
 
                                 <br>
-                                Off Strike
+                                Off Strike :
+                                <span id="bowler2"></span>
+<!--
                                 <select id="bowler2" onchange="changeBOff(this)">
                                     <?php
-                                        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
-
-                                        $sql= "SELECT * FROM `country` where team_id='".$team2."'";
-
-                                        $result = mysqli_query($conn, $sql);
-                                        //echo mysqli_num_rows($result);
-
-                                        while($row = mysqli_fetch_assoc($result)){
-
-                                            for($i=1; $i<12; $i++){
-
-                                                echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
-
-                                            }
-
-                                        }
-                                        mysqli_close($conn);
+//                                        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+//
+//                                        $sql= "SELECT * FROM `country` where team_id='".$team2."'";
+//
+//                                        $result = mysqli_query($conn, $sql);
+//                                        //echo mysqli_num_rows($result);
+//
+//                                        while($row = mysqli_fetch_assoc($result)){
+//
+//                                            for($i=1; $i<12; $i++){
+//
+//                                                echo '<option value="'.$row["player".$i].'">'.$row["player".$i].'</option>';
+//
+//                                            }
+//
+//                                        }
+//                                        mysqli_close($conn);
                                     ?>
                                 </select>
+-->
                             </div>
 
                             <div>
@@ -315,7 +348,36 @@
                                 
                             </div>
                         </td>
+                        
+                        <td width="10%"></td>
+                        
+                        <td id="bowl">
+                            <h2>Bowlers</h2>
+                            <table>
+                                <?php
+                                        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+
+                                        $sql= "SELECT * FROM `country` where team_id='".$team2."'";
+
+                                        $result = mysqli_query($conn, $sql);
+                                        //echo mysqli_num_rows($result);
+
+                                        while($row = mysqli_fetch_assoc($result)){
+
+                                            for($i=1; $i<12; $i++){
+                                                echo "<tr><td><div onclick='choseBowler(this)'>".$row['player'.$i]."</div></td></tr>" ;
+                                                
+
+                                            }
+
+                                        }
+                                        mysqli_close($conn);
+                                    ?>
+                            </table>
+                            <span id="b_err">Choose a different bowler</span>
+                        </td>
                     </tr>
+                    
                 </table>
                 
                 
@@ -343,6 +405,11 @@
                 <input type="button" value="Add" id="add" onclick="addExtra()">
                 <span id="error">Please give a valid score</span>
                 
+                <br>
+                <br>
+                
+                <input type="button" value="2nd Innings" id="2nd" onclick="next()">
+                <input type="button" value="Match Finish" id="finish" onclick="finish()">
                 
             </td>
         </tr>
@@ -373,22 +440,30 @@
         $(document).ready(function(){
 
            $("#error").hide();
+           $("#bowl").hide();
+           $("#b_err").hide();
+            
+            var innings = <?=$innings?>;
+            //console.log(innings);
+            if(innings == 2){
+                $("#2nd").hide();
+            }
             
             //$("#on").text($("#player1 option:first").val());
             //$('#player1').find('option:first').attr('selected', 'selected');
             p1 = '<?=$playerName1?>';
-            $("#player1").val(p1);
+            $("#player1").text(p1);
             
             //$("#player2").val($("#player2 option:eq(1)").val());
             //$("#off").text($("#player2 option:eq(1)").val());
             //$('#player2').find('option:eq(1)').attr('selected', 'selected');
             p2 = '<?=$playerName2?>';
-            $("#player2").val(p2);
+            $("#player2").text(p2);
             
             b1 = '<?=$bowlerName1?>';
             b2 = '<?=$bowlerName2?>';
-            $("#bowler1").val(b1);
-            $("#bowler2").val(b2);
+            $("#bowler1").text(b1);
+            $("#bowler2").text(b2);
 
         });
         
@@ -419,7 +494,13 @@
                 b=0;
                 o++;
                 swapBatsman();
-                swapBowler();
+                //swapBowler();
+                $("#bowl").show();
+                offbtn();
+            }
+            
+            if(obj.value == 1 || obj.value == 3){
+                swapBatsman();
             }
             
             $("#onrun").text(pr);
@@ -516,14 +597,14 @@
         
         function addWicket(){
             
-            $.get("addWicket.php?id="+batting+"&country="+team1, function(data, status){
+            $.get("addWicket.php?id="+batting+"&country="+team1+"&name="+b1, function(data, status){
                     //alert("Data: " + data + "\nStatus: " + status);
                     if(status == "success"){
                         //$("#run").text(data);
                         $("#on").text(jQuery.trim(data));
                         
                         p1 = jQuery.trim(data);
-                        $("#player1").val(jQuery.trim(data));
+                        $("#player1").text(jQuery.trim(data));
                         console.log(data);
                         pr = 0;
                         pb = 0;
@@ -538,7 +619,9 @@
                             b=0;
                             o++;
                             swapBatsman();
-                            swapBowler();
+                            //swapBowler();
+                            $("#bowl").show();
+                            offbtn();
                         }
                         $("#over").text(o);
                         $("#ball").text(b);
@@ -567,7 +650,7 @@
 //                $("#player1 option:[value='"+ p1 +"']").attr('selected');
                 
                 //$('#player1').removeAttr('selected').find('option:first').attr('selected', 'selected');
-                $("#player1").val(p1);
+                $("#player1").text(p1);
             }
             
         }
@@ -583,7 +666,7 @@
                 console.log(p1+" "+p2 )
                 
                 //$('#player1').removeAttr('selected').find('option:first').attr('selected', 'selected');
-                $("#player2").val(p2);
+                $("#player2").text(p2);
             }
             
 
@@ -602,7 +685,7 @@
 //                $("#player1 option:[value='"+ p1 +"']").attr('selected');
                 
                 //$('#player1').removeAttr('selected').find('option:first').attr('selected', 'selected');
-                $("#bowler1").val(b1);
+                $("#bowler1").text(b1);
             }
             
         }
@@ -618,7 +701,7 @@
                 //console.log(p1+" "+p2 )
                 
                 //$('#player1').removeAttr('selected').find('option:first').attr('selected', 'selected');
-                $("#bowler2").val(b2);
+                $("#bowler2").text(b2);
             }
             
 
@@ -634,8 +717,8 @@
                         p1 = p2;
                         p2 = temp;
                         
-                        $("#player1").val(p1);
-                        $("#player2").val(p2);
+                        $("#player1").text(p1);
+                        $("#player2").text(p2);
                         
                         $("#on").text(p1);
                         $("#off").text(p2);
@@ -666,8 +749,8 @@
                         b1 = b2;
                         b2 = temp;
                         
-                        $("#bowler1").val(b1);
-                        $("#bowler2").val(b2);
+                        $("#bowler1").text(b1);
+                        $("#bowler2").text(b2);
                         
                         $("#b_on").text(b1);
                         $("#b_off").text(b2);
@@ -680,6 +763,60 @@
                     }
                 });
             
+        }
+        
+        function choseBowler(obj){
+            
+            if(obj.innerHTML == b1){
+                $("#b_err").show();
+            }
+            else{
+                
+                $.get("changeBowler.php?id="+bowling+"&name="+obj.innerHTML+"&country="+team2, function(data, status){
+                    //alert("Data: " + data + "\nStatus: " + status);
+                    if(status == "success"){
+                        
+                        var temp = obj.innerHTML;
+                        
+                        b2 = b1;
+                        b1 = temp;
+                        
+                        $("#bowler1").text(b1);
+                        $("#bowler2").text(b2);
+                        
+                        $("#b_on").text(b1);
+                        $("#b_off").text(b2);
+                        
+                        temp = $("#b_onscore").text();
+                        $("#b_onscore").text(data);
+                        $("#b_offscore").text(temp);
+                        
+                        $("#bowl").hide();
+                        $("#b_err").hide();
+                        
+                        onbtn();
+                    }
+                });
+            }
+            
+            
+            
+        }
+        
+        function offbtn(){
+            $(':button').prop('disabled', true);
+        }
+        
+        function onbtn(){
+            $(':button').prop('disabled', false);
+        }
+        
+        function finish(){
+            window.location = 'matchFinish.php?id=<?=$matchid?>';
+        }
+        
+        function next(){
+            window.location = 'nextInnings.php?id=<?=$matchid?>';
         }
         
     </script>
