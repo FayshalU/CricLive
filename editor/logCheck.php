@@ -39,7 +39,6 @@ include 'databaseconnection.php';
 					else{}
                       
                      setcookie("abc",$id, time() + (86400 * 30), "/");
-                     setcookie("pass",$password, time() + (86400 * 30), "/");
 
 					$isValid = "valid";
 					

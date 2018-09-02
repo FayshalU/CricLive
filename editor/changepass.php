@@ -1,8 +1,9 @@
 <?php
 
 include 'databaseconnection.php';
-     if(isset($_COOKIE['abc']) && isset($_COOKIE['pass'])) {
+     if(isset($_COOKIE['abc']) ) {
     	echo "";
+		$id=$_COOKIE['abc'];
 	}else{
 		header("location: login.php");
 	}
@@ -39,15 +40,24 @@ $isValid =true;
 
 <h3>Current Password     &nbsp &nbsp <input type="password" name="password"/><br/>
                              <?php  
-                            if($_SERVER['REQUEST_METHOD'] == 'POST')
+							  if($_SERVER['REQUEST_METHOD'] == 'POST')
                             {
-                                if($_POST['password'] == "" || strlen($_POST['password']) <2 || ($_COOKIE['pass'] != $_POST['password']))
+							  $con=mysqli_connect('localhost','root','','criclive');
+		                      $sql = "SELECT * FROM reg ";
+                              $result = mysqli_query($con,$sql);
+			                  while($row = mysqli_fetch_assoc($result))
+			                  {
+				               if($row['id'] == $id)
+				              {
+                                if($_POST['password'] == "" || strlen($_POST['password']) <2 || ( $row['password'] != $_POST['password']))
                                 {
                                     echo '<i font-size:10px">* Please give a valid Password</i> ';
                                     $isValid=false;
                                 }
 								else{}
                             }
+							  }
+							}
                            ?>
 <h3>New Password        &nbsp &nbsp &nbsp &nbsp &nbsp <input type="password" name="npassword"/><br/>
                            <?php  
