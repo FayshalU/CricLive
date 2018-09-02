@@ -23,8 +23,8 @@
 <body>
     <table width="100%" style="color:green;" height="50px">
         <tr >
-            <td width="10%"><a href="user.php"><center>CricLive</center></a></td>
-            <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
+            <td width="10%"><a href="editor.php"><center>CricLive</center></a></td>
+  
             <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
             <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
@@ -34,16 +34,32 @@
     </table >
     <br/>
     <table width="100%">
-        
+        <tr>
+            <td  width="20%" valign="top">
+                
+                <table  width="100%" border="1">
+                    <tr>
+                        <center>
+                            <td>
+
+                                 <ul>
+                                <li><a href="#">Timeline</a></li>
+                                <li><a href="createnewmatch.php">Create match</a></li>
+                                <li><a href="scores.php">Update Scores</a></li>
+                                <li><a href="addartical.php"> Add Artical </a></li>
+								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
+                              </ul>
+
+
+                            </td>
+                            
+                        </center>
+                    </tr>
                 </table>
                 
             </td>
             <td  width="5%"></td>
-			
-			
-			
-			
-			
+          
 			
             <td width="75%" valign="top">
                 <table  width="100%" border="1">
@@ -55,11 +71,52 @@
 			
 			<center>
 		   
-		        <a href="createnewmatch.php"><h2> <b>Create match</b></h2></a><br/><br/><br/>
-                <a  href="scores.php"><h2><font><b>Update Score</b></font></h2></a><br/><br/><br/>
-                <a href="addartical.php"><h2> <b>Add Artical</b></h2></a><br/><br/><br/>
-                <a href="articals.php"><h2> <b>Articals</b></h2></a><br/><br/><br/>
-				<a href="pollcreate.php"><h2> <b>Create Poll Quistans</b></h2></a><br/><br/><br/>
+            <td width="75%" valign="top">
+                <table  width="100%" border="1">
+                    <div>
+			
+
+			<input type="text" id='search' name="" >
+			<input type="button"  name="" value="Search" onclick="loadData()">
+
+		</div>
+		<div id="result">
+			
+		</div>
+
+	</center>
+
+	<script type="text/javascript">
+		
+		function loadData(){
+           
+		
+			var xmlHttp = new XMLHttpRequest();
+
+			xmlHttp.open('POST', 'search.php', true);
+			xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			var abc = "key="+document.getElementById('search').value;
+			xmlHttp.send(abc);
+
+			xmlHttp.onreadystatechange = function(){
+
+				if(this.readyState == 4 && this.status==200)
+				{
+					
+					document.getElementById('result').innerHTML = this.responseText;
+					//alert(this.responseText);
+				}
+			}
+
+		}
+        
+		function abc(data){
+
+			document.getElementById('search').value=data;
+			document.getElementById('result').innerHTML="";
+		}
+
+	</script>
 				
 		
 		  </center>

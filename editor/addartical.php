@@ -25,8 +25,8 @@
 <body>
     <table width="100%" style="color:green;" height="50px">
         <tr >
-            <td width="10%"><a href="user.php"><center>CricLive</center></a></td>
-            <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
+            <td width="10%"><a href="editor.php"><center>CricLive</center></a></td>
+     
             <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
             <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
@@ -49,7 +49,6 @@
                                 <li><a href="createnewmatch.php">Create match</a></li>
                                 <li><a href="scores.php">Update Scores</a></li>
                                 <li><a href="addartical.php"> Add Artical </a></li>
-								<li><a href="articals.php"> Articals </a></li>
 								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
                               </ul>
                             </td>
