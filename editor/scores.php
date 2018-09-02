@@ -2,16 +2,13 @@
 	session_start();
 	error_reporting(0);
 
-//	if(!isset($_SESSION['log']))
-//    {
-//        header("location: ../login.html");
-//	}else{
-//        
-//        $value = null;
-//        $count = 10;
-//        $conn = null;
-//        
-//    }
+    if(!isset($_SESSION['log']))
+    {
+        header("location: ../login.html");
+	}else{
+        include 'databaseconnection.php';
+        
+    }
 ?>
 
 <!DOCTYPE html>

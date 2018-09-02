@@ -1,6 +1,12 @@
+
 <?php
-	include 'databaseconnection.php';
-    setcookie("abc","", time() - 3600,"/");
-	setcookie("rem", "", time() - 3600, "/");
-	header("location: login.php");
+	
+	session_start();
+	session_destroy();
+
+    setcookie('rem', '', time()-100, '/');
+    setcookie('abc', '', time()-100, '/');
+    setcookie('log', '', time()-100, '/');
+
+	header("location: ../login.html");
 ?>

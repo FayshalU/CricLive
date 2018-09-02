@@ -50,7 +50,9 @@
                 
                 $_SESSION['log'] = $_POST['luser'];
                 
-                include 'getInfo.php';
+                setcookie("abc", $_POST['luser'], time()+3600,'/');
+                
+                //include 'getInfo.php';
                 
                 if($_POST['remember']=="on")
                 {

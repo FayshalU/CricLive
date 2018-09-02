@@ -1,11 +1,14 @@
-<?php
-include 'databaseconnection.php';
 
-   if(isset($_COOKIE['abc'])) {
-    	echo "";
+<?php
+	session_start();
+	error_reporting(0);
+
+	if(!isset($_SESSION['log']))
+    {
+        header("location: ../login.html");
 	}else{
-		header("location: login.php");
-	}
+        include 'databaseconnection.php';
+    }
 ?>
 
 <!DOCTYPE html>

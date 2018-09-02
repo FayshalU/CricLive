@@ -2,6 +2,14 @@
 	session_start();
 	error_reporting(0);
 
+    if(!isset($_SESSION['log']))
+    {
+        header("location: ../login.html");
+	}else{
+        include 'databaseconnection.php';
+        
+    }
+
     
     $id = $_GET['id'];
 

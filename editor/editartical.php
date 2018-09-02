@@ -1,14 +1,15 @@
 <?php
 
-include 'databaseconnection.php';
-    if(isset($_COOKIE['abc'])) {
-    	$post_id=$_GET['post_id'];
-        
-          error_reporting(0);
-	}else{
-		header("location: login.php");
-	}
+    session_start();
+	error_reporting(0);
 
+    if(!isset($_SESSION['log']))
+    {
+        header("location: ../login.html");
+	}else{
+        include 'databaseconnection.php';
+        $post_id=$_GET['post_id'];
+    }
 ?>
 <!DOCTYPE html>
 <html>

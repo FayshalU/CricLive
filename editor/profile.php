@@ -1,13 +1,16 @@
 
 <?php
 
-     include 'databaseconnection.php';
-    if(isset($_COOKIE['abc'])) {
-    	echo "";
+    session_start();
+	error_reporting(0);
 
+    if(!isset($_SESSION['log']))
+    {
+        header("location: ../login.html");
 	}else{
-		header("location: login.php");
-	}
+        include 'databaseconnection.php';
+        
+    }
 	
 ?>
 <!DOCTYPE html>
@@ -57,7 +60,7 @@
 			   $result = mysqli_query($con,$sql);
 			   while($row = mysqli_fetch_assoc($result))
 			   {
-				   if($row['id'] == "adam")
+				   if($row['id'] == $_COOKIE['abc'])
 				   {
 					   ?><h2 > <?php echo "User Name : ". $row['id']."<br/>";
 		               ?><h2 ><?php echo "User ID : ". $row['name']."<br/>";

@@ -2,6 +2,13 @@
 	session_start();
 	error_reporting(0);
 
+    if(!isset($_SESSION['log']))
+    {
+        header("location: ../login.html");
+	}else{
+        include 'databaseconnection.php';
+        
+    }
     //echo "300";
 
     $run = $_GET['run'];

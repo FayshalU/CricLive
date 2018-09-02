@@ -1,14 +1,17 @@
-<?php
 
-include 'databaseconnection.php';
-     if(isset($_COOKIE['abc']) ) {
-    	echo "";
-		$id=$_COOKIE['abc'];
+<?php
+	session_start();
+	error_reporting(0);
+
+	if(!isset($_SESSION['log']))
+    {
+        header("location: ../login.html");
 	}else{
-		header("location: login.php");
-	}
-$isValid =true;
+        include 'databaseconnection.php';
+        $isValid =true;
+    }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
