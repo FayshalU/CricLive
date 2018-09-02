@@ -88,11 +88,11 @@
                             <td>
 
                                <ul>
-                                <li><a href="#">Timeline</a></li>
+                                <li><a href="editor.php">Timeline</a></li>
                                 <li><a href="createnewmatch.php">Create match</a></li>
                                 <li><a href="scores.php">Update Scores</a></li>
                                 <li><a href="addartical.php"> Add Artical </a></li>
-								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
+								<li><a href="pollcreate.php"> Create Poll</a></li>
                               </ul>
 
                             </td>
