@@ -26,10 +26,11 @@ else{
 	
       if($tm1 != $tm2)
      {
-        $con=mysqli_connect('localhost','root','','criclive');
-		
-		$sql = "INSERT INTO play VALUES  ('','$tm1','$tm2','Live','$type')";
-	
+        $con=mysqli_connect('localhost', 'root', '', 'criclive');
+          
+		$sql = "INSERT INTO play VALUES  ('','".$tm1."','".$tm2."','live',1,'".$type."')";
+	   
+          echo $sql;
 
         if(mysqli_query($con,$sql))
 		{
@@ -37,16 +38,18 @@ else{
 		header("location: createnewmatch.php?enserted");
 		}
 		else{
+            echo 'Not inserted';
 			header("location: createnewmatch.php?not enserted");		
 		}
 	}
 	else{
 		header("location: createnewmatch.php?o");
 	}
-		}
-		}
-		else
-		{
-			header("location: createnewmatch.php?oooo");
-		}
-		?> 
+}
+}
+    else
+    {
+        header("location: createnewmatch.php?oooo");
+    }
+
+?> 

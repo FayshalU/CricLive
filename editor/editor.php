@@ -42,7 +42,7 @@
 			<center>
 		   
 		        <a href="createnewmatch.php"><h2> <b>Create match</b></h2></a><br/><br/><br/>
-                <a  href="updateschore.php"><h2><font><b>Update Score</b></font></h2></a><br/><br/><br/>
+                <a  href="scores.php"><h2><font><b>Update Score</b></font></h2></a><br/><br/><br/>
                 <a href="addartical.php"><h2> <b>Add Artical</b></h2></a><br/><br/><br/>
                 <a href="articals.php"><h2> <b>Articals</b></h2></a><br/><br/><br/>
 				<a href="pollcreate.php"><h2> <b>Create Poll Quistans</b></h2></a><br/><br/><br/>
