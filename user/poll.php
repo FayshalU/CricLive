@@ -19,6 +19,7 @@
   <title>CricLive - Cricket Score, News</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <script src="../js/lib/jquery-3.3.1.js"></script>
   
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -108,11 +109,13 @@
                                     
                                     $done = true;
                                     
-                                    echo '<div style="width:100%;">
+                                    echo '<div style="width:100%;" id="'.$row["poll_id"].'">
                                             <div>'.$value1." ". 100*round($op1/($op2+$op1),2).'% </div>
                                             <div style="background-color:lightblue; width:'. 100*round($op1/($op2+$op1),2).'%; height:20px;"></div>
                                             <div>'. $value2." ". 100*round($op2/($op2+$op1),2).'% </div>
-                                            <div style="background-color:lightgreen; width:'. 100*round($op2/($op2+$op1),2).'%; height:20px;"</div>  
+                                            <div style="background-color:lightgreen; width:'. 100*round($op2/($op2+$op1),2).'%; height:20px;"></div>
+                                            <br>
+                                            <input type="button" class="'.$row["poll_id"].'" value="Change" style="height:30px;" onclick="changeVote(this)">
                                         </div>';
                                 }
                                 
@@ -131,8 +134,8 @@
                         
                             <form method="post" action="#">
                                 <div id="<?=$row['poll_id']?>">
-                                    <input type="button" class="<?=$row['poll_id']?>" value="<?=$row['op1']?>" style="height:30px;width:48%" onclick="getVote(this)">
-                                    <input type="button" class="<?=$row['poll_id']?>" value="<?=$row['op2']?>" style="height:30px;width:50%" onclick="getVote(this)">
+                                    <input type="button" class="<?=$row['poll_id']?>" value="<?=$row['op1']?>" style="height:30px;width:48%;" onclick="getVote(this)">
+                                    <input type="button" class="<?=$row['poll_id']?>" value="<?=$row['op2']?>" style="height:30px;width:50%;" onclick="getVote(this)">
                                 </div>
                             </form>
                             
@@ -176,6 +179,17 @@
           }
           xmlhttp.open("GET","pollVote.php?id="+obj.className+"&vote="+obj.value,true);
           xmlhttp.send();
+        }
+        
+        function changeVote(obj){
+            
+            $.get("changeVote.php?id="+obj.className, function(data, status){
+                //alert("Data: " + data + "\nStatus: " + status);
+                if(status == "success"){
+                    $("#"+obj.className).html(data);
+                }
+            });
+            
         }
         
     </script>

@@ -11,6 +11,7 @@
 
     
     $id = $_GET['id'];
+    $matchId = $_GET['matchId'];
 
     $conn = mysqli_connect('localhost', 'root', '', 'criclive');
 
@@ -39,81 +40,63 @@
     while($row1 = mysqli_fetch_assoc($result2)){
         
         if($row1['player1'] == $id){
-            header('location: modify.php?err=a');
+            header('location: modify.php?err=a&id='.$matchId);
         }
         else if($row1['player2'] == $id){
-            header('location: modify.php?err=a');
+            header('location: modify.php?err=a&id='.$matchId);
         }
         else if($row1['player3'] == $id){
-            header('location: modify.php?err=a');
+            header('location: modify.php?err=a&id='.$matchId);
         }
         else if($row1['player4'] == $id){
-            header('location: modify.php?err=a');
+            header('location: modify.php?err=a&id='.$matchId);
         }
         else if($row1['player5'] == $id){
-            header('location: modify.php?err=a');
-        }
-        else if($row1['player6'] == $id){
-            header('location: modify.php?err=a');
-        }
-        else if($row1['player7'] == $id){
-            header('location: modify.php?err=a');
-        }
-        else if($row1['player8'] == $id){
-            header('location: modify.php?err=a');
-        }
-        else if($row['player9'] == $id){
-            header('location: modify.php?err=a');
-        }
-        else if($row1['player10'] == $id){
-            header('location: modify.php?err=a');
-        }
-        else if($row1['player11'] == $id){
-            header('location: modify.php?err=a');
+            header('location: modify.php?err=a&id='.$matchId);
         }
         else{
-            $balance = $row1['balance'];
+//            $balance = $row1['balance'];
+//            
+//            if($balance < $price){
+//                header('location: modify.php?err=b');
+//            }
             
-            if($balance < $price){
-                header('location: modify.php?err=b');
-            }
-            else{
-                $balance -= $price;
-                
-                $i = 1;
-                //echo $row1['player1'];
-                $inserted = false;
-                
-                while($i<12 ){
-                    
-                    echo "Inside";
-                    
-                    $player = (string)('player'.$i);
-                    
-                    
-                    
-                    if($row1[$player] == ""){
-                        $sql3 = "UPDATE `team` SET player".$i."='".$id."',balance=".$balance." WHERE user_id='".$_SESSION['id']."'";
-                        
-                        echo $sql3;
-                        
-                        if(mysqli_query($conn, $sql3)){
-                            header('location: modify.php');
-                            $inserted = true;
-                        }
-                        else{
-                            echo "Not inserted";
-                        }
-                        break;
+            //$balance -= $price;
+
+            $i = 1;
+            //echo $row1['player1'];
+            $inserted = false;
+
+            while($i<6 ){
+
+                //echo "Inside";
+
+                $player = (string)('player'.$i);
+
+
+
+                if($row1[$player] == ""){
+                    $sql3 = "UPDATE `team` SET player".$i."='".$id."' WHERE user_id='".$_SESSION['id']."' AND  match_id='".$matchId."'";
+
+                    //echo $sql3;
+
+                    if(mysqli_query($conn, $sql3)){
+                        header('location: modify.php?id='.$matchId);
+                        $inserted = true;
                     }
-                    
-                    $i++;
+                    else{
+                        echo "Not inserted";
+                    }
+                    break;
                 }
-                if($inserted == false){
-                    header('location: modify.php?err=c');
-                }
-                
+
+                $i++;
             }
+            if($inserted == false){
+                header('location: modify.php?err=c&id='.$matchId);
+            }
+                
+            
             
         }
         

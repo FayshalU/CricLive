@@ -11,19 +11,59 @@
         
         $conn = mysqli_connect('localhost', 'root', '', 'criclive');
                         
-        $sql= "SELECT * FROM `team` WHERE user_id='".$_SESSION['id']."'";
+        $sql= "SELECT * FROM `rank` WHERE user_id='".$_SESSION['id']."'";
 
         $result = mysqli_query($conn, $sql);
         
         while($row = mysqli_fetch_assoc($result)){
             
-            $balance = $row['balance'];
+            $points = $row['points'];
         }
         
         
         
         //mysqli_close($conn);
     }
+    
+    $matchId = $_GET['id'];
+
+    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+    $sql5= "SELECT * from `team` where match_id='".$matchId."' AND  user_id='".$_SESSION['id']."'";
+    $result5 = mysqli_query($conn, $sql5);
+    $row = mysqli_num_rows($result5);
+
+    if($row<1 && $matchId!=""){
+        $sql2 = "INSERT INTO `team`(`user_id`, `match_id`) VALUES ('".$_SESSION['id']."','".$matchId."')";
+        
+        if(mysqli_query($conn, $sql2))
+        {
+            //echo "Inserted";
+        }
+        else{
+            echo "Not Inserted";
+        }
+    }
+    else{}
+
+    $team1 = null;
+    $team2 = null;
+
+    $sql= "SELECT * FROM `play` WHERE match_id='".$matchId."'";
+
+    $result = mysqli_query($conn, $sql);
+
+    while($row = mysqli_fetch_assoc($result)){
+
+        $team1 = $row['team1'];
+        $team2 = $row['team2'];
+    }
+
+    $count = 0;
+    $batsman = 0;
+    $wicket = 0;
+    $bowler = 0;
+    $all = 0;
+    
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +74,7 @@
   <title>CricLive - Cricket Score, News</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <script src="../js/lib/jquery-3.3.1.js"></script>
   
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -60,8 +101,10 @@
                             <td>
 
                                 <ul>
-                                <li><a href="myTeam.php">View Team</a></li>
-                                <li><a href="#">Change Team</a></li>
+                                <li><a href="user.php">Timeline</a></li>
+                                <li><a href="myTeam.php"> My Team</a></li>
+                                <li><a href="ranking.php"> My Ranking</a></li>
+                                <li><a href="poll.php"> Current Polls </a></li>
                               </ul>
 
                             </td>
@@ -77,7 +120,11 @@
                     <tr>
                         <td>
                             <div>
-                              <center><h3>Available Balance: $<?=$balance?> </h3></center>
+                              <center><h3>My Points: <?=$points?> </h3></center>
+                            </div>
+                            
+                            <div>
+                              <center><h3>Team for: <?=$team1?> vs <?=$team2?></h3></center>
                             </div>
                               
                         </td>
@@ -102,7 +149,7 @@
                                             
                                                 //$conn = mysqli_connect('localhost', 'root', '', 'criclive');
                         
-                                                $sql= "SELECT * FROM `team` WHERE user_id='".$_SESSION['id']."'";
+                                                $sql= "SELECT * FROM `team` WHERE match_id='".$matchId."' AND user_id='".$_SESSION['id']."'";
 
                                                 $result = mysqli_query($conn, $sql);
                                                 //echo mysqli_num_rows($result);
@@ -111,7 +158,7 @@
                                                     
                                                     $i = 1;
                                                     
-                                                    while($i<12){
+                                                    while($i<6){
                                                         
                                                         $sql2= "SELECT * FROM `player info` WHERE player_id='".$row['player'.$i]."'";
 
@@ -119,6 +166,28 @@
                                                         //echo mysqli_num_rows($result);
 
                                                         while($row2 = mysqli_fetch_assoc($result2)){
+                                                            $count++;
+                                                            
+                                                            //echo $row2['category'];
+                                                            
+                                                            if($row2['category'] == "Batsman"){
+                                                                $batsman++;
+                                                                
+                                                            }
+                                                            else if($row2['category'] == "Bowler"){
+                                                                $bowler++;
+                                                                
+                                                            }
+                                                            else if($row2['category'] == "All-Rounder"){
+                                                                $all++;
+                                                                
+                                                            }
+                                                            else if($row2['category'] == "WicketKeeper"){
+                                                                $wicket++;
+                                                                
+                                                            }
+                                                            else{}
+                                                            
                                                             
                                             ?>
                                                             
@@ -149,8 +218,9 @@
                                                     <br><br>
                                                     <center>
                                                         <div id="a" style="color:green;">Player already added</div>
-                                                        <div id="b" style="color:green;">Not enough balance</div>
+<!--                                                        <div id="b" style="color:green;">Not enough balance</div>-->
                                                         <div id="c" style="color:green;">Please remove a player to add new player</div>
+                                                        <div id="d" style="color:green;"></div>
                                                     </center>
                                                 </td>
                                             </tr>
@@ -158,7 +228,8 @@
                                             <tr>
                                                 <td colspan="4">
                                                     <br><br>
-                                                    <center><input type="button" id="confirm" value="confirm" onclick="createTeam()"> </center>
+<!--                                                    <center><input type="button" id="confirm" value="confirm" onclick="createTeam()"> </center>-->
+                                                    <center>You need <?=(5-$count)?> more players(<?=(1-$wicket)?> WC,<?=(4-($bowler+$batsman+$all))?> BAT & BOWL) </center>
                                                 </td>
                                             </tr>
                                             
@@ -195,26 +266,28 @@
     
     <script>
         
+        var matchId = '<?=$matchId?>';
+        
         var err = <?php echo json_encode($_GET['err']); ?> ;
         
         if(err == "a"){
             document.getElementById('a').style.display = 'block';
-            document.getElementById('b').style.display = 'none';
+            //document.getElementById('b').style.display = 'none';
             document.getElementById('c').style.display = 'none';
         }
-        else if(err == "b"){
-            document.getElementById('a').style.display = 'none';
-            document.getElementById('b').style.display = 'block';
-            document.getElementById('c').style.display = 'none';
-        }
+//        else if(err == "b"){
+//            document.getElementById('a').style.display = 'none';
+//            document.getElementById('b').style.display = 'block';
+//            document.getElementById('c').style.display = 'none';
+//        }
         else if(err == "c"){
             document.getElementById('a').style.display = 'none';
-            document.getElementById('b').style.display = 'none';
+            //document.getElementById('b').style.display = 'none';
             document.getElementById('c').style.display = 'block';
         }
         else{
             document.getElementById('a').style.display = 'none';
-            document.getElementById('b').style.display = 'none';
+            //document.getElementById('b').style.display = 'none';
             document.getElementById('c').style.display = 'none';
         }
         
@@ -222,7 +295,7 @@
             if(obj.value != ""){
                 var xmlHttp = new XMLHttpRequest();
 
-                xmlHttp.open('GET', 'searchPlayer.php?txt='+obj.value, true);
+                xmlHttp.open('GET', 'searchPlayer.php?txt='+obj.value+'&matchId='+matchId, true);
                 xmlHttp.send();
 
                 xmlHttp.onreadystatechange = function (){
@@ -241,9 +314,13 @@
             }
         }
         
+        var catagory = null;
+        
         function view(obj){
             
             document.getElementById('search').value = obj.innerHTML;
+            
+            
             
             var xmlHttp = new XMLHttpRequest();
 
@@ -264,6 +341,8 @@
                             var price = data['Rating'] * 1000;
                             
                             content = "<div id='"+data['ID']+"' class='info' ><br/>Id: "+data['ID'] +"<br/> Name: "+data['Name'] +"<br/> Country: "+data['Country']+"<br/> Category: "+data['Category']+"<br/> Rating: "+data['Rating']+"<br/> Price: "+price+"<br/><br/></div><center><input type='button' id='add' value='ADD' onclick='createTeam()'></center>";
+                            
+                            catagory = data['Category'];
                              
                             document.getElementById("player").innerHTML = content;
                             
@@ -274,18 +353,102 @@
         
         function createTeam(){
             
-            var data = document.getElementsByClassName('info')['0'];
+            var batsman = <?=$batsman?>;
+            var wicket = <?=$wicket?>;
+            var bowler = <?=$bowler?>;
+            var all = <?=$all?>;
+            var count = <?=$count?>;
             
-            console.log(data.id);
+            if(catagory == "Batsman"){
+                
+                if(batsman >= 2){
+                    $("#d").text("You can not add more batsman");
+                    $("#search").val("");
+                }
+                else if(batsman >= 1 && bowler>=2 && all>=1){
+                    $("#d").text("You can not add more batsman");
+                    $("#search").val("");
+                }
+                else{
+                    $("#d").text("");
+                    
+                    var data = document.getElementsByClassName('info')['0'];
             
-            location.replace('addPlayer.php?id='+data.id);
+                    console.log(data.id);
+
+                    location.replace('addPlayer.php?id='+data.id+'&matchId='+matchId);
+                }
+
+            }
+            else if(catagory == "Bowler"){
+                
+                if(bowler >= 2){
+                    $("#d").text("You can not add more bowler");
+                    $("#search").val("");
+                }
+                else if(batsman >= 2 && bowler>=1 && all>=1){
+                    $("#d").text("You can not add more bowler");
+                    $("#search").val("");
+                }
+                else{
+                    $("#d").text("");
+                    
+                    var data = document.getElementsByClassName('info')['0'];
+            
+                    console.log(data.id);
+
+                    location.replace('addPlayer.php?id='+data.id+'&matchId='+matchId);
+                }
+
+
+            }
+            else if(catagory == "All-Rounder"){
+                
+                
+                if(batsman >= 2 && bowler>=2){
+                    $("#d").text("You can not add more all-rounder");
+                    $("#search").val("");
+                }
+                else{
+                    $("#d").text("");
+                    
+                    var data = document.getElementsByClassName('info')['0'];
+            
+                    console.log(data.id);
+
+                    location.replace('addPlayer.php?id='+data.id+'&matchId='+matchId);
+                }
+
+            }
+            else if(catagory == "WicketKeeper"){
+                
+                if(wicket >= 1){
+                    $("#d").text("You can not add more wicket-keeper");
+                    $("#search").val("");
+                }
+                else{
+                    $("#d").text("");
+                    
+                    var data = document.getElementsByClassName('info')['0'];
+            
+                    console.log(data.id);
+
+                    location.replace('addPlayer.php?id='+data.id+'&matchId='+matchId);
+                }
+
+            }
+            else{
+                
+            }
+            
+            
         }
         
         function remove(obj){
             
             console.log(obj.id);
             
-            location.replace('removePlayer.php?id='+obj.id);
+            location.replace('removePlayer.php?id='+obj.id+'&matchId='+matchId);
         }
         
     </script>

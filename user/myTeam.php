@@ -44,8 +44,10 @@
                             <td>
 
                                 <ul>
-                                <li><a href="#">View Team</a></li>
-                                <li><a href="modify.php">Change Team</a></li>
+                                <li><a href="user.php">Timeline</a></li>
+                                <li><a href="myTeam.php"> My Team</a></li>
+                                <li><a href="ranking.php"> My Ranking</a></li>
+                                <li><a href="poll.php"> Current Polls </a></li>
                               </ul>
 
                             </td>
@@ -57,98 +59,52 @@
             </td>
             <td  width="5%"></td>
             <td width="75%">
-                <table  width="100%" border="1">
+                <center><h2>Select Match</h2></center>
+                
+                <table>
+                    <table  width="100%" border="1">
                     <tr>
-                        <td>
-                            <div>
-                              <center><h3>My Squad</h3></center>
-                            </div>
-                              <table width="100%">
-                                <?php
-                                     
-                                    $conn = mysqli_connect('localhost', 'root', '', 'criclive');
-
-                                    $sql = "SELECT * FROM team where user_id='".$_SESSION['id']."'";
-
-                                    $result = mysqli_query($conn, $sql);
-
-                                    while($row = mysqli_fetch_assoc($result)){
-
-                                        if(($row['player1'] == "") || ($row['player2'] == "") || ($row['player3'] == "") || ($row['player4'] == "") || ($row['player5'] == "") || ($row['player6'] == "") || ($row['player7'] == "") || ($row['player8'] == "") || ($row['player9'] == "") || ($row['player10'] == "") || ($row['player11'] == "")){
-                                ?>
-                                                <tr>
-                                                    <td>
-                                                        <center><h4>Create a team first</h4></center>
-                                                    </td>
-                                                </tr>
-                                <?php
-                                        }
-                                        else{
-                                ?>
-                                                <thead>
-                                                    <tr>
-                                                        <th><center>Name</center></th>
-                                                        <th><center>Country</center></th>
-                                                        <th><center>Type</center></th>
-                                                        <th><center>Rating</center></th>
-                                                    </tr>
-                                                </thead>
-                                    <?php
-                                            
-                                                //$conn = mysqli_connect('localhost', 'root', '', 'criclive');
-                        
-                                                $sql= "SELECT * FROM `team` WHERE user_id='".$_SESSION['id']."'";
-
-                                                $result = mysqli_query($conn, $sql);
-                                                //echo mysqli_num_rows($result);
-                                                
-                                                while($row = mysqli_fetch_assoc($result)){ 
-                                                    
-                                                    $i = 1;
-                                                    
-                                                    while($i<12){
-                                                        
-                                                        $sql2= "SELECT * FROM `player info` WHERE player_id='".$row['player'.$i]."'";
-
-                                                        $result2 = mysqli_query($conn, $sql2);
-                                                        //echo mysqli_num_rows($result);
-
-                                                        while($row2 = mysqli_fetch_assoc($result2)){
-                                                            
-                                    ?>
-                                                            
-                                                            <tr>
-                                                                <td><center> <?=$row2['name']?> </center></td>
-                                                                <td><center> <?=$row2['country']?> </center></td>
-                                                                <td><center> <?=$row2['category']?> </center></td>
-                                                                <td><center> <?=$row2['rating']?> </center></td>
-                                                                
-                                                            </tr>
-                                                
-                                            <?php                
-                                                        }
-                                                        
-                                                        $i++;
-                                                        
-                                                    }
-                                                    
-                                                }
-                                                
-                                  
-                                        }
-
-                                    }
-                                     
-                                    mysqli_close($conn);
-                                  
-                                ?>
-                                
-                                
-                          </table>
-                        </td>
+                        <th><h2>Live Matches</h2></th>
                     </tr>
-                   
+                    
+                    <?php
+                        $conn = mysqli_connect('localhost', 'root', '', 'criclive');
+                        
+                        $sql= "SELECT * FROM `play` where `status`='live'";
+
+                        $result = mysqli_query($conn, $sql);
+                        //echo mysqli_num_rows($result);
+                        //$i = 0;
+                        while($row = mysqli_fetch_assoc($result)){ 
+                            
+                            
+                            $str1 = 'modify.php?id='.$row['match_id'];
+                            $str2 = $row['team1'];
+                            $str3 = $row['team2'];
+                            
+                            
+                    ?>
+                            
+                        <tr> <td>
+                            <a href='<?=$str1?>'><center><h3><?=$str2."vs".$str3?></h3></center></a>
+<!--                            <center><p style="font-size:15px;"><?=$str2?> <?=$score1?> &nbsp &nbsp &nbsp &nbsp &nbsp <?=$score2?> <?=$str3?></p></center>-->
+
+                                <br><br>
+                            
+                            </td> </tr>
+                        <?php
+                            
+                            //echo $row['text'];
+                            //$i++;
+                        }
+                        
+                        mysqli_close($conn);
+                    
+                    ?>
+                    
                 </table>
+                </table>
+                
             </td>
         </tr>
     </table>

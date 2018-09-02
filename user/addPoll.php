@@ -53,12 +53,12 @@
 //        echo $op2;
 //        echo $value2;
 //        echo $value1;
-        echo '<div style="width:100%;">
-                <div>'.$value1." ". 100*round($op1/($op2+$op1),2).'% </div>
+        echo '<div>'.$value1." ". 100*round($op1/($op2+$op1),2).'% </div>
                 <div style="background-color:lightblue; width:'. 100*round($op1/($op2+$op1),2).'%; height:20px;"></div>
                 <div>'. $value2." ". 100*round($op2/($op2+$op1),2).'% </div>
-                <div style="background-color:lightgreen; width:'. 100*round($op2/($op2+$op1),2).'%; height:20px;"</div>  
-            </div>';
+                <div style="background-color:lightgreen; width:'. 100*round($op2/($op2+$op1),2).'%; height:20px;"></div>
+                <br>
+                <input type="button" class="'.$id.'" value="Change" style="height:30px;" onclick="changeVote(this)">';
 
     }
     else{

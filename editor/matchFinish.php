@@ -24,6 +24,11 @@
             //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
         
+        
+        
+        
+        
+        
         header('location: scores.php');
         
     }

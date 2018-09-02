@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2018 at 12:28 AM
+-- Generation Time: Sep 02, 2018 at 03:25 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -74,8 +74,8 @@ CREATE TABLE `batting` (
 --
 
 INSERT INTO `batting` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `score`, `wicket`, `extra`, `over`, `batsman1`, `batsman2`) VALUES
-('banvsaus_1', '21/10', '3/3', '27/18', '24/18', '', '', '', '', '', '', '', 77, 2, 2, '8.1', 'player4', 'player3'),
-('banvsaus_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', 'player1', 'player2');
+('1_1', '21/10', '3/3', '27/18', '24/18', '', '', '', '', '', '', '', 77, 2, 2, '8.1', 'player4', 'player3'),
+('1_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', 'player1', 'player2');
 
 -- --------------------------------------------------------
 
@@ -105,8 +105,8 @@ CREATE TABLE `bowling` (
 --
 
 INSERT INTO `bowling` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `bowler1`, `bowler2`) VALUES
-('banvsaus_1', '', '', '', '', '', '', '', '', '', '', '', 'player9', 'player10'),
-('banvsaus_2', '', '', '', '', '', '', '3.0-27-1', '3.0-26-1', '0.1-1-0', '1.0-8-0', '1.0-14-0', 'player9', 'player10');
+('1_1', '', '', '', '', '', '', '', '', '', '', '', 'player9', 'player10'),
+('1_2', '', '', '', '', '', '', '3.0-27-1', '3.0-26-1', '0.1-1-0', '1.0-8-0', '1.0-14-0', 'player9', 'player10');
 
 -- --------------------------------------------------------
 
@@ -216,19 +216,20 @@ INSERT INTO `login` (`id`, `password`, `type`) VALUES
 --
 
 CREATE TABLE `play` (
-  `match_id` varchar(100) NOT NULL,
+  `match_id` int(100) NOT NULL,
   `team1` varchar(10) NOT NULL,
   `team2` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL,
-  `innings` int(10) NOT NULL
+  `innings` int(10) NOT NULL,
+  `type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `play`
 --
 
-INSERT INTO `play` (`match_id`, `team1`, `team2`, `status`, `innings`) VALUES
-('banvsaus', 'BAN', 'AUS', 'live', 1);
+INSERT INTO `play` (`match_id`, `team1`, `team2`, `status`, `innings`, `type`) VALUES
+(1, 'BAN', 'IND', 'live', 1, 'ODI');
 
 -- --------------------------------------------------------
 
@@ -253,7 +254,7 @@ INSERT INTO `player info` (`player_id`, `name`, `country`, `category`, `rating`)
 ('10', 'Joe Root', 'England', 'Batsman', 9),
 ('11', 'Azhar Ali', 'Pakistan', 'Batsman', 8),
 ('12', 'Wahab Riaz', 'Pakistan', 'Bowler', 8),
-('13', 'Chris Gayle', 'Windies', 'Batsman', 8),
+('13', 'Chris Gayle', 'West', 'Batsman', 8),
 ('14', 'Thisara Perera', 'Srilanka', 'All-Rounder', 8),
 ('15', 'kusal Perera', 'Srilanka', 'Batsman', 8),
 ('16', 'Rubel Hossain', 'Bangladesh', 'Bowler', 8),
@@ -263,9 +264,9 @@ INSERT INTO `player info` (`player_id`, `name`, `country`, `category`, `rating`)
 ('2', 'Tamim Iqbal', 'Bangladesh', 'Batsman', 9),
 ('20', 'Rashid Khan', 'Afganistan', 'Bowler', 9),
 ('3', 'kane Williamson', 'New Zeland', 'Batsman', 9),
-('4', 'MS Dhoni', 'India', 'WicketKeeper ', 8),
-('5', 'Shakib al Hasan', 'Bangladesh', 'All-rounder', 9),
-('6', 'Andre Russell', 'Windies', 'All-Rounder', 9),
+('4', 'MS Dhoni', 'India', 'WicketKeeper', 8),
+('5', 'Shakib al Hasan', 'Bangladesh', 'All-Rounder', 9),
+('6', 'Andre Russell', 'West', 'All-Rounder', 9),
 ('7', 'Mashrafee Mortaza', 'Bangladesh', 'Bowler', 8),
 ('8', 'Mustafizur Rahman', 'Bangladesh', 'Bowler', 9),
 ('9', 'Mohammad Amir', 'Pakistan', 'Bowler', 9);
@@ -309,15 +310,15 @@ CREATE TABLE `polls` (
 --
 
 INSERT INTO `polls` (`id`, `poll_id`, `user_id`, `response`) VALUES
-(1, '1', 'aa', 'Bangladesh'),
-(7, '2', 'aa', 'Pakistan'),
 (9, '1', 'xx', 'Australia'),
 (30, '1', '28412', 'Bangladesh'),
 (32, '2', '28412', 'India'),
 (33, '1', 'bb', 'Bangladesh'),
 (34, '2', 'bb', 'Pakistan'),
 (35, '1', '15578', 'Bangladesh'),
-(36, '1', '935', 'Australia');
+(36, '1', '935', 'Australia'),
+(46, '2', 'aa', 'Pakistan'),
+(55, '1', 'aa', 'Bangladesh');
 
 -- --------------------------------------------------------
 
@@ -372,29 +373,22 @@ INSERT INTO `rank` (`user_id`, `name`, `country`, `points`) VALUES
 --
 
 CREATE TABLE `team` (
+  `id` int(100) NOT NULL,
   `user_id` varchar(100) NOT NULL,
   `player1` varchar(100) NOT NULL,
   `player2` varchar(100) NOT NULL,
   `player3` varchar(100) NOT NULL,
   `player4` varchar(100) NOT NULL,
   `player5` varchar(100) NOT NULL,
-  `player6` varchar(100) NOT NULL,
-  `player7` varchar(100) NOT NULL,
-  `player8` varchar(100) NOT NULL,
-  `player9` varchar(100) NOT NULL,
-  `player10` varchar(100) NOT NULL,
-  `player11` varchar(100) NOT NULL,
-  `balance` int(255) NOT NULL
+  `match_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`user_id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `balance`) VALUES
-('aa', '5', '8', '7', '9', '17', '18', '1', '3', '16', '13', '20', 10000),
-('bb', '', '', '', '', '', '', '', '', '', '', '', 50000),
-('xx', '', '', '', '', '', '', '', '', '', '', '', 50000);
+INSERT INTO `team` (`id`, `user_id`, `player1`, `player2`, `player3`, `player4`, `player5`, `match_id`) VALUES
+(4, 'aa', '7', '5', '4', '1', '8', 'banvsind');
 
 -- --------------------------------------------------------
 
@@ -446,7 +440,8 @@ CREATE TABLE `wicket` (
 --
 
 INSERT INTO `wicket` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`) VALUES
-('banvsaus_1', 'Paine', 'Wade', '', '', '', '', '', '', '', '', '');
+('1_1', 'Paine', 'Wade', '', '', '', '', '', '', '', '', ''),
+('1_2', '', '', '', '', '', '', '', '', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -534,7 +529,7 @@ ALTER TABLE `rank`
 -- Indexes for table `team`
 --
 ALTER TABLE `team`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -559,6 +554,12 @@ ALTER TABLE `comment`
   MODIFY `com_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `play`
+--
+ALTER TABLE `play`
+  MODIFY `match_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `poll`
 --
 ALTER TABLE `poll`
@@ -568,13 +569,19 @@ ALTER TABLE `poll`
 -- AUTO_INCREMENT for table `polls`
 --
 ALTER TABLE `polls`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
   MODIFY `post_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `team`
+--
+ALTER TABLE `team`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

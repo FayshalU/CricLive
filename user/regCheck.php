@@ -86,7 +86,7 @@
 
             if(mysqli_query($conn, $sql))
             {
-                echo "Inserted";
+                //echo "Inserted";
             }
             else{
                 echo "Not Registered";
@@ -96,7 +96,7 @@
 
             if(mysqli_query($conn, $sql2))
             {
-                echo "Inserted";
+                //echo "Inserted";
             }
             else{
                 echo "Not Registered";
@@ -108,23 +108,23 @@
 
             if(mysqli_query($conn, $sql3))
             {
-                echo "Inserted";
+                //echo "Inserted";
             }
             else{
                 echo "Not Registered";
             }
             
             
-            $balance = 50000;
-            $sql4 = "INSERT into team (user_id, balance) values('".$_POST['userName']."',".$balance.")";
-
-            if(mysqli_query($conn, $sql4))
-            {
-                echo "Inserted";
-            }
-            else{
-                echo "Not Registered";
-            }
+//            $balance = 50000;
+//            $sql4 = "INSERT into team (user_id, balance) values('".$_POST['userName']."',".$balance.")";
+//
+//            if(mysqli_query($conn, $sql4))
+//            {
+//                //echo "Inserted";
+//            }
+//            else{
+//                echo "Not Registered";
+//            }
             
             
 

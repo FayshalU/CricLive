@@ -29,13 +29,22 @@
             //echo $row['password'];
             if($row['password'] == $_POST['lpass'])
             {
-                echo $row['password'];
+                //echo $row['password'];
                 //echo $row['type'];
                 
                 if($row['type'] == "user"){
                     //echo $row['type'];
                     $valid = "user";    
-                }else{
+                }
+                else if($row['type'] == "admin"){
+                    //echo $row['type'];
+                    $valid = "admin";    
+                }
+                else if($row['type'] == "editor"){
+                    //echo $row['type'];
+                    $valid = "editor";    
+                }
+                else{
                     
                 }
                 
@@ -60,7 +69,14 @@
 
         if($valid == "user"){
             echo "<script> location.replace('user/user.php'); </script>";
-        }else{
+        }
+        else if($valid == "admin"){
+            echo "<script> location.replace('admin/admin.php'); </script>";
+        }
+        else if($valid == "editor"){
+            echo "<script> location.replace('editor/editor.php'); </script>";
+        }
+        else{
             echo "<script> location.replace('login.html?error=e'); </script>";
         }
         
