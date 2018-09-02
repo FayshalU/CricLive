@@ -85,30 +85,30 @@
 
             <select name ="op1">
              <?php
-		       $sql = "SELECT name FROM country";
+		       $sql = "SELECT * FROM country";
 			   $result = mysqli_query($con,$sql);
 			   while($row = mysqli_fetch_assoc($result))
 			   {
 
 				   
 					   ?><h2 >
-                        <option name="op1" value="<?=$row['name']?>"><?php echo $row['name'];?></option>
+                        <option name="op1" value="<?=$row['team_id']?>"><?php echo $row['name'];?></option>
 		               
 		                <?php
 				   }
 		?>
 		 </select>
-		<h3><br/><br/><br/>Select 2nd Option<br/><br/>
+		<h3><br/><br/><br/>Select 2nd Option<br/><br/><h3 >
 
 			<select name="op2">
 <?php
-			  $sql = "SELECT name FROM country";
+			  $sql = "SELECT * FROM country";
 			   $result = mysqli_query($con,$sql);
 			   while($row = mysqli_fetch_assoc($result))
 			   {
 				   
-					   ?><h2 >
-                        <option  value="<?=$row['name']?>"><?php echo $row['name'];?></option>
+					   ?>
+                        <option  value="<?php echo $row['team_id'];?>"><?php echo $row['name'];?></option>
 		               
 		                <?php
 				   }
@@ -117,9 +117,9 @@
 		   <br/><br/><br/><h3>Match Type<br/><br/>
 
 		   	 <select name="type">
-             <option value="T-20">T-20</option>
-            <option value="One-day">One-day</option>
-            <option value="test">test</option>
+             <option value="T20">T20</option>
+            <option value="ODI">ODI</option>
+            <option value="TEST">TEST</option>
 </select> 
 
        </br> </br><input type='submit' value='Submit' name="submit">
