@@ -1,6 +1,6 @@
 <?php
 
-    session_start();
+ session_start();
 	error_reporting(0);
 
     if(!isset($_SESSION['log']))
@@ -10,7 +10,6 @@
         include 'databaseconnection.php';
         
     }
-
 if(isset($_POST['submit']))
 {
 	    $head = $_POST['text1'];
@@ -44,3 +43,5 @@ if(isset($_POST['submit']))
 	}
 
 ?>
+
+

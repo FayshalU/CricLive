@@ -1,6 +1,7 @@
 <?php
-    
-    session_start();
+include 'databaseconnection.php';
+
+   session_start();
 	error_reporting(0);
 
     if(!isset($_SESSION['log']))

@@ -1,7 +1,6 @@
-
 <?php
 
-    session_start();
+ session_start();
 	error_reporting(0);
 
     if(!isset($_SESSION['log']))
@@ -13,32 +12,68 @@
     }
 	
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>profile</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CricLive - Cricket Score, News</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>
-<body background="3.jpg">
-<form method="post" action="#">
+<body>
+    <table width="100%" style="color:green;" height="50px">
+        <tr >
+            <td width="10%"><a href="user.php"><center>CricLive</center></a></td>
+            <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
+            <td width="10%"><a href="#"><center>Series</center></a></td>
+            <td width="50%"></td>
+            <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
+            <td width="10%"><a href="logout.php"><center>Log Out</center></a></td>
+            
+        </tr>
+    </table >
+    <br/>
+    <table width="100%">
+        <tr>
+            <td  width="20%" valign="top">
+                
+                <table  width="100%" border="1">
+                    <tr>
+                        <center>
+                            <td>
 
+                                <ul>
+                                <li><a href="#">Timeline</a></li>
+                                <li><a href="createnewmatch.php">Create match</a></li>
+                                <li><a href="scores.php">Update Scores</a></li>
+                                <li><a href="addartical.php"> Add Artical </a></li>
+								<li><a href="articals.php"> Articals </a></li>
+								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
+                              </ul>
 
-	<table border="2" width="100%" >
-	 <tr>
-		<td>
-		   <a href="editor.php"><h2> <b>CricLive</b></h2><a/>
-			 </td>
-			 <td colspan="2" width="50%">
-			 </td>
-			 <td>
-			<a href="profile.php"><h2> <b>Profile</b></h2><a/>
-			</td>
-			<td>
-			<a href="logout.php"><h2> <b>Logout</b></h2><a/>
-			</td>
-			</tr>
-			</table>
-			<br/><br/><br/><br/><br/>
+                            </td>
+                            
+                        </center>
+                    </tr>
+                </table>
+                
+            </td>
+            <td  width="5%"></td>
 			
+			
+			
+			
+			
+			
+            <td width="75%" valign="top">
+                <table  width="100%" border="1">
+                    <form method="post" action="#">
+
+
+
 			
 			<center>
 		  
@@ -60,7 +95,7 @@
 			   $result = mysqli_query($con,$sql);
 			   while($row = mysqli_fetch_assoc($result))
 			   {
-				   if($row['id'] == $_COOKIE['abc'])
+				   if($row['id'] == "adam")
 				   {
 					   ?><h2 > <?php echo "User Name : ". $row['id']."<br/>";
 		               ?><h2 ><?php echo "User ID : ". $row['name']."<br/>";
@@ -79,5 +114,17 @@
   
 	</center>
 	</form>
+				
+				
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <?php include 'footer.php';?>
+    
+    <script>
+        
+    </script>
+    
 </body>
 </html>
