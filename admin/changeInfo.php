@@ -17,6 +17,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CricLive - Cricket Score, News</title>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
@@ -41,7 +42,7 @@
         <tr>
             <td  width="20%" valign="top">
                 
-                <table  width="100%" border="1">
+                <table  width="100%" border="0">
                     <tr>
                         <center>
                             <td>
@@ -338,7 +339,7 @@
             <td width="15%"></td>
         </tr>
     </table>
-    <br/>
+   
     <?php include 'footer.php';?>
 </body>
 </html>

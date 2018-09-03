@@ -7,6 +7,7 @@ $isValid =true;
 <html>
 <title>Registration_form
 </title>
+<link rel="stylesheet" type="text/css" href="../css/style.css">
 <body>
 <form method="post" action="#">
 <center>
@@ -16,7 +17,7 @@ $isValid =true;
 		       <td>
 			   Name :
 			   </td>
-                <td border="2" width="260" border="2">
+                <td border="2" width="260" border="1">
 				<input name="name"  type="text">
 				 <?php  
                             if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -39,7 +40,7 @@ $isValid =true;
 		       <td>
 			   ID :
 			   </td>
-                <td border="2" width="260" border="2">
+                <td border="2" width="260" border="1">
 				<input name="id"  type="text">
 				 <?php  
                             if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -62,7 +63,7 @@ $isValid =true;
 		       <td>
 			   Password :
 			   </td>
-                <td border="2" width="260" border="2">
+                <td border="2" width="260" border="1">
 				<input name="password"  type="password">
 				 <?php  
                             if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -85,7 +86,7 @@ $isValid =true;
 		       <td>
 			   Confirm Password :
 			   </td>
-                <td border="2" width="260" border="2">
+                <td border="2" width="260" border="1">
 				<input name="cpassword"  type="password">
 				 <?php  
                             if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -119,10 +120,10 @@ $isValid =true;
 			
 			
 			<tr>
-		       <td border="2">
+		       <td border="1">
 			   Gender :
 			   </td>
-                <td border="2" width="260">
+                <td border="1" width="260">
 				<input name="gender"  type="radio" value="male"/>Male
 				<input name="gender" type="radio" value="female"/>Female
 				<input name="gender" type="radio" value="other"/>Other
@@ -134,14 +135,14 @@ $isValid =true;
                             }
                         ?>
 			   </td>
-			   <td border="2" width="40">
+			   <td border="1" width="40">
 			   
 			   </td>
 		    </tr>
 			
 			
 			<tr>
-		       <td border="2">
+		       <td border="1">
 			   Date of Birth :
 			   </td>
                 <td border="2" width="260">
@@ -160,7 +161,7 @@ $isValid =true;
                         ?>
 				
 			   </td>
-			   <td border="2" width="40">
+			   <td border="1" width="40">
 			   
 			   </td>
 		    </tr>
@@ -170,14 +171,14 @@ $isValid =true;
 			
 			
 				<tr height="50">
-		       <td border="2" colspan="3">
+		       <td border="1" colspan="3">
 			   
 			   
 			   </td>
 		    </tr>
 			
 			   <tr height="50">
-		       <td border="2" colspan="3">
+		       <td border="1" colspan="3">
 			   
 			    <input type='submit' value='Submit' name="submit">
                 <input type="reset" value="Reset">

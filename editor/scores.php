@@ -17,34 +17,33 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CricLive - Cricket Score, News</title>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>
 <body>
-    <table width="100%" style="color:green;" height="50px">
+    <table width="100%" id="headerstyle"style="color:green;" height="50px">
         <tr >
             <td width="10%"><a href="editor.php"><center>CricLive</center></a></td>
-
-            <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
             <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
             <td width="10%"><a href="logout.php"><center>Log Out</center></a></td>
             
         </tr>
     </table >
-    <br/>
-    <table width="100%">
+  
+    <table id="mainframe" width="100%" height="640px">
         <tr>
             <td  width="20%" valign="top">
                 
-                <table  width="100%" border="1">
+                <table  width="100%" border="0">
                     <tr>
                         <center>
                             <td>
 
                               <ul>
-                                <li><a href="#">Timeline</a></li>
-                                <li><a href="createnewmatch.php">Create match</a></li>
+                                <li><a href="editor.php">Timeline</a></li>
+                                <br><li><a href="createnewmatch.php">Create match</a></li>
                                 <li><a href="scores.php">Update Scores</a></li>
                                 <li><a href="addartical.php"> Add Artical </a></li>
 								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
@@ -101,7 +100,7 @@
             </td>
         </tr>
     </table>
-    <br/>
+
     <?php include 'footer.php';?>
     
     <script>

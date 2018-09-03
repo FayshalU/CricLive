@@ -43,7 +43,7 @@ else{
 		}
 	}
 	else{
-		header("location: createnewmatch.php?o");
+		header('location: createnewmatch.php?$er="choose different team please"');
 	}
 }
 }

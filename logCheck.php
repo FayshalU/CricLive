@@ -73,9 +73,11 @@
             echo "<script> location.replace('user/user.php'); </script>";
         }
         else if($valid == "admin"){
+              $_SESSION['logu'] = $_POST['luser'];
             echo "<script> location.replace('admin/admin.php'); </script>";
         }
         else if($valid == "editor"){
+              $_SESSION['loge'] = $_POST['luser'];
             echo "<script> location.replace('editor/editor.php'); </script>";
         }
         else{

@@ -21,13 +21,15 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CricLive - Cricket Score, News</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body>
-    <table width="100%" style="color:green;" height="50px">
+    <table width="100%"id="headerstyle" style="color:green;" height="50px">
         <tr >
             <td width="10%"><a href="../index.php"><center>CricLive</center></a></td>
             <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
@@ -38,19 +40,18 @@
             
         </tr>
     </table >
-    <br/>
-    <table width="100%">
-        <tr>
+    
+    <table id="mainframe" height="640px">
             <td  width="20%" valign="top">
                 
-                <table  width="100%" border="1">
+                <table  width="100%" border="0">
                     <tr>
                         <center>
                             <td>
 
                                 <ul>
                                 <li><a href="../index.php">Timeline</a></li>
-                                <li><a href="aPoll.php"> Current Polls</a></li>
+                                <br><li><a href="aPoll.php"> Current Polls</a></li>
                               </ul>
 
                             </td>
@@ -155,7 +156,7 @@
         </tr>
         
     </table>
-    <br/>
+    
     <?php include 'footer.php';?>
 </body>
 </html>

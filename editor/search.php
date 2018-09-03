@@ -11,7 +11,7 @@
     }
 	
     $data ="";
-	if($_POST['key'] > 0)
+	if($_POST['key'] >= 0)
 	{
 	$key 	= $_POST['key'];
 	$id = $_COOKIE['abc'];

@@ -17,34 +17,33 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CricLive - Cricket Score, News</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>
 <body>
-    <table width="100%" style="color:green;" height="50px">
+    <table width="100%" id="headerstyle"style="color:green;" height="50px">
         <tr >
             <td width="10%"><a href="editor.php"><center>CricLive</center></a></td>
-  
-            <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
             <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
             <td width="10%"><a href="logout.php"><center>Log Out</center></a></td>
             
         </tr>
     </table >
-    <br/>
-    <table width="100%">
+   
+    <table id="mainframe" width="100%" height="640px">
         <tr>
             <td  width="20%" valign="top">
                 
-                <table  width="100%" border="1">
+                <table  width="100%" border="0">
                     <tr>
                         <center>
                             <td>
 
                                  <ul>
-                                <li><a href="#">Timeline</a></li>
-                                <li><a href="createnewmatch.php">Create match</a></li>
+                                <li><a href="editor.php">Timeline</a></li>
+                                <br><li><a href="createnewmatch.php">Create match</a></li>
                                 <li><a href="scores.php">Update Scores</a></li>
                                 <li><a href="addartical.php"> Add Artical </a></li>
 								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
@@ -65,76 +64,83 @@
                 <table  width="100%" border="1">
                     <form method="post" action="#">
 
+<div>
+            
 
-	
-			
-			
-			<center>
-		   
-            <td width="75%" valign="top">
-                <table  width="100%" border="1">
-                    <div>
-			
+            <input type="text" id='search' name="" >
+            <input type="button"  name="" value="Search" onclick="loadData()">
 
-			<input type="text" id='search' name="" >
-			<input type="button"  name="" value="Search" onclick="loadData()">
+        </div>
+        <div id="result">
+            
+        </div>
 
-		</div>
-		<div id="result">
-			
-		</div>
+    </center>
 
-	</center>
+    
 
-	<script type="text/javascript">
-		
-		function loadData(){
-           
-		
-			var xmlHttp = new XMLHttpRequest();
+         <div id=1>
+         <h3 style="background-color:DodgerBlue;">  All Post
+           <?php 
+                     $con = DBconnection();
+                      $iiidd =$_COOKIE['abc'];
+                  $sql = "SELECT * FROM post where user_id='".$iiidd."'";
+               $result = mysqli_query($con,$sql);
+              
+               while($row = mysqli_fetch_assoc($result))
+               {
+                       ?>
+                        <h4 > <hr></center>
+                         <?php echo "<h3>".$row['post_id']."</h3>"."<center>"."</br>"."</br>".$row['date']."&nbsp"."&nbsp"."&nbsp"."&nbsp"."&nbsp"."&nbsp"."&nbsp"."&nbsp"."&nbsp"."&nbsp".$row['time']."<br/>"."<br/>"."<br/>".$row['headline']."<br/>"."<br/>"."<br/>"."<img src=".$row['image'].">"."<br/>";
+                        ?><h4 ><?php echo  $row['text']."<br/>";?>
+                       </br> <?php echo "
+                       <a href='deleteartical.php?id=".$row['post_id']." '>
+                            <input type='button' name='delete' value='delete'/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                       <a href='editartical.php?post_id=".$row['post_id']."'>
+                            <input type='button' name='edit' value='edit'/> </br> </br> </tr> <hr> ";
+                      
+                   }
 
-			xmlHttp.open('POST', 'search.php', true);
-			xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			var abc = "key="+document.getElementById('search').value;
-			xmlHttp.send(abc);
-
-			xmlHttp.onreadystatechange = function(){
-
-				if(this.readyState == 4 && this.status==200)
-				{
-					
-					document.getElementById('result').innerHTML = this.responseText;
-					//alert(this.responseText);
-				}
-			}
-
-		}
+               
+                      ?>
         
-		function abc(data){
-
-			document.getElementById('search').value=data;
-			document.getElementById('result').innerHTML="";
-		}
-
-	</script>
-				
-		
-		  </center>
-			<br/><br/><br/><br/><br/><br/>
-	
-
-	</form>
-				
-				
+                
             </td>
-        </tr>
-    </table>
-    <br/>
-    <?php include 'footer.php';?>
-    
-    <script>
+
+            
+         <script type="text/javascript">
         
+        function loadData(){
+           
+        
+            var xmlHttp = new XMLHttpRequest();
+
+            xmlHttp.open('POST', 'search.php', true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var abc = "key="+document.getElementById('search').value;
+            xmlHttp.send(abc);
+
+            xmlHttp.onreadystatechange = function(){
+
+                if(this.readyState == 4 && this.status==200)
+                {
+                    
+                    document.getElementById('result').innerHTML = this.responseText;
+                    //alert(this.responseText);
+                }
+            }
+
+        }
+        
+        function abc(data){
+
+            document.getElementById('search').value=data;
+            document.getElementById('result').innerHTML="";
+        }
+
     </script>
-    
+  </h4></h4></h3></div></form></table></td></tr></table>
+
+    <?php include 'footer.php';?>
 </body>
 </html>
