@@ -50,7 +50,7 @@
                                 <li><a href="profile.php">My info</a></li>
                                 <li><a href="#"> Change Info </a></li>
                                 <li><a href="changePass.php"> Change Password</a></li>
-                                <li><a href="changePic.php"> Change Picture </a></li>
+<!--                                <li><a href="changePic.php"> Change Picture </a></li>-->
                               </ul>
 
                             </td>
@@ -61,7 +61,7 @@
                 
             </td>
             <td  width="15%"></td>
-            <td width="50%">
+            <td width="50%" valign="top">
                 <fieldset>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <br/>

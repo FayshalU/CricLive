@@ -88,6 +88,82 @@
             <td  width="5%"></td>
             <td width="75%" valign="top">
                 
+            <?php 
+                 
+                
+                            
+                            $str1 = 'matches.php?id='.$matchId;
+                            $str2 = $row['team1'];
+                            $str3 = $row['team2'];
+                            
+                            $score1 = null;
+                            $score2 = null;
+                            
+                            $run1 = 0;
+                            $run2 = 0;
+                            
+                            $sql1= "SELECT * FROM `batting` where `id`='".$matchId."_1'";
+                            $result1 = mysqli_query($conn, $sql1);
+                            //echo mysqli_num_rows($result);
+                            
+                            while($row1 = mysqli_fetch_assoc($result1)){
+                                
+                                $run1 = $row1['score'];
+                                
+                                $score1 = $row1['score']."/".$row1['wicket'];
+                            }
+                            
+                            $sql2= "SELECT * FROM `batting` where `id`='".$matchId."_2'";
+                            $result2 = mysqli_query($conn, $sql2);
+                            //echo mysqli_num_rows($result);
+                            
+                            while($row2 = mysqli_fetch_assoc($result2)){
+                                
+                                $run2 = $row2['score'];
+                                
+                                $score2 = $row2['score']."/".$row2['wicket'];
+                            }
+                            //echo $score1;
+                            
+                            if($innings == 2){
+                                
+                                $need = $run1-$run2;
+                                $wicket = 10 - $row2['wicket'];
+                        ?>        
+                                
+                                
+                                <center><h3><?=$team1."vs".$team2?></h3></center>
+                                <center><p style="font-size:15px;"><?=$team1?> <?=$score1?> &nbsp &nbsp &nbsp &nbsp &nbsp <?=$team2?> <?=$score2?></p></center>
+                                    <center><p style="font-size:15px;"><?=$team2?> need <?=$need?> run to win with <?=$wicket?> wickets remaining</p></center>
+
+                                    <br><br>
+
+                                
+                    
+                       <?php
+                            
+                            }
+                            else{
+                            
+                    ?>
+                            
+                        
+                            <center><h3><?=$team1."vs".$team2?></h3></center>
+                            <center><p style="font-size:15px;"><?=$team1?> <?=$score1?> &nbsp &nbsp &nbsp &nbsp &nbsp <?=$team2?> <?=$score2?></p></center>
+
+                                <br><br>
+                            
+                            
+                        <?php
+                            }
+                            //echo $row['text'];
+                            //$i++;
+                        
+                        
+                        
+                    
+                    ?>
+                
                 <input type="button" value="Live" onclick="livebtn()">
                 <input type="button" value="Scorecard" onclick="scorecardbtn()">
                 
@@ -303,10 +379,6 @@
                 <br>
                 <br>
                 
-                
-                
-                <br>
-                <br>
                 
                 <div id="scorecard">
                     

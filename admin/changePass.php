@@ -6,7 +6,7 @@
     {
         header("location: ../login.html");
 	}else{
-        include 'getInfo.php';
+        include 'getInfoadmin.php';
     }
 ?>
 
@@ -44,10 +44,9 @@
                             <td>
 
                                 <ul>
-                                <li><a href="profile.php">My info</a></li>
-                                <li><a href="changeInfo.php"> Change Info </a></li>
-                                <li><a href="#"> Change Password</a></li>
-                                <li><a href="changePic.php"> Change Picture </a></li>
+                                <li><a href="admin.php">Timeline</a></li>
+                                <br>
+                                <li><a href="changepass.php"> Change Password</a></li>
                               </ul>
 
                             </td>

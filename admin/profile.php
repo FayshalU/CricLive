@@ -48,9 +48,7 @@
                                 <ul>
                                 <li><a href="admin.php">Timeline</a></li>
                                 <br>
-                                <li><a href="AddEditor.php">AddEditor</a></li>
-                                <li><a href="viewEditor.php">viewEditor</a></li>
-                                <li><a href="viewUser.php">viewUser</a></li>
+                                <li><a href="changepass.php"> Change Password</a></li>
                               </ul>
 
                             </td>
@@ -61,7 +59,7 @@
                 
             </td>
             <td  width="15%"></td>
-            <td width="50%">
+            <td width="50%" valign="top">
                 <table  width="100%" border="1">
                     <tr>
                         <td colspan="2">

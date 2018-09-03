@@ -116,7 +116,7 @@
                 
             </td>
             <td  width="5%"></td>
-            <td width="75%">
+            <td width="75%" valign="top">
                 <table  width="100%" border="1">
                     <tr>
                         <td>
@@ -179,11 +179,11 @@
                                                                 $bowler++;
                                                                 
                                                             }
-                                                            else if($row2['category'] == "All-Rounder"){
+                                                            else if($row2['category'] == "All-rounder"){
                                                                 $all++;
                                                                 
                                                             }
-                                                            else if($row2['category'] == "WicketKeeper"){
+                                                            else if($row2['category'] == "WicketKeep"){
                                                                 $wicket++;
                                                                 
                                                             }
@@ -372,7 +372,7 @@
     
             console.log(data.id);
 
-            location.replace('addPlayer.php?id='+data.id+'&matchId='+matchId);
+            //location.replace('addPlayer.php?id='+data.id+'&matchId='+matchId);
 
             
             if(catagory == "Batsman"){
@@ -418,10 +418,14 @@
 
 
             }
-            else if(catagory == "All-Rounder"){
+            else if(catagory == "All-rounder"){
                 
                 
                 if(batsman == 2 && bowler==2){
+                    $("#d").text("You can not add more all-rounder");
+                    $("#search").val("");
+                }
+                else if(all >= 1){
                     $("#d").text("You can not add more all-rounder");
                     $("#search").val("");
                 }
@@ -436,7 +440,7 @@
                 }
 
             }
-            else if(catagory == "WicketKeeper"){
+            else if(catagory == "WicketKeep"){
                 
                 if(wicket == 1){
                     $("#d").text("You can not add more wicket-keeper");

@@ -6,12 +6,12 @@
     {
         header("location: ../login.html");
 	}else{
-        include 'getInfo.php';
+        include 'getInfoadmin.php';
     }
     //echo $_SESSION['name'];
     
     
-    echo $_GET['date'];
+    //echo $_GET['date'];
 
     
 
@@ -41,7 +41,7 @@
                 echo "Success <br/>";
             }
 
-            $sql = $sql= "UPDATE `user` SET `password`='".$_POST['password']."' where id='".$_SESSION['id']."'";
+            $sql = $sql= "UPDATE `admin` SET `password`='".$_POST['password']."' where id='".$_SESSION['id']."'";
             
             echo $sql;
             
@@ -54,10 +54,9 @@
             }
                 
             
-            
             $sql = $sql= "UPDATE `login` SET `password`='".$_POST['password']."' where id='".$_SESSION['id']."'";
             
-            //echo $sql;
+            echo $sql;
             
             if(mysqli_query($conn, $sql))
             {

@@ -47,7 +47,7 @@
                                 <li><a href="profile.php">My info</a></li>
                                 <li><a href="changeInfo.php"> Change Info </a></li>
                                 <li><a href="#"> Change Password</a></li>
-                                <li><a href="changePic.php"> Change Picture </a></li>
+<!--                                <li><a href="changePic.php"> Change Picture </a></li>-->
                               </ul>
 
                             </td>
@@ -58,7 +58,7 @@
                 
             </td>
             <td  width="15%"></td>
-            <td width="50%">
+            <td width="50%" valign="top">
                 <fieldset>
                 <form method="post" action="addPass.php" onsubmit="return checkValid()">
                 <br/>
