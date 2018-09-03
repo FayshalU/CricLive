@@ -141,11 +141,22 @@ $isValid =true;
 
         if(mysqli_query($con,$sql))
 		{
-			header("location: profile.php");
+		
 		}
 		else{
 			echo "dosen no insert";
 		}
+
+        $sql = "UPDATE login SET password= '$npassword' WHERE id='$id'";
+    
+
+        if(mysqli_query($con,$sql))
+        {
+            header("location: profile.php");
+        }
+        else{
+            echo "dosen no insert";
+        }
 		}
 ?>
 				

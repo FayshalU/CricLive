@@ -10,7 +10,7 @@
         include 'databaseconnection.php';
           
     }
-	      $er="";
+	     
 ?>
 
 
