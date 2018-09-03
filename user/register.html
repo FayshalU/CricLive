@@ -6,13 +6,14 @@
 
 </head>
 <body>
+    <div id="reg">
 <center>
-     <br/> <br/> <br/> <br/>
+</br> </br> </br>
 <a href="../index.php"><b>Cric</b>LIVE</a>
     <br/> <br/>
 <fieldset style="width:50%">
     <legend><b>REGISTRATION</b></legend>
-	<form name="register" action="regCheck.php" onsubmit="return checkInfo()" method="post">
+	<form name="register" action="regCheck.php" id="mainframe" onsubmit="return checkInfo()" method="post">
 		<br/>
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
@@ -114,6 +115,11 @@
 		<input type="submit" value="Register">
 	</form>
 </fieldset>
+<a href="../login.html">Already a member?</a>
+</center>
+
+
+</div>
     <script>
         var isValid = true;
         function checkName(){
@@ -305,7 +311,7 @@
         }
         
     </script>
-<a href="../login.html">Already a member?</a>
+
 </center>
 </body>
 </html>

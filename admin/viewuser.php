@@ -25,7 +25,6 @@
         <tr >
             <td width="10%"><a href="admin.php"><center>CricLive</center></a></td>
             <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
-            <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
             <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
             <td width="10%"><a href="logout.php"><center>Log Out</center></a></td>
