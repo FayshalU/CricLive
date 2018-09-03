@@ -50,7 +50,7 @@
                                <br> <li><a href="createnewmatch.php">Create match</a></li>
                                 <li><a href="scores.php">Update Scores</a></li>
                                 <li><a href="addartical.php"> Add Artical </a></li>
-								                <li><a href="#"> Create Poll </a></li>
+								<li><a href="#"> Create Poll </a></li>
                               </ul>
 
                             </td>
@@ -70,15 +70,15 @@
 	
 			
 			<center>
-		   <h3>Enter Poll Quistion</h3><br/><br/>
+		   <h3>Enter Poll Question</h3><br/>
 		   
 		   <textarea type="text" name="text1" ></textarea><br/>
 		  
-           <br/><br/><br/><h3>Select 1st Option<br/><br/>
+           <h3>Select 1st Option<br/><br/>
 
           <textarea type="text" name="text2" ></textarea><br/>
 
-            <br/><br/><br/><h3>Select 2st Option<br/><br/>
+            <h3>Select 2st Option<br/><br/>
 
             <textarea type="text" name="text3" ></textarea><br/>
            </br><input type='submit' value='Submit' name="submit">
