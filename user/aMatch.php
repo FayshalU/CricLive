@@ -37,6 +37,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CricLive - Cricket Score, News</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <script src="../js/lib/jquery-3.3.1.js"></script>
@@ -44,7 +45,7 @@
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body>
-    <table width="100%" style="color:green;" height="50px">
+    <table id="headerstyle"width="100%" style="color:green;" height="50px">
         <tr >
             <td width="10%"><a href="../index.php"><center>CricLive</center></a></td>
             <td width="10%" style="color:green;"><a href="aLiveScore.php"><center>Live Score</center></a></td>
@@ -54,12 +55,12 @@
             
         </tr>
     </table >
-    <br/>
-    <table width="100%">
+    
+    <table id="mainframe"width="100%"height="640px">
         <tr>
             <td  width="20%" valign="top">
                 
-                <table  width="100%" border="1">
+                <table  width="100%" border="0">
                     <tr>
                         <center>
                             <td>
@@ -77,8 +78,9 @@
                 
             </td>
             <td  width="5%"></td>
-            <td width="75%">
+            <td width="75%" valign="top">
                 <input type="button" value="Live" onclick="livebtn()">
+                <input type="button" value="Scorecard" onclick="scorecardbtn()">
                 
                 <div id="live">
                     
@@ -292,7 +294,7 @@
                 <br>
                 <br>
                 
-                <input type="button" value="Scorecard" onclick="scorecardbtn()">
+                
                 
                 <br>
                 <br>
@@ -731,7 +733,7 @@
             </td>
         </tr>
     </table>
-    <br/>
+   
     <?php include 'user/footer.php';?>
     
     <script>

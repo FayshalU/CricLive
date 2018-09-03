@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2018 at 12:30 AM
+-- Generation Time: Sep 03, 2018 at 08:37 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -75,7 +75,9 @@ CREATE TABLE `batting` (
 
 INSERT INTO `batting` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `score`, `wicket`, `extra`, `over`, `batsman1`, `batsman2`) VALUES
 ('1_1', '21/10', '3/3', '27/18', '24/18', '', '', '', '', '', '', '', 77, 2, 2, '8.1', 'player4', 'player3'),
-('1_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', 'player1', 'player2');
+('1_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', 'player1', 'player2'),
+('6_1', '0/0', '0/0', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', 'player1', 'player2'),
+('6_2', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '0.0', 'player1', 'player2');
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,9 @@ CREATE TABLE `bowling` (
 
 INSERT INTO `bowling` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`, `bowler1`, `bowler2`) VALUES
 ('1_1', '', '', '', '', '', '', '', '', '', '', '', 'player9', 'player10'),
-('1_2', '', '', '', '', '', '', '3.0-27-1', '3.0-26-1', '0.1-1-0', '1.0-8-0', '1.0-14-0', 'player9', 'player10');
+('1_2', '', '', '', '', '', '', '3.0-27-1', '3.0-26-1', '0.1-1-0', '1.0-8-0', '1.0-14-0', 'player9', 'player10'),
+('6_1', '', '', '', '', '', '', '', '', '0.0-0-0', '0.0-0-0', '', 'player9', 'player10'),
+('6_2', '', '', '', '', '', '', '', '', '0.0-0-0', '0.0-0-0', '', 'player9', 'player10');
 
 -- --------------------------------------------------------
 
@@ -231,7 +235,8 @@ CREATE TABLE `play` (
 --
 
 INSERT INTO `play` (`match_id`, `team1`, `team2`, `status`, `innings`, `type`) VALUES
-(1, 'BAN', 'IND', 'live', 1, 'ODI');
+(1, 'BAN', 'IND', 'live', 1, 'ODI'),
+(6, 'AUS', 'BAN', 'live', 1, 'T20');
 
 -- --------------------------------------------------------
 
@@ -456,7 +461,9 @@ CREATE TABLE `wicket` (
 
 INSERT INTO `wicket` (`id`, `player1`, `player2`, `player3`, `player4`, `player5`, `player6`, `player7`, `player8`, `player9`, `player10`, `player11`) VALUES
 ('1_1', 'Paine', 'Wade', '', '', '', '', '', '', '', '', ''),
-('1_2', '', '', '', '', '', '', '', '', '', '', '');
+('1_2', '', '', '', '', '', '', '', '', '', '', ''),
+('6_1', '', '', '', '', '', '', '', '', '', '', ''),
+('6_2', '', '', '', '', '', '', '', '', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -572,7 +579,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `play`
 --
 ALTER TABLE `play`
-  MODIFY `match_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `match_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `poll`

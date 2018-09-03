@@ -89,6 +89,7 @@
             <td width="75%" valign="top">
                 
                 <input type="button" value="Live" onclick="livebtn()">
+                <input type="button" value="Scorecard" onclick="scorecardbtn()">
                 
                 <div id="live">
                     
@@ -302,7 +303,7 @@
                 <br>
                 <br>
                 
-                <input type="button" value="Scorecard" onclick="scorecardbtn()">
+                
                 
                 <br>
                 <br>
