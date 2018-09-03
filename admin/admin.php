@@ -47,7 +47,7 @@
                             <td>
 
                                 <ul>
-                                <li><a href="admin.php">Timeline</a></li>
+                                <li><a href="#">Timeline</a></li>
                                 <br>
                                 <li><a href="AddEditor.php">AddEditor</a></li>
                                 <li><a href="viewEditor.php">viewEditor</a></li>

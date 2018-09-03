@@ -49,7 +49,7 @@ $isValid =true;
                                 <br><li><a href="createnewmatch.php">Create match</a></li>
                                 <li><a href="scores.php">Update Scores</a></li>
                                 <li><a href="addartical.php"> Add Artical </a></li>
-								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
+								<li><a href="pollcreate.php"> Create Poll </a></li>
                               </ul>
 
                             </td>
@@ -80,11 +80,11 @@ $isValid =true;
 							  if($_SERVER['REQUEST_METHOD'] == 'POST')
                             {
 							  $con=mysqli_connect('localhost','root','','criclive');
-		                      $sql = "SELECT * FROM reg ";
+		                      $sql = "SELECT * FROM editor ";
                               $result = mysqli_query($con,$sql);
 			                  while($row = mysqli_fetch_assoc($result))
 			                  {
-				               if($row['id'] == $id)
+				               if($row['id'] == $_COOKIE['abc'])
 				              {
                                 if($_POST['password'] == "" || strlen($_POST['password']) <2 || ( $row['password'] != $_POST['password']))
                                 {
@@ -136,12 +136,12 @@ $isValid =true;
 
  
 		
-		$sql = "UPDATE reg SET password= '$npassword' WHERE id='$id'";
+		$sql = "UPDATE editor SET password= '$npassword' WHERE id='$id'";
 	
 
         if(mysqli_query($con,$sql))
 		{
-			header("location: login.php");
+			header("location: profile.php");
 		}
 		else{
 			echo "dosen no insert";

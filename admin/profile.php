@@ -47,10 +47,11 @@
                             <td>
 
                                 <ul>
-                                <li><a href="#">Admin info</a></li>
-                                <li><a href="changeInfo.php"> Change Info </a></li>
-                                <li><a href="changePass.php"> Change Password</a></li>
-                                <li><a href="changePic.php"> Change Picture </a></li>
+                                <li><a href="admin.php">Timeline</a></li>
+                                <br>
+                                <li><a href="AddEditor.php">AddEditor</a></li>
+                                <li><a href="viewEditor.php">viewEditor</a></li>
+                                <li><a href="viewUser.php">viewUser</a></li>
                               </ul>
 
                             </td>
