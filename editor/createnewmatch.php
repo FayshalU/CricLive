@@ -109,7 +109,7 @@
 				   }
 		?>
 		 </select>
-		<h3><br/><br/><br/>Select 2nd Option<br/><br/></h3 >
+		<h3><br/><br/><br/>Select 2nd Team<br/><br/></h3 >
 
 			<select name="op2">
 <?php
@@ -131,7 +131,9 @@
              <option value="T20">T20</option>
             <option value="ODI">ODI</option>
             <option value="TEST">TEST</option>
-</select> 
+</select>
+                
+                <div id="err">Both teams must be different</div>
 
        </br> </br><input type='submit' value='Submit' name="submit">
      
@@ -143,7 +145,13 @@
     <?php include 'footer.php';?>
     
     <script>
-        
+        var e = '<?=$_GET['e']?>';
+        if(e == ""){
+            document.getElementById('err').style.display = 'none';
+        }
+        else{
+            document.getElementById('err').style.display = 'block';
+        }
     </script>
     
 </body>
