@@ -359,14 +359,29 @@
             var bowler = <?=$bowler?>;
             var all = <?=$all?>;
             var count = <?=$count?>;
+
+
+
+            // var data = document.getElementsByClassName('info')['0'];
+            
+             console.log(all);
+
+             $("#d").text("");
+                    
+            var data = document.getElementsByClassName('info')['0'];
+    
+            console.log(data.id);
+
+            location.replace('addPlayer.php?id='+data.id+'&matchId='+matchId);
+
             
             if(catagory == "Batsman"){
                 
-                if(batsman >= 2){
+                if(batsman == 2){
                     $("#d").text("You can not add more batsman");
                     $("#search").val("");
                 }
-                else if(batsman >= 1 && bowler>=2 && all>=1){
+                else if(batsman == 1 && bowler==2 && all==1){
                     $("#d").text("You can not add more batsman");
                     $("#search").val("");
                 }
@@ -383,11 +398,11 @@
             }
             else if(catagory == "Bowler"){
                 
-                if(bowler >= 2){
+                if(bowler == 2){
                     $("#d").text("You can not add more bowler");
                     $("#search").val("");
                 }
-                else if(batsman >= 2 && bowler>=1 && all>=1){
+                else if(batsman == 2 && bowler==1 && all==1){
                     $("#d").text("You can not add more bowler");
                     $("#search").val("");
                 }
@@ -406,7 +421,7 @@
             else if(catagory == "All-Rounder"){
                 
                 
-                if(batsman >= 2 && bowler>=2){
+                if(batsman == 2 && bowler==2){
                     $("#d").text("You can not add more all-rounder");
                     $("#search").val("");
                 }
@@ -423,7 +438,7 @@
             }
             else if(catagory == "WicketKeeper"){
                 
-                if(wicket >= 1){
+                if(wicket == 1){
                     $("#d").text("You can not add more wicket-keeper");
                     $("#search").val("");
                 }

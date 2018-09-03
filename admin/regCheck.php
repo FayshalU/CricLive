@@ -129,16 +129,16 @@
 
             mysqli_close($conn);
 
-            echo "<script> location.replace('../login.html'); </script>";
+            echo "<script> location.replace('admin.php'); </script>";
 
         }
         else{
-            echo "<script> location.replace('register.html'); </script>";  
+            echo "<script> location.replace('AddEditor.php'); </script>";  
         } 
         
     }
     else{
-        echo "<script> location.replace('register.html'); </script>";  
+        echo "<script> location.replace('AddEditor.php'); </script>";  
     } 
 
     

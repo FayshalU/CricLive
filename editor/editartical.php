@@ -120,7 +120,7 @@
 			$sql = "UPDATE post SET headline='$head',text='$body',image ='$filepath' WHERE post_id='$post_id'";
           
 			if(mysqli_query($con, $sql)){
-		     header("location: articals.php");
+		     header("location: editor.php");
 			}else{
 				header("location: uploadeditartical.php?status=error");
 			}

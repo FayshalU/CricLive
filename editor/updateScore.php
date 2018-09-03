@@ -401,7 +401,7 @@
                 <input type="button" value="NO" id="NO" onclick="addExtrabtn(this)">
                 <input type="button" value="WD" id="WD" onclick="addExtrabtn(this)">
                 <input type="text" value="" id="extra">
-                <input type="button" value="Add" id="add" onclick="addExtra()">
+                <input type="button" value="Add" id="add" onclick="addExtraBy()">
                 <span id="error">Please give a valid score</span>
                 
                 <br>
@@ -530,7 +530,8 @@
 //          xmlhttp.send();
         }
         
-        function addExtra(){
+
+        function addExtraBy(){
             
             var num = $("#extra").val();
             //alert(isNumeric(num));
@@ -538,8 +539,10 @@
                 
                 var val = parseInt(num);
                 //alert(val);
+                $("#error").hide();
                 
-                $.get("addExtra.php?id="+batting+"&run="+num, function(data, status){
+                
+                $.get("addExtraBy.php?id="+batting+"&run="+num, function(data, status){
                     //alert("Data: " + data + "\nStatus: " + status);
                     if(status == "success"){
                         $("#run").text(data);
@@ -550,6 +553,39 @@
                         $("#extra").val("");
                     }
                 });
+
+                $.get("addRunBowler.php?id="+bowling+"&run="+num, function(data1, status){
+                    //alert("Data: " + data + "\nStatus: " + status);
+                    if(status == "success"){
+                        $("#b_onscore").text(data1);
+                    }
+                });
+
+                pb = parseInt($("#onball").text());
+                console.log(pb);
+                console.log(b);
+                pb++;
+                b++;
+                console.log(pb);
+                console.log(b);
+                if(b>5){
+                    b=0;
+                    o++;
+                    swapBatsman();
+                    //swapBowler();
+                    $("#bowl").show();
+                    offbtn();
+                }
+
+                if(val == 1 || val == 3){
+                    swapBatsman();
+                }
+
+                 $("#onrun").text(pr);
+                $("#onball").text(pb);
+                //$("#run").text(r);
+                $("#over").text(o);
+                $("#ball").text(b);
                 
                 
                 

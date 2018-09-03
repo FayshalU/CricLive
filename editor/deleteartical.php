@@ -1,5 +1,4 @@
 <?php
-include 'databaseconnection.php';
 
    session_start();
 	error_reporting(0);
@@ -9,17 +8,22 @@ include 'databaseconnection.php';
         header("location: ../login.html");
 	}else{
         include 'databaseconnection.php';
-        
-    }
+
+        echo 'inside';
 	
 	$id = $_GET['id'];
 		$conn = DBconnection();
 		$sql= "delete from post where post_id=".$id;
+		echo $sql;
 		
 		if(mysqli_query($conn, $sql)){
-			header("location: articals.php");
+			header("location: editor.php");
 		}else{
-			header("location: articals.php?error=true");
+			header("location: editor.php?error=true");
 		}
 		mysqli_close($conn);
+        
+    }
+
+
 ?>

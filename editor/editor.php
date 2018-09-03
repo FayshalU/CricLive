@@ -95,9 +95,9 @@
                         ?><h4 ><?php echo  $row['text']."<br/>";?>
                        </br> <?php echo "
                        <a href='deleteartical.php?id=".$row['post_id']." '>
-                            <input type='button' name='delete' value='delete'/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <input type='button' name='delete' value='delete'/></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                        <a href='editartical.php?post_id=".$row['post_id']."'>
-                            <input type='button' name='edit' value='edit'/> </br> </br> </tr> <hr> ";
+                            <input type='button' name='edit' value='edit'/></a> </br> </br> </tr> <hr> ";
                       
                    }
 

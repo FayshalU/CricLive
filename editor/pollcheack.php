@@ -32,7 +32,7 @@ else{
 
         if(mysqli_query($con,$sql))
 		{
-			echo "enserted";
+			header("location: pollcreate.php");
 		}
 		else{
 			echo "does no ensert";			
