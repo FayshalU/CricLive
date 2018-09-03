@@ -12,6 +12,8 @@
     }
 	$post_id=$_GET['post_id'];
 
+	$_SESSION['post_id'] = $post_id;
+
 ?>
 
 
@@ -70,7 +72,7 @@
 			
             <td width="75%" valign="top">
                 <table  width="100%" border="1">
-                    <form method="post" action="#" enctype="multipart/form-data">
+                    <form method="post" action="uploadeditartical.php" enctype="multipart/form-data">
 
 
 	
@@ -142,7 +144,7 @@
             </td>
         </tr>
     </table>
-    
+    </td></tr></table>
     <?php include 'footer.php';?>
     
     <script>

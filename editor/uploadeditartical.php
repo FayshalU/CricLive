@@ -29,10 +29,11 @@ if(isset($_POST['submit']))
 
 			$con = DBconnection();
             $iiidd =$_COOKIE['abc'];
-			$sql = "UPDATE post SET headline='$head',text='$body',image ='$filepath' WHERE post_id='$post_id'";
+			$sql = "UPDATE post SET headline='".$head."',text='".$body."',image ='".$filepath."' WHERE post_id='".$_SESSION['post_id']."'";
            // $sql =  UPDATE `post` SET `user_id`=[$iiidd],`headline`=[$head],`text`=[$body],`date`=[$date],`time`=[$time],`image`=[$filepath] WHERE $post_id;
 			if(mysqli_query($con, $sql)){
-		echo "done";		//header("location: editor.php");
+				//echo "done";		
+				header("location: editor.php");
 			}else{
 				header("location: uploadeditartical.php?status=error");
 			}
