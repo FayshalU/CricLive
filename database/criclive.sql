@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2018 at 03:25 PM
+-- Generation Time: Sep 03, 2018 at 12:30 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -205,8 +205,10 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `password`, `type`) VALUES
 ('aa', '1234', 'user'),
+('adam', '1111', 'editor'),
 ('admin', '1111', 'admin'),
 ('bb', '1234', 'user'),
+('charlie', '3333', 'editor'),
 ('xx', '2222', 'user');
 
 -- --------------------------------------------------------
@@ -242,7 +244,7 @@ CREATE TABLE `player info` (
   `name` varchar(50) NOT NULL,
   `country` varchar(20) NOT NULL,
   `category` varchar(15) NOT NULL,
-  `rating` float NOT NULL
+  `rating` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -250,26 +252,39 @@ CREATE TABLE `player info` (
 --
 
 INSERT INTO `player info` (`player_id`, `name`, `country`, `category`, `rating`) VALUES
-('1', 'Virat Kohli', 'India', 'Batsman', 9),
-('10', 'Joe Root', 'England', 'Batsman', 9),
-('11', 'Azhar Ali', 'Pakistan', 'Batsman', 8),
-('12', 'Wahab Riaz', 'Pakistan', 'Bowler', 8),
-('13', 'Chris Gayle', 'West', 'Batsman', 8),
-('14', 'Thisara Perera', 'Srilanka', 'All-Rounder', 8),
-('15', 'kusal Perera', 'Srilanka', 'Batsman', 8),
-('16', 'Rubel Hossain', 'Bangladesh', 'Bowler', 8),
-('17', 'Mushfiqur Rahman', 'Bangladesh', 'WicketKeeper', 8),
-('18', 'Mahmud Ullah', 'Bangladesh', 'Batsman', 8),
-('19', 'Liton Das', 'Bangladesh', 'WicketKeeper', 8),
-('2', 'Tamim Iqbal', 'Bangladesh', 'Batsman', 9),
-('20', 'Rashid Khan', 'Afganistan', 'Bowler', 9),
-('3', 'kane Williamson', 'New Zeland', 'Batsman', 9),
-('4', 'MS Dhoni', 'India', 'WicketKeeper', 8),
-('5', 'Shakib al Hasan', 'Bangladesh', 'All-Rounder', 9),
-('6', 'Andre Russell', 'West', 'All-Rounder', 9),
-('7', 'Mashrafee Mortaza', 'Bangladesh', 'Bowler', 8),
-('8', 'Mustafizur Rahman', 'Bangladesh', 'Bowler', 9),
-('9', 'Mohammad Amir', 'Pakistan', 'Bowler', 9);
+('Ashraful', 'Ashraful', 'Bangladesh', 'Batsman', 8),
+('Ashwin', 'Ashwin', 'India', 'All-rounder', 8),
+('Bumrah', 'Bumrah', 'India', 'Bowler', 9),
+('Cummins', 'Cummins', 'Australia', 'Bowler', 8),
+('Dhoni', 'Dhoni', 'India', 'WicketKeep', 9),
+('Finch', 'Finch', 'Australia', 'Batsman', 8),
+('Jadeja', 'Jadeja', 'India', 'All-Rounder', 8),
+('Khawaja', 'Khawaja', 'Australia', 'Batsman', 8),
+('kohli', 'kohli', 'India', 'Batsman', 9),
+('Liton', 'Liton', 'Bangladesh', 'Batsman', 9),
+('Lyon', 'Lyon', 'Australia', 'Bowler', 8),
+('Mahmud', 'Mahmud', 'Bangladesh', 'All-rounder', 9),
+('Marsh', 'Marsh', 'Australia', 'Batsman', 9),
+('Mashrafee', 'Mashrafee', 'Bangladesh', 'Bowler', 9),
+('Maxwell', 'Maxwell', 'Australia', 'All-rounder', 8),
+('Mushfiq', 'Mushfiq', 'Bangladesh', 'WicketKeep', 9),
+('Mustafiz', 'Mustafiz', 'Bangladesh', 'Bowler', 9),
+('Paine', 'Paine', 'Australia', 'WicketKeep', 8),
+('Pandya', 'Pandya', 'India', 'All-rounder', 9),
+('Pujara', 'Pujara', 'India', 'Batsman', 8),
+('Rahul', 'Rahul', 'India', 'Batsman', 8),
+('Rohit', 'Rohit', 'India', 'Batsman', 9),
+('Roni', 'Roni', 'Bangladesh', 'Bowler', 8),
+('Rubel', 'Rubel', 'Bangladesh', 'Bowler', 9),
+('Shakib', 'Shakib', 'Bangladesh', 'All-rounder', 9),
+('Shami', 'Shami', 'India', 'Bowler', 9),
+('Smith', 'Smith', 'Australia', 'All-rounder', 8),
+('Soumya', 'Soumya', 'Bangladesh', 'Batsman', 8),
+('Starc', 'Starc', 'Australia', 'Bowler', 8),
+('Tamim', 'Tamim', 'Bangladesh', 'Batsman', 9),
+('Wade', 'Wade', 'Australia', 'Batsman', 8),
+('Warner', 'Warner', 'Australia', 'Batsman', 9),
+('yuvraj', 'yuvraj', 'India', 'All-rounder', 8);
 
 -- --------------------------------------------------------
 
@@ -388,7 +403,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`id`, `user_id`, `player1`, `player2`, `player3`, `player4`, `player5`, `match_id`) VALUES
-(4, 'aa', '7', '5', '4', '1', '8', 'banvsind');
+(5, 'aa', 'Shakib', 'Mustafiz', 'Jadeja', '', '', '1');
 
 -- --------------------------------------------------------
 
@@ -557,7 +572,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `play`
 --
 ALTER TABLE `play`
-  MODIFY `match_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `match_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `poll`
@@ -581,7 +596,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

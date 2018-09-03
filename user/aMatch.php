@@ -2,17 +2,13 @@
 	session_start();
 	error_reporting(0);
 
-	if(!isset($_SESSION['log']))
+	if(isset($_SESSION['log']))
     {
-        header("location: ../login.html");
-	}else{
-        
-        //$value = null;
-        //$count = 10;
-        $conn = null;
+        header("location: user/user.php");
+	}else if(!isset($_SESSION['an'])){
         
     }
-
+    
     $matchId = $_GET['id'];
 
     $conn = mysqli_connect('localhost', 'root', '', 'criclive');
@@ -33,9 +29,6 @@
         $team2 = $row['team2'];
         
     }
-    
-
-
 ?>
 
 <!DOCTYPE html>
@@ -44,39 +37,37 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CricLive - Cricket Score, News</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <script src="../js/lib/jquery-3.3.1.js"></script>
+  
 </head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body>
-    <table width="100%" id="headerstyle" style="color:green;" height="50px">
+    <table width="100%" style="color:green;" height="50px">
         <tr >
-            <td width="10%"><a href="user.php"><center>CricLive</center></a></td>
-            <td width="10%" style="color:green;"><a href="viewScore.php"><center>Live Score</center></a></td>
+            <td width="10%"><a href="../index.php"><center>CricLive</center></a></td>
+            <td width="10%" style="color:green;"><a href="aLiveScore.php"><center>Live Score</center></a></td>
             <td width="10%"><a href="#"><center>Series</center></a></td>
             <td width="50%"></td>
-            <td width="10%"><a href="profile.php"><center>Profile</center></a></td>
-            <td width="10%"><a href="logout.php"><center>Log Out</center></a></td>
+            <td width="10%"><a href="../login.html"><center>Sign In</center></a></td>
+            <td width="10%"><a href="register.html"><center>Sign Up</center></a></td>
             
         </tr>
     </table >
-  
-    <table id="mainframe"width="100%"height="640px">
+    <br/>
+    <table width="100%">
         <tr>
             <td  width="20%" valign="top">
                 
-                <table  width="100%" border="0">
+                <table  width="100%" border="1">
                     <tr>
                         <center>
                             <td>
 
                                 <ul>
-                                <li><a href="user.php">Timeline</a></li>
-                               <br> <li><a href="myTeam.php"> My Team</a></li>
-                                <li><a href="ranking.php"> My Ranking</a></li>
-                                <li><a href="poll.php"> Current Polls </a></li>
+                                <li><a href="../index.php">Timeline</a></li>
+                                <li><a href="aPoll.php"> Current Polls</a></li>
                               </ul>
 
                             </td>
@@ -87,8 +78,7 @@
                 
             </td>
             <td  width="5%"></td>
-            <td width="75%" valign="top">
-                
+            <td width="75%">
                 <input type="button" value="Live" onclick="livebtn()">
                 
                 <div id="live">
@@ -739,13 +729,11 @@
                     </div>
                     
                 </div>
-                
-                
             </td>
         </tr>
     </table>
-   
-    <?php include 'footer.php';?>
+    <br/>
+    <?php include 'user/footer.php';?>
     
     <script>
         

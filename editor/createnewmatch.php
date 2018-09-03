@@ -45,11 +45,16 @@
                             <td>
 
                                  <ul>
+<<<<<<< HEAD
                                 <li><a href="#">Timeline</a></li>
                                 <br><li><a href="createnewmatch.php">Create match</a></li>
+=======
+                                <li><a href="editor.php">Timeline</a></li>
+                                <li><a href="#">Create match</a></li>
+>>>>>>> cd12985c49608fe062e08ee1822e3ce2fc042309
                                 <li><a href="scores.php">Update Scores</a></li>
                                 <li><a href="addartical.php"> Add Artical </a></li>
-								<li><a href="pollcreate.php"> Create Poll Quistans </a></li>
+								<li><a href="pollcreate.php"> Create Poll</a></li>
                               </ul>
 
                             </td>
